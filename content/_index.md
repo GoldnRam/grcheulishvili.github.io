@@ -16,7 +16,7 @@ toc: false
   {{< card link="engineering" title="⚙️ Engineering" subtitle="Infrastructure Independence" >}}
   {{< card link="projects" title="🛡️ Armory" subtitle="Capability Development" >}}
   {{< card link="about" title="👤 Operator" subtitle="Whoami" >}}
-  {{< card link="manifesto" title="📜 Doctrine" subtitle="Technological Sovereignty" >}}
+  {{< card link="manifesto" title="📜 Doctrine" subtitle="Engineering Philosophy" >}}
 {{< /cards >}}
 
 <div style="margin-top: 4rem; border-top: 1px solid #222; padding-top: 2rem; color: #666; font-size: 0.9rem;">
