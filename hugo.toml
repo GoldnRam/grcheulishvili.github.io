@@ -12,6 +12,7 @@ theme = ["github.com/imfing/hextra"]
 
 [params]
   description = "Offensive Systems Research | Kernel | C2"
+  favicon = "/favicon.ico"
   
   [params.theme]
     default = "dark"
@@ -27,7 +28,7 @@ theme = ["github.com/imfing/hextra"]
     
   [params.footer]
     enable = true
-    displayCopyright = true
+    displayCopyright = false
 
   [params.navbar]
     displayTitle = true

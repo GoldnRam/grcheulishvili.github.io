@@ -876,43 +876,30 @@ stockApi=http://localhost/admin</code></pre></div><div class="hextra-code-copy-b
     </article>
   </div>
 
-      <div class="terminal-status" style="
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    background: rgba(5, 5, 8, 0.95);
-    padding: 1rem 2rem;
-    margin-top: 4rem;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.75rem;
-    color: #6b7280;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    letter-spacing: 0.05em;
-    backdrop-filter: blur(10px);
-">
-  <div style="display: flex; gap: 2rem;">
-    <span>
-      <span style="color: #10b981; animation: blink 2s infinite;">●</span> 
-      SYSTEM ONLINE
-    </span>
-    <span>
-      <span style="color: #a78bfa;">ID:</span> USER@CYBREALM
-    </span>
-    <span class="hidden-mobile">
-      <span style="color: #a78bfa;">LOC:</span> /VAR/WWW/LOGS
-    </span>
-  </div>
+      <footer class="hextra-footer">
+  <div class="system-status-bar">
+    
+    <div class="status-group">
+      <span class="status-dot"></span>
+      <span class="status-text">SYSTEM ONLINE</span>
+    </div>
 
-  <div style="display: flex; gap: 2rem;">
-    <span class="hidden-mobile">ENCRYPTION: <span style="color: #e2e8f0;">TLS 1.3</span></span>
-    <span>UPTIME: <span style="color: #e2e8f0;">99.9%</span></span>
-  </div>
-</div>
+    <div class="status-group mobile-hide">
+      <span class="status-value">IERI.SH</span>
+      <span class="separator">/</span>
+      <span class="status-value">TBILISI</span>
+    </div>
 
-<style>
-  @keyframes blink { 0% { opacity: 1; } 50% { opacity: 0.4; } 100% { opacity: 1; } }
-  @media (max-width: 640px) { .hidden-mobile { display: none; } }
-</style>
+    <div class="status-group">
+      <span class="status-label">ENC:</span>
+      <span class="status-value">TLS 1.3</span>
+      <span class="separator">|</span>
+      <span class="status-label">UPTIME:</span>
+      <span class="status-value">99.9%</span>
+    </div>
+
+  </div>
+</footer>
     
     <script defer src="/js/main.js" integrity=""></script>
 <script defer src="/js/flexsearch.9f5b5908f93ae86f1ecd4b043b799f580c2d1654e703dd9357d568ac41b2547a.js" integrity="sha256-n1tZCPk66G8ezUsEO3mfWAwtFlTnA92TV9VorEGyVHo=" crossorigin="anonymous"></script>

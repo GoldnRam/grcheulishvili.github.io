@@ -168,3 +168,77 @@ article a:hover {
     color: var(--crimson) !important;
     background: rgba(220, 20, 60, 0.1);
 }
+
+/* --- SYSTEM STATUS FOOTER --- */
+.hextra-footer {
+    background: transparent !important; /* Remove default background */
+    margin-top: 0 !important;
+    padding-bottom: 0 !important;
+}
+
+.system-status-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 36px;
+    background-color: rgba(5, 5, 5, 0.95);
+    border-top: 1px solid #222;
+    backdrop-filter: blur(5px);
+    
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 1.5rem;
+    z-index: 100;
+    
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.05em;
+    color: #666;
+    text-transform: uppercase;
+}
+
+/* The Glowing Green Dot */
+.status-dot {
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    background-color: #00FF00; /* Pure Green */
+    border-radius: 50%;
+    margin-right: 8px;
+    box-shadow: 0 0 5px #00FF00;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.4; }
+    100% { opacity: 1; }
+}
+
+/* Text Styles */
+.status-text {
+    color: #e0e0e0;
+    font-weight: 700;
+}
+
+.status-label {
+    color: #444;
+    margin-right: 4px;
+}
+
+.status-value {
+    color: #888;
+}
+
+.separator {
+    color: #333;
+    margin: 0 10px;
+}
+
+@media (max-width: 768px) {
+    .mobile-hide {
+        display: none;
+    }
+}
