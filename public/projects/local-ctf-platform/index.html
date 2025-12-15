@@ -8,14 +8,14 @@
 <link rel="icon" href="/favicon-32x32.png" type="image/png" sizes="32x32" />
 <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180" />
 <link fetchpriority="low" href="/site.webmanifest" rel="manifest" />
-<title>Bastion Wargames Platform – IERI.SH</title>
-  <meta name="description" content="A hybrid wargame platform combining a CTFd frontend with a hardened Linux backend using Split-SSH architecture." /><link rel="canonical" href="http://localhost:1313/projects/local-ctf-platform/" itemprop="url" />
+<title>Case Study: Engineering Multi-Tenant Security for a CTF Wargames Platform – IERI.SH</title>
+  <meta name="description" content="A technical review of the Bastioni platform architecture, detailing the use of Split-SSH, user isolation, and intentional flaws for security training." /><link rel="canonical" href="http://localhost:1313/projects/local-ctf-platform/" itemprop="url" />
 
-<meta property="og:title" content="Bastion Wargames Platform">
+<meta property="og:title" content="Case Study: Engineering Multi-Tenant Security for a CTF Wargames Platform">
 <meta
   property="og:description"
   content="
-    A hybrid wargame platform combining a CTFd frontend with a hardened Linux backend using Split-SSH architecture.
+    A technical review of the Bastioni platform architecture, detailing the use of Split-SSH, user isolation, and intentional flaws for security training.
   ">
 <meta
   property="og:type"
@@ -35,15 +35,15 @@
 
 
 
-  <meta itemprop="name" content="Bastion Wargames Platform">
-  <meta itemprop="description" content="A hybrid wargame platform combining a CTFd frontend with a hardened Linux backend using Split-SSH architecture.">
+  <meta itemprop="name" content="Case Study: Engineering Multi-Tenant Security for a CTF Wargames Platform">
+  <meta itemprop="description" content="A technical review of the Bastioni platform architecture, detailing the use of Split-SSH, user isolation, and intentional flaws for security training.">
   <meta itemprop="datePublished" content="2025-11-27T00:00:00+00:00">
   <meta itemprop="dateModified" content="2025-11-27T00:00:00+00:00">
-  <meta itemprop="wordCount" content="219">
-  <meta itemprop="keywords" content="Infrastructure,CTFd,Hardening,Linux">
+  <meta itemprop="wordCount" content="402">
+  <meta itemprop="keywords" content="Infrastructure,Hardening,Linux,CTFd,Engineering">
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Bastion Wargames Platform">
-  <meta name="twitter:description" content="A hybrid wargame platform combining a CTFd frontend with a hardened Linux backend using Split-SSH architecture.">
+  <meta name="twitter:title" content="Case Study: Engineering Multi-Tenant Security for a CTF Wargames Platform">
+  <meta name="twitter:description" content="A technical review of the Bastioni platform architecture, detailing the use of Split-SSH, user isolation, and intentional flaws for security training.">
 <link href="/css/compiled/main.css" rel="stylesheet" />
     <link href="/css/variables.css" rel="stylesheet" />
     <link href="/css/custom.css" rel="stylesheet" />
@@ -391,26 +391,32 @@
       hextra-sidebar-active-item hx:bg-primary-100 hx:font-semibold hx:text-primary-800 hx:contrast-more:border hx:contrast-more:border-primary-500 hx:dark:bg-primary-400/10 hx:dark:text-primary-600 hx:contrast-more:dark:border-primary-500"
     href="/projects/local-ctf-platform/"
     
-  >Bastion Wargames Platform
+  >Case Study: Engineering Multi-Tenant Security for a CTF Wargames Platform
     </a>
   
     <ul class='hx:flex hx:flex-col hx:gap-1 hx:relative hx:before:absolute hx:before:inset-y-1 hx:before:w-px hx:before:bg-gray-200 hx:before:content-[""] hx:dark:before:bg-neutral-800 hx:ltr:pl-3 hx:ltr:before:left-0 hx:rtl:pr-3 hx:rtl:before:right-0 hx:ltr:ml-3 hx:rtl:mr-3'><li>
               <a
-                href="#philosophy"
+                href="#overview"
                 class="hx:flex hx:rounded-sm hx:px-2 hx:py-1.5 hx:text-sm hx:transition-colors [word-break:break-word] hx:cursor-pointer [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] hx:contrast-more:border hx:gap-2 hx:before:opacity-25 hx:before:content-['#'] hx:text-gray-500 hx:hover:bg-gray-100 hx:hover:text-gray-900 hx:dark:text-neutral-400 hx:dark:hover:bg-primary-100/5 hx:dark:hover:text-gray-50 hx:contrast-more:text-gray-900 hx:contrast-more:dark:text-gray-50 hx:contrast-more:border-transparent hx:contrast-more:hover:border-gray-900 hx:contrast-more:dark:hover:border-gray-50"
-              >Philosophy</a>
+              >Overview</a>
             </li>
           <li>
               <a
-                href="#hybrid-architecture"
+                href="#1-isolation-architecture-defense-in-depth"
                 class="hx:flex hx:rounded-sm hx:px-2 hx:py-1.5 hx:text-sm hx:transition-colors [word-break:break-word] hx:cursor-pointer [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] hx:contrast-more:border hx:gap-2 hx:before:opacity-25 hx:before:content-['#'] hx:text-gray-500 hx:hover:bg-gray-100 hx:hover:text-gray-900 hx:dark:text-neutral-400 hx:dark:hover:bg-primary-100/5 hx:dark:hover:text-gray-50 hx:contrast-more:text-gray-900 hx:contrast-more:dark:text-gray-50 hx:contrast-more:border-transparent hx:contrast-more:hover:border-gray-900 hx:contrast-more:dark:hover:border-gray-50"
-              >Hybrid Architecture</a>
+              >1. Isolation Architecture (Defense in Depth)</a>
             </li>
           <li>
               <a
-                href="#challenge-design-patterns"
+                href="#2-the-progressive-scenario-mechanic"
                 class="hx:flex hx:rounded-sm hx:px-2 hx:py-1.5 hx:text-sm hx:transition-colors [word-break:break-word] hx:cursor-pointer [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] hx:contrast-more:border hx:gap-2 hx:before:opacity-25 hx:before:content-['#'] hx:text-gray-500 hx:hover:bg-gray-100 hx:hover:text-gray-900 hx:dark:text-neutral-400 hx:dark:hover:bg-primary-100/5 hx:dark:hover:text-gray-50 hx:contrast-more:text-gray-900 hx:contrast-more:dark:text-gray-50 hx:contrast-more:border-transparent hx:contrast-more:hover:border-gray-900 hx:contrast-more:dark:hover:border-gray-50"
-              >Challenge Design Patterns</a>
+              >2. The Progressive Scenario Mechanic</a>
+            </li>
+          <li>
+              <a
+                href="#3-maintenance-philosophy"
+                class="hx:flex hx:rounded-sm hx:px-2 hx:py-1.5 hx:text-sm hx:transition-colors [word-break:break-word] hx:cursor-pointer [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] hx:contrast-more:border hx:gap-2 hx:before:opacity-25 hx:before:content-['#'] hx:text-gray-500 hx:hover:bg-gray-100 hx:hover:text-gray-900 hx:dark:text-neutral-400 hx:dark:hover:bg-primary-100/5 hx:dark:hover:text-gray-50 hx:contrast-more:text-gray-900 hx:contrast-more:dark:text-gray-50 hx:contrast-more:border-transparent hx:contrast-more:hover:border-gray-900 hx:contrast-more:dark:hover:border-gray-50"
+              >3. Maintenance Philosophy</a>
             </li>
           </ul>
   
@@ -420,7 +426,7 @@
       hx:text-gray-500 hx:hover:bg-gray-100 hx:hover:text-gray-900 hx:contrast-more:border hx:contrast-more:border-transparent hx:contrast-more:text-gray-900 hx:contrast-more:hover:border-gray-900 hx:dark:text-neutral-400 hx:dark:hover:bg-primary-100/5 hx:dark:hover:text-gray-50 hx:contrast-more:dark:text-gray-50 hx:contrast-more:dark:hover:border-gray-50"
     href="/projects/mantis-c2/"
     
-  >Honeypot Agent
+  >Project: High-Fidelity Stealth Agent - Research in Evasion and C2 Telemetry
     </a>
               
             </li><li class="hx:flex hx:flex-col "><a
@@ -428,7 +434,7 @@
       hx:text-gray-500 hx:hover:bg-gray-100 hx:hover:text-gray-900 hx:contrast-more:border hx:contrast-more:border-transparent hx:contrast-more:text-gray-900 hx:contrast-more:hover:border-gray-900 hx:dark:text-neutral-400 hx:dark:hover:bg-primary-100/5 hx:dark:hover:text-gray-50 hx:contrast-more:dark:text-gray-50 hx:contrast-more:dark:hover:border-gray-50"
     href="/projects/regional-threat-intel/"
     
-  >Regional CTI Dashboard
+  >Project: High-Fidelity Threat Aggregation Platform (CTI Case Study)
     </a>
               
             </li></ul>
@@ -460,27 +466,31 @@
 <nav class="hextra-toc hx:order-last hx:hidden hx:w-64 hx:shrink-0 hx:xl:block hx:print:hidden hx:px-4" aria-label="table of contents">
     <div class="hextra-scrollbar hx:sticky hx:top-16 hx:overflow-y-auto hx:pr-4 hx:pt-6 hx:text-sm [hyphens:auto] hx:max-h-[calc(100vh-var(--navbar-height)-env(safe-area-inset-bottom))] hx:ltr:-mr-4 hx:rtl:-ml-4"><p class="hx:mb-4 hx:font-semibold hx:tracking-tight">On this page</p><ul>
       <li class="hx:my-2 hx:scroll-my-6 hx:scroll-py-6">
-        <a class="hx:font-medium hx:inline-block hx:text-gray-500 hx:hover:text-gray-900 hx:dark:text-gray-400 hx:dark:hover:text-gray-300 hx:contrast-more:text-gray-900 hx:contrast-more:underline hx:contrast-more:dark:text-gray-50 hx:w-full hx:break-words" href="#philosophy">Philosophy
+        <a class="hx:font-medium hx:inline-block hx:text-gray-500 hx:hover:text-gray-900 hx:dark:text-gray-400 hx:dark:hover:text-gray-300 hx:contrast-more:text-gray-900 hx:contrast-more:underline hx:contrast-more:dark:text-gray-50 hx:w-full hx:break-words" href="#overview">Overview
         </a>
       </li>
       <li class="hx:my-2 hx:scroll-my-6 hx:scroll-py-6">
-        <a class="hx:font-medium hx:inline-block hx:text-gray-500 hx:hover:text-gray-900 hx:dark:text-gray-400 hx:dark:hover:text-gray-300 hx:contrast-more:text-gray-900 hx:contrast-more:underline hx:contrast-more:dark:text-gray-50 hx:w-full hx:break-words" href="#hybrid-architecture">Hybrid Architecture
+        <a class="hx:font-medium hx:inline-block hx:text-gray-500 hx:hover:text-gray-900 hx:dark:text-gray-400 hx:dark:hover:text-gray-300 hx:contrast-more:text-gray-900 hx:contrast-more:underline hx:contrast-more:dark:text-gray-50 hx:w-full hx:break-words" href="#1-isolation-architecture-defense-in-depth">1. Isolation Architecture (Defense in Depth)
         </a>
       </li>
       <li class="hx:my-2 hx:scroll-my-6 hx:scroll-py-6">
-        <a class="hx:font-medium hx:inline-block hx:text-gray-500 hx:hover:text-gray-900 hx:dark:text-gray-400 hx:dark:hover:text-gray-300 hx:contrast-more:text-gray-900 hx:contrast-more:underline hx:contrast-more:dark:text-gray-50 hx:w-full hx:break-words" href="#challenge-design-patterns">Challenge Design Patterns
+        <a class="hx:ltr:pl-4 hx:rtl:pr-4 hx:inline-block hx:text-gray-500 hx:hover:text-gray-900 hx:dark:text-gray-400 hx:dark:hover:text-gray-300 hx:contrast-more:text-gray-900 hx:contrast-more:underline hx:contrast-more:dark:text-gray-50 hx:w-full hx:break-words" href="#a-split-ssh-access-control">A. Split-SSH Access Control
         </a>
       </li>
       <li class="hx:my-2 hx:scroll-my-6 hx:scroll-py-6">
-        <a class="hx:ltr:pl-4 hx:rtl:pr-4 hx:inline-block hx:text-gray-500 hx:hover:text-gray-900 hx:dark:text-gray-400 hx:dark:hover:text-gray-300 hx:contrast-more:text-gray-900 hx:contrast-more:underline hx:contrast-more:dark:text-gray-50 hx:w-full hx:break-words" href="#1-alpha-privilege-escalation">1. “Alpha” (Privilege Escalation)
+        <a class="hx:ltr:pl-4 hx:rtl:pr-4 hx:inline-block hx:text-gray-500 hx:hover:text-gray-900 hx:dark:text-gray-400 hx:dark:hover:text-gray-300 hx:contrast-more:text-gray-900 hx:contrast-more:underline hx:contrast-more:dark:text-gray-50 hx:w-full hx:break-words" href="#b-process-and-file-hiding">B. Process and File Hiding
         </a>
       </li>
       <li class="hx:my-2 hx:scroll-my-6 hx:scroll-py-6">
-        <a class="hx:ltr:pl-4 hx:rtl:pr-4 hx:inline-block hx:text-gray-500 hx:hover:text-gray-900 hx:dark:text-gray-400 hx:dark:hover:text-gray-300 hx:contrast-more:text-gray-900 hx:contrast-more:underline hx:contrast-more:dark:text-gray-50 hx:w-full hx:break-words" href="#2-bravo-red-team--boot-to-root">2. “Bravo” (Red Team / Boot-to-Root)
+        <a class="hx:ltr:pl-4 hx:rtl:pr-4 hx:inline-block hx:text-gray-500 hx:hover:text-gray-900 hx:dark:text-gray-400 hx:dark:hover:text-gray-300 hx:contrast-more:text-gray-900 hx:contrast-more:underline hx:contrast-more:dark:text-gray-50 hx:w-full hx:break-words" href="#c-containerized-boot-to-root-scenarios">C. Containerized Boot-to-Root Scenarios
         </a>
       </li>
       <li class="hx:my-2 hx:scroll-my-6 hx:scroll-py-6">
-        <a class="hx:ltr:pl-4 hx:rtl:pr-4 hx:inline-block hx:text-gray-500 hx:hover:text-gray-900 hx:dark:text-gray-400 hx:dark:hover:text-gray-300 hx:contrast-more:text-gray-900 hx:contrast-more:underline hx:contrast-more:dark:text-gray-50 hx:w-full hx:break-words" href="#3-charlie-forensics--reversing">3. “Charlie” (Forensics &amp; Reversing)
+        <a class="hx:font-medium hx:inline-block hx:text-gray-500 hx:hover:text-gray-900 hx:dark:text-gray-400 hx:dark:hover:text-gray-300 hx:contrast-more:text-gray-900 hx:contrast-more:underline hx:contrast-more:dark:text-gray-50 hx:w-full hx:break-words" href="#2-the-progressive-scenario-mechanic">2. The Progressive Scenario Mechanic
+        </a>
+      </li>
+      <li class="hx:my-2 hx:scroll-my-6 hx:scroll-py-6">
+        <a class="hx:font-medium hx:inline-block hx:text-gray-500 hx:hover:text-gray-900 hx:dark:text-gray-400 hx:dark:hover:text-gray-300 hx:contrast-more:text-gray-900 hx:contrast-more:underline hx:contrast-more:dark:text-gray-50 hx:w-full hx:break-words" href="#3-maintenance-philosophy">3. Maintenance Philosophy
         </a>
       </li></ul>
       <div class="hx:mt-8 hx:border-t hx:bg-white hx:pt-8 hx:shadow-[0_-12px_16px_white] hx:dark:bg-dark hx:dark:shadow-[0_-12px_16px_#111] hx:sticky hx:bottom-0 hx:flex hx:flex-col hx:items-start hx:gap-2 hx:pb-8 hx:border-gray-200 hx:dark:border-neutral-800 hx:contrast-more:border-t hx:contrast-more:border-neutral-400 hx:contrast-more:shadow-none hx:contrast-more:dark:border-neutral-400">
@@ -499,43 +509,48 @@
       <main class="hx:w-full hx:min-w-0 hx:max-w-6xl hx:px-6 hx:pt-4 hx:md:px-12">
         
         <br class="hx:mt-1.5 hx:text-sm" />
-        <h1 class="hx:text-center hx:mt-2 hx:text-4xl hx:font-bold hx:tracking-tight hx:text-slate-900 hx:dark:text-slate-100">Bastion Wargames Platform</h1>
+        <h1 class="hx:text-center hx:mt-2 hx:text-4xl hx:font-bold hx:tracking-tight hx:text-slate-900 hx:dark:text-slate-100">Case Study: Engineering Multi-Tenant Security for a CTF Wargames Platform</h1>
         <div class="hx:mb-16"></div>
         <div class="content">
-          <h1>Project Status: [Production]</h1><h2>Philosophy<span class="hx:absolute hx:-mt-20" id="philosophy"></span>
-    <a href="#philosophy" class="subheading-anchor" aria-label="Permalink for this section"></a></h2><p>Bastion is designed around <strong>progressive scenario-based learning</strong>, mimicking the &ldquo;OverTheWire&rdquo; mechanic where <code>Flag = Next Password</code>. Unlike standard CTFs, the goal is not just to find a string, but to compromise the user account of the next level.</p>
-<h2>Hybrid Architecture<span class="hx:absolute hx:-mt-20" id="hybrid-architecture"></span>
-    <a href="#hybrid-architecture" class="subheading-anchor" aria-label="Permalink for this section"></a></h2><ol>
-<li><strong>Frontend:</strong> Containerized <strong>CTFd</strong> handling scoring and user registration.</li>
-<li><strong>Backend:</strong> Hardened Ubuntu Server hosting live SSH challenges.</li>
-<li><strong>Split-SSH Access Control:</strong>
+          <h1>Bastioni Platform: Multi-Tenant Hardening Case Study</h1><h2>Overview<span class="hx:absolute hx:-mt-20" id="overview"></span>
+    <a href="#overview" class="subheading-anchor" aria-label="Permalink for this section"></a></h2><p>Bastioni is a hybrid wargames platform built for scenario-based cybersecurity training. The primary technical challenge was engineering a secure, multi-tenant Linux environment where players (tenants) could exploit vulnerabilities against adjacent targets without compromising the entire system or affecting other players.</p>
+<h2>1. Isolation Architecture (Defense in Depth)<span class="hx:absolute hx:-mt-20" id="1-isolation-architecture-defense-in-depth"></span>
+    <a href="#1-isolation-architecture-defense-in-depth" class="subheading-anchor" aria-label="Permalink for this section"></a></h2><p>The platform implements three core layers of isolation to maintain stability and prevent cross-user pivoting:</p>
+<h3>A. Split-SSH Access Control<span class="hx:absolute hx:-mt-20" id="a-split-ssh-access-control"></span>
+    <a href="#a-split-ssh-access-control" class="subheading-anchor" aria-label="Permalink for this section"></a></h3><p>Access is segregated at the network port level:</p>
 <ul>
-<li><strong>Port 22:</strong> Admin access only (Key-based).</li>
-<li><strong>Port 2222:</strong> Player access (Password-based, restricted shell).</li>
+<li><strong>Port 22:</strong> Restricted to administrators only (key-based authentication).</li>
+<li><strong>Port 2222:</strong> Dedicated to players only (password-based authentication via the <code>game_users</code> group).</li>
+<li><strong>Defense:</strong> This ensures administrative traffic is isolated from potential player brute-force attempts or protocol abuses, and allows separate Fail2Ban rules for each service.</li>
 </ul>
-</li>
-</ol>
-<h2>Challenge Design Patterns<span class="hx:absolute hx:-mt-20" id="challenge-design-patterns"></span>
-    <a href="#challenge-design-patterns" class="subheading-anchor" aria-label="Permalink for this section"></a></h2><p>I standardized three distinct challenge archetypes to cover the full offensive spectrum:</p>
-<h3>1. &ldquo;Alpha&rdquo; (Privilege Escalation)<span class="hx:absolute hx:-mt-20" id="1-alpha-privilege-escalation"></span>
-    <a href="#1-alpha-privilege-escalation" class="subheading-anchor" aria-label="Permalink for this section"></a></h3><ul>
-<li><strong>Concept:</strong> The player starts as <code>user</code>. The flag is the password for <code>user+1</code>.</li>
-<li><strong>Mechanic:</strong> Exploiting intentional misconfigurations (e.g., SUID binaries, insecure Cron jobs, group-writable files) to pivot to the next user.</li>
-<li><strong>Isolation:</strong> <code>hidepid=2</code> ensures players cannot see processes belonging to other levels.</li>
+<h3>B. Process and File Hiding<span class="hx:absolute hx:-mt-20" id="b-process-and-file-hiding"></span>
+    <a href="#b-process-and-file-hiding" class="subheading-anchor" aria-label="Permalink for this section"></a></h3><p>The environment is hardened using system-level controls:</p>
+<ul>
+<li><strong><code>hidepid=2</code>:</strong> Ensures that players cannot see processes belonging to other users or challenge levels, preventing simple scanning for running exploits or user IDs.</li>
+<li><strong><code>chmod 700</code>:</strong> Enforced across all user home directories, ensuring strict privacy for player files and challenge assets.</li>
 </ul>
-<h3>2. &ldquo;Bravo&rdquo; (Red Team / Boot-to-Root)<span class="hx:absolute hx:-mt-20" id="2-bravo-red-team--boot-to-root"></span>
-    <a href="#2-bravo-red-team--boot-to-root" class="subheading-anchor" aria-label="Permalink for this section"></a></h3><ul>
-<li><strong>Target:</strong> Vulnerable Docker containers (e.g., modified DVWA) exposed internally.</li>
-<li><strong>Goal:</strong> Web Exploitation $rightarrow$ Reverse Shell $rightarrow$ Root Flag.</li>
-<li><strong>Maintenance:</strong> Automated nightly reset scripts destroy and redeploy the containers to ensure a fresh environment for every session.</li>
+<h3>C. Containerized Boot-to-Root Scenarios<span class="hx:absolute hx:-mt-20" id="c-containerized-boot-to-root-scenarios"></span>
+    <a href="#c-containerized-boot-to-root-scenarios" class="subheading-anchor" aria-label="Permalink for this section"></a></h3><p>For high-risk challenges (e.g., the <strong>Bravo</strong> category), a Docker-based architecture is used.</p>
+<ul>
+<li>The vulnerable target is run in an ephemeral container, isolated from the host OS.</li>
+<li><strong>Self-Healing:</strong> A nightly reset script automatically tears down and redeploys the container, guaranteeing a fresh, known-good environment for every session.</li>
 </ul>
-<h3>3. &ldquo;Charlie&rdquo; (Forensics &amp; Reversing)<span class="hx:absolute hx:-mt-20" id="3-charlie-forensics--reversing"></span>
-    <a href="#3-charlie-forensics--reversing" class="subheading-anchor" aria-label="Permalink for this section"></a></h3><ul>
-<li><strong>Concept:</strong> Self-contained analysis tasks.</li>
-<li><strong>Tooling:</strong> Custom access groups (e.g., <code>tools-gef</code>) grant access to debuggers like <code>GDB/GEF</code> or <code>Radare2</code> only to specific users, keeping the environment clean.</li>
+<h2>2. The Progressive Scenario Mechanic<span class="hx:absolute hx:-mt-20" id="2-the-progressive-scenario-mechanic"></span>
+    <a href="#2-the-progressive-scenario-mechanic" class="subheading-anchor" aria-label="Permalink for this section"></a></h2><p>The platform uses a <strong>Flag = Password</strong> progression, forcing users to fully compromise a system before moving on. This mechanic is implemented via intentional flaws:</p>
+<ul>
+<li><strong>Alpha (Privilege Escalation):</strong> Exploits a single, deliberate flaw (e.g., SUID binaries owned by the next user) to pivot from <code>user N</code> to <code>user N+1</code>. The flag is the password for <code>user N+1</code>.</li>
+<li><strong>Charlie (Forensics &amp; Reversing):</strong> Users are restricted to their home directory but are granted specific tool access (e.g., GDB/GEF) via group membership (<code>tools-gef</code>), isolating the tooling risk.</li>
 </ul>
-<hr>
-<p><em>Infrastructure is hardened with UFW default-deny policies and Fail2Ban integration.</em></p>
+<h2>3. Maintenance Philosophy<span class="hx:absolute hx:-mt-20" id="3-maintenance-philosophy"></span>
+    <a href="#3-maintenance-philosophy" class="subheading-anchor" aria-label="Permalink for this section"></a></h2><p>The design prioritizes stability and clean re-deployment:</p>
+<ul>
+<li><strong>User Provisioning:</strong> Access to specialized reversing tools is controlled via simple Linux groups (<code>sudo usermod -aG tools-gef user</code>).</li>
+<li><strong>Challenge Isolation:</strong> Creation of &ldquo;Alpha&rdquo; challenges involves setting specific group ownership (<code>sudo chown Alpha1:Alpha0 /home/Alpha1</code>) to restrict access to the flag file to only the intended user group.</li>
+</ul>
+<blockquote>
+  <p><strong>Disclaimer:</strong> <em>Specific server IP addresses and administrative command sequences are omitted from this public review. This document focuses on the defensive architecture and principles used to manage risk in a hostile multi-tenant environment.</em></p>
+
+</blockquote>
 
         </div>
         <div class="hx:mt-16"></div>

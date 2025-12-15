@@ -16,7 +16,7 @@
     
     
     <item>
-      <title>Bastion Wargames Platform</title>
+      <title>Case Study: Engineering Multi-Tenant Security for a CTF Wargames Platform</title>
       <link>http://localhost:1313/projects/local-ctf-platform/</link>
       <pubDate>Thu, 27 Nov 2025 00:00:00 +0000</pubDate>
       
@@ -24,46 +24,51 @@
       <description>
         
         
-        &lt;h1&gt;Project Status: [Production]&lt;/h1&gt;&lt;h2&gt;Philosophy&lt;span class=&#34;hx:absolute hx:-mt-20&#34; id=&#34;philosophy&#34;&gt;&lt;/span&gt;
-    &lt;a href=&#34;#philosophy&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Bastion is designed around &lt;strong&gt;progressive scenario-based learning&lt;/strong&gt;, mimicking the &amp;ldquo;OverTheWire&amp;rdquo; mechanic where &lt;code&gt;Flag = Next Password&lt;/code&gt;. Unlike standard CTFs, the goal is not just to find a string, but to compromise the user account of the next level.&lt;/p&gt;
-&lt;h2&gt;Hybrid Architecture&lt;span class=&#34;hx:absolute hx:-mt-20&#34; id=&#34;hybrid-architecture&#34;&gt;&lt;/span&gt;
-    &lt;a href=&#34;#hybrid-architecture&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;ol&gt;
-&lt;li&gt;&lt;strong&gt;Frontend:&lt;/strong&gt; Containerized &lt;strong&gt;CTFd&lt;/strong&gt; handling scoring and user registration.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Backend:&lt;/strong&gt; Hardened Ubuntu Server hosting live SSH challenges.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Split-SSH Access Control:&lt;/strong&gt;
+        &lt;h1&gt;Bastioni Platform: Multi-Tenant Hardening Case Study&lt;/h1&gt;&lt;h2&gt;Overview&lt;span class=&#34;hx:absolute hx:-mt-20&#34; id=&#34;overview&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#overview&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Bastioni is a hybrid wargames platform built for scenario-based cybersecurity training. The primary technical challenge was engineering a secure, multi-tenant Linux environment where players (tenants) could exploit vulnerabilities against adjacent targets without compromising the entire system or affecting other players.&lt;/p&gt;
+&lt;h2&gt;1. Isolation Architecture (Defense in Depth)&lt;span class=&#34;hx:absolute hx:-mt-20&#34; id=&#34;1-isolation-architecture-defense-in-depth&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#1-isolation-architecture-defense-in-depth&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;The platform implements three core layers of isolation to maintain stability and prevent cross-user pivoting:&lt;/p&gt;
+&lt;h3&gt;A. Split-SSH Access Control&lt;span class=&#34;hx:absolute hx:-mt-20&#34; id=&#34;a-split-ssh-access-control&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#a-split-ssh-access-control&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;Access is segregated at the network port level:&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;Port 22:&lt;/strong&gt; Admin access only (Key-based).&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Port 2222:&lt;/strong&gt; Player access (Password-based, restricted shell).&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Port 22:&lt;/strong&gt; Restricted to administrators only (key-based authentication).&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Port 2222:&lt;/strong&gt; Dedicated to players only (password-based authentication via the &lt;code&gt;game_users&lt;/code&gt; group).&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Defense:&lt;/strong&gt; This ensures administrative traffic is isolated from potential player brute-force attempts or protocol abuses, and allows separate Fail2Ban rules for each service.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h2&gt;Challenge Design Patterns&lt;span class=&#34;hx:absolute hx:-mt-20&#34; id=&#34;challenge-design-patterns&#34;&gt;&lt;/span&gt;
-    &lt;a href=&#34;#challenge-design-patterns&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;I standardized three distinct challenge archetypes to cover the full offensive spectrum:&lt;/p&gt;
-&lt;h3&gt;1. &amp;ldquo;Alpha&amp;rdquo; (Privilege Escalation)&lt;span class=&#34;hx:absolute hx:-mt-20&#34; id=&#34;1-alpha-privilege-escalation&#34;&gt;&lt;/span&gt;
-    &lt;a href=&#34;#1-alpha-privilege-escalation&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;Concept:&lt;/strong&gt; The player starts as &lt;code&gt;user&lt;/code&gt;. The flag is the password for &lt;code&gt;user+1&lt;/code&gt;.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Mechanic:&lt;/strong&gt; Exploiting intentional misconfigurations (e.g., SUID binaries, insecure Cron jobs, group-writable files) to pivot to the next user.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Isolation:&lt;/strong&gt; &lt;code&gt;hidepid=2&lt;/code&gt; ensures players cannot see processes belonging to other levels.&lt;/li&gt;
+&lt;h3&gt;B. Process and File Hiding&lt;span class=&#34;hx:absolute hx:-mt-20&#34; id=&#34;b-process-and-file-hiding&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#b-process-and-file-hiding&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;The environment is hardened using system-level controls:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;hidepid=2&lt;/code&gt;:&lt;/strong&gt; Ensures that players cannot see processes belonging to other users or challenge levels, preventing simple scanning for running exploits or user IDs.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;chmod 700&lt;/code&gt;:&lt;/strong&gt; Enforced across all user home directories, ensuring strict privacy for player files and challenge assets.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3&gt;2. &amp;ldquo;Bravo&amp;rdquo; (Red Team / Boot-to-Root)&lt;span class=&#34;hx:absolute hx:-mt-20&#34; id=&#34;2-bravo-red-team--boot-to-root&#34;&gt;&lt;/span&gt;
-    &lt;a href=&#34;#2-bravo-red-team--boot-to-root&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;Target:&lt;/strong&gt; Vulnerable Docker containers (e.g., modified DVWA) exposed internally.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Goal:&lt;/strong&gt; Web Exploitation $rightarrow$ Reverse Shell $rightarrow$ Root Flag.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Maintenance:&lt;/strong&gt; Automated nightly reset scripts destroy and redeploy the containers to ensure a fresh environment for every session.&lt;/li&gt;
+&lt;h3&gt;C. Containerized Boot-to-Root Scenarios&lt;span class=&#34;hx:absolute hx:-mt-20&#34; id=&#34;c-containerized-boot-to-root-scenarios&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#c-containerized-boot-to-root-scenarios&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;For high-risk challenges (e.g., the &lt;strong&gt;Bravo&lt;/strong&gt; category), a Docker-based architecture is used.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;The vulnerable target is run in an ephemeral container, isolated from the host OS.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Self-Healing:&lt;/strong&gt; A nightly reset script automatically tears down and redeploys the container, guaranteeing a fresh, known-good environment for every session.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3&gt;3. &amp;ldquo;Charlie&amp;rdquo; (Forensics &amp;amp; Reversing)&lt;span class=&#34;hx:absolute hx:-mt-20&#34; id=&#34;3-charlie-forensics--reversing&#34;&gt;&lt;/span&gt;
-    &lt;a href=&#34;#3-charlie-forensics--reversing&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;Concept:&lt;/strong&gt; Self-contained analysis tasks.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Tooling:&lt;/strong&gt; Custom access groups (e.g., &lt;code&gt;tools-gef&lt;/code&gt;) grant access to debuggers like &lt;code&gt;GDB/GEF&lt;/code&gt; or &lt;code&gt;Radare2&lt;/code&gt; only to specific users, keeping the environment clean.&lt;/li&gt;
+&lt;h2&gt;2. The Progressive Scenario Mechanic&lt;span class=&#34;hx:absolute hx:-mt-20&#34; id=&#34;2-the-progressive-scenario-mechanic&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#2-the-progressive-scenario-mechanic&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;The platform uses a &lt;strong&gt;Flag = Password&lt;/strong&gt; progression, forcing users to fully compromise a system before moving on. This mechanic is implemented via intentional flaws:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Alpha (Privilege Escalation):&lt;/strong&gt; Exploits a single, deliberate flaw (e.g., SUID binaries owned by the next user) to pivot from &lt;code&gt;user N&lt;/code&gt; to &lt;code&gt;user N+1&lt;/code&gt;. The flag is the password for &lt;code&gt;user N+1&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Charlie (Forensics &amp;amp; Reversing):&lt;/strong&gt; Users are restricted to their home directory but are granted specific tool access (e.g., GDB/GEF) via group membership (&lt;code&gt;tools-gef&lt;/code&gt;), isolating the tooling risk.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;hr&gt;
-&lt;p&gt;&lt;em&gt;Infrastructure is hardened with UFW default-deny policies and Fail2Ban integration.&lt;/em&gt;&lt;/p&gt;
+&lt;h2&gt;3. Maintenance Philosophy&lt;span class=&#34;hx:absolute hx:-mt-20&#34; id=&#34;3-maintenance-philosophy&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#3-maintenance-philosophy&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;The design prioritizes stability and clean re-deployment:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;User Provisioning:&lt;/strong&gt; Access to specialized reversing tools is controlled via simple Linux groups (&lt;code&gt;sudo usermod -aG tools-gef user&lt;/code&gt;).&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Challenge Isolation:&lt;/strong&gt; Creation of &amp;ldquo;Alpha&amp;rdquo; challenges involves setting specific group ownership (&lt;code&gt;sudo chown Alpha1:Alpha0 /home/Alpha1&lt;/code&gt;) to restrict access to the flag file to only the intended user group.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;strong&gt;Disclaimer:&lt;/strong&gt; &lt;em&gt;Specific server IP addresses and administrative command sequences are omitted from this public review. This document focuses on the defensive architecture and principles used to manage risk in a hostile multi-tenant environment.&lt;/em&gt;&lt;/p&gt;
+
+&lt;/blockquote&gt;
 
       </description>
     </item>
     
     <item>
-      <title>Honeypot Agent</title>
+      <title>Project: High-Fidelity Stealth Agent - Research in Evasion and C2 Telemetry</title>
       <link>http://localhost:1313/projects/mantis-c2/</link>
       <pubDate>Thu, 27 Nov 2025 00:00:00 +0000</pubDate>
       
@@ -71,39 +76,44 @@
       <description>
         
         
-        &lt;h1&gt;Project Status: [Research / Active]&lt;/h1&gt;&lt;h2&gt;Overview&lt;span class=&#34;hx:absolute hx:-mt-20&#34; id=&#34;overview&#34;&gt;&lt;/span&gt;
-    &lt;a href=&#34;#overview&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;This is a stealthy agent designed to let attackers &amp;ldquo;catch themselves.&amp;rdquo; When deployed on a honeypot, it mimics legitimate software while establishing a covert channel back to a custom Command &amp;amp; Control (C2) server.&lt;/p&gt;
-&lt;h2&gt;Technical Architecture&lt;span class=&#34;hx:absolute hx:-mt-20&#34; id=&#34;technical-architecture&#34;&gt;&lt;/span&gt;
-    &lt;a href=&#34;#technical-architecture&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;The system consists of three core components:&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;strong&gt;The Agent (&lt;code&gt;stealer&lt;/code&gt;):&lt;/strong&gt; A GUI-less Go payload that runs silently on the victim machine.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;The C2 (&lt;code&gt;receiver&lt;/code&gt;):&lt;/strong&gt; A Linux-based server managing multiple sessions and exfiltrated data.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;The Builder:&lt;/strong&gt; A custom GUI tool to generate polymorphic payloads on demand.&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h2&gt;Key Capabilities&lt;span class=&#34;hx:absolute hx:-mt-20&#34; id=&#34;key-capabilities&#34;&gt;&lt;/span&gt;
-    &lt;a href=&#34;#key-capabilities&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;h3&gt;1. Polymorphism &amp;amp; Evasion&lt;span class=&#34;hx:absolute hx:-mt-20&#34; id=&#34;1-polymorphism--evasion&#34;&gt;&lt;/span&gt;
-    &lt;a href=&#34;#1-polymorphism--evasion&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;Dynamic Builds:&lt;/strong&gt; The &lt;code&gt;Makefile&lt;/code&gt; generates a unique file hash for every build, evading hash-based signaling.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Debug Stripping:&lt;/strong&gt; Automatically removes DWARF tables and symbol information to complicate reverse engineering.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Hidden Execution:&lt;/strong&gt; Runs as a background process on Windows without flashing the console.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3&gt;2. The &amp;ldquo;Pillage&amp;rdquo; Workflow&lt;span class=&#34;hx:absolute hx:-mt-20&#34; id=&#34;2-the-pillage-workflow&#34;&gt;&lt;/span&gt;
-    &lt;a href=&#34;#2-the-pillage-workflow&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;I engineered a two-stage exfiltration process to optimize bandwidth:&lt;/p&gt;
+        &lt;h1&gt;Project: Mantis C2 Framework - Agent R&amp;amp;D&lt;/h1&gt;&lt;h2&gt;Overview&lt;span class=&#34;hx:absolute hx:-mt-20&#34; id=&#34;overview&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#overview&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;This project is a Command &amp;amp; Control (C2) framework built as a research vehicle for testing modern evasion techniques and high-fidelity data extraction methods. The agent is designed for covert operations and is often deployed in internal honeypot environments to study attack TTPs (Tactics, Techniques, and Procedures).&lt;/p&gt;
+&lt;h2&gt;1. Evasion and Persistence Architecture&lt;span class=&#34;hx:absolute hx:-mt-20&#34; id=&#34;1-evasion-and-persistence-architecture&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#1-evasion-and-persistence-architecture&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;h3&gt;AST-Driven Polymorphism Protocol&lt;span class=&#34;hx:absolute hx:-mt-20&#34; id=&#34;ast-driven-polymorphism-protocol&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#ast-driven-polymorphism-protocol&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;To defeat static analysis, the builder utilizes a custom source-code mutation protocol:&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;Stage 1 (Recon):&lt;/strong&gt; Grabs &amp;ldquo;Recent Files&amp;rdquo; and system info immediately upon connection.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Stage 2 (Deep Dive):&lt;/strong&gt; The &lt;code&gt;pil_fil&lt;/code&gt; command allows operators to surgically extract specific extensions (e.g., &lt;code&gt;.pdf&lt;/code&gt;, &lt;code&gt;.docx&lt;/code&gt;) or directories.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;AST-Driven Mutation:&lt;/strong&gt; The agent is processed by a custom pre-compiler that mutates the Abstract Syntax Tree (AST) to generate &lt;strong&gt;structurally unique binaries&lt;/strong&gt; for every deployment. This defeats Control Flow Graph (CFG) analysis and static signatures, a key step beyond simple file hash mutation.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;String Context Encryption:&lt;/strong&gt; All sensitive strings (e.g., C2 domains, commands) are automatically detected and encrypted at the source-code level and decrypted at runtime using a file-local key.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Debug Stripping:&lt;/strong&gt; All DWARF tables and symbol information are automatically removed during cross-compilation to severely complicate reverse engineering efforts.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3&gt;3. Persistence &amp;amp; Self-Destruct&lt;span class=&#34;hx:absolute hx:-mt-20&#34; id=&#34;3-persistence--self-destruct&#34;&gt;&lt;/span&gt;
-    &lt;a href=&#34;#3-persistence--self-destruct&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;Persistence:&lt;/strong&gt; Modifies the Windows Registry Run keys for survival across reboots.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Kill Switch:&lt;/strong&gt; The &lt;code&gt;quit&lt;/code&gt; command triggers a self-destruct routine, scrubbing the registry keys and deleting the agent binary from the disk.&lt;/li&gt;
+&lt;h3&gt;Operational Stealth&lt;span class=&#34;hx:absolute hx:-mt-20&#34; id=&#34;operational-stealth&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#operational-stealth&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;The agent runs silently as a background process (&lt;code&gt;-H=windowsgui&lt;/code&gt; flag).&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Jitter Beacon:&lt;/strong&gt; Network heartbeat uses randomized intervals (Base ± Jitter%) to defeat detection rules based on static frequency analysis.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h2&gt;Code Snippet: Makefile Logic&lt;span class=&#34;hx:absolute hx:-mt-20&#34; id=&#34;code-snippet-makefile-logic&#34;&gt;&lt;/span&gt;
-    &lt;a href=&#34;#code-snippet-makefile-logic&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;div class=&#34;hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code&#34;&gt;
+&lt;h3&gt;Self-Contained OPSEC&lt;span class=&#34;hx:absolute hx:-mt-20&#34; id=&#34;self-contained-opsec&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#self-contained-opsec&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;The &lt;strong&gt;&lt;code&gt;quit&lt;/code&gt;&lt;/strong&gt; command initiates a self-destruct routine, which is critical for operational cleanup:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Removes Windows Registry Run keys used for persistence.&lt;/li&gt;
+&lt;li&gt;Securely deletes the executable binary from the disk.&lt;/li&gt;
+&lt;li&gt;Terminates the session and signals the C2 server.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2&gt;2. Streaming Data Telemetry&lt;span class=&#34;hx:absolute hx:-mt-20&#34; id=&#34;2-streaming-data-telemetry&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#2-streaming-data-telemetry&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;The core innovation is the streaming telemetry model, designed for high-volume, low-latency exfiltration:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Streaming C2:&lt;/strong&gt; Data is sent immediately in small, encrypted batches (ZIPs) over a covert TCP channel. This ensures data capture is continuous, even if the session is unexpectedly terminated.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Auto-Pillage:&lt;/strong&gt; An immediate &lt;strong&gt;Stage 1 Recon Report&lt;/strong&gt; is generated upon connection, providing the operator with critical system and file metadata before any manual command is issued.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Large File Handling:&lt;/strong&gt; Files exceeding a defined threshold (&lt;strong&gt;50MB&lt;/strong&gt;) are automatically streamed raw in chunks, bypassing the compression engine to prevent memory spikes and keep CPU load minimal.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;3. Tooling and Sanitization&lt;span class=&#34;hx:absolute hx:-mt-20&#34; id=&#34;3-tooling-and-sanitization&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#3-tooling-and-sanitization&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;The framework includes a custom Builder tool to generate payloads. The code is structured to enforce responsible R&amp;amp;D principles.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Code Snippet: Stealth Compilation&lt;/strong&gt;
+&lt;em&gt;The following sanitized Makefile snippet shows the cross-compilation flags used to ensure a minimal, quiet Windows binary.&lt;/em&gt;&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code&#34;&gt;
 
 &lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-makefile&#34; data-lang=&#34;makefile&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c&#34;&gt;# Example of build automation for stealth
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c&#34;&gt;&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;build_stealer_windows&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nv&#34;&gt;GOOS&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;windows &lt;span class=&#34;nv&#34;&gt;GOARCH&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;amd64 go build -ldflags&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;-s -w -H=windowsgui&amp;#34;&lt;/span&gt; -o dist/stealer.exe
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nv&#34;&gt;GOOS&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;windows &lt;span class=&#34;nv&#34;&gt;GOARCH&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;amd64 go build -ldflags&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;-s -w -H=windowsgui&amp;#34;&lt;/span&gt; -o dist/agent.exe
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-0&#34;&gt;
   &lt;button
     class=&#34;hextra-code-copy-btn hx:group/copybtn hx:cursor-pointer hx:transition-all hx:active:opacity-50 hx:bg-primary-700/5 hx:border hx:border-black/5 hx:text-gray-600 hx:hover:text-gray-900 hx:rounded-md hx:p-1.5 hx:dark:bg-primary-300/10 hx:dark:border-white/10 hx:dark:text-gray-400 hx:dark:hover:text-gray-50&#34;
@@ -114,14 +124,18 @@
   &lt;/button&gt;
 &lt;/div&gt;
 &lt;/div&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;strong&gt;Disclaimer:&lt;/strong&gt; &lt;em&gt;Core OPSEC features, including the encryption/decryption keys, C2 IP/Port configuration, and the full multi-threaded session management logic, are omitted from this public documentation to prevent weaponization and maintain responsible disclosure standards. For the technical mechanism behind the polymorphic build, please refer to the dedicated research: &lt;a href=&#34;https://ieri.sh/research/building-a-polymorphic-engine/&#34;target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Go AST Polymorphic Engine&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+
+&lt;/blockquote&gt;
 &lt;hr&gt;
-&lt;p&gt;&lt;em&gt;This tool is for educational research and authorized honeypot deployment only.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;This tool is for educational research and authorized internal threat simulation only.&lt;/em&gt;&lt;/p&gt;
 
       </description>
     </item>
     
     <item>
-      <title>Regional CTI Dashboard</title>
+      <title>Project: High-Fidelity Threat Aggregation Platform (CTI Case Study)</title>
       <link>http://localhost:1313/projects/regional-threat-intel/</link>
       <pubDate>Thu, 27 Nov 2025 00:00:00 +0000</pubDate>
       
@@ -129,31 +143,60 @@
       <description>
         
         
-        &lt;h1&gt;Project Status: [Production]&lt;/h1&gt;&lt;h2&gt;System Overview&lt;span class=&#34;hx:absolute hx:-mt-20&#34; id=&#34;system-overview&#34;&gt;&lt;/span&gt;
-    &lt;a href=&#34;#system-overview&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;The CTI Dashboard is a custom intelligence aggregation platform designed to combat alert fatigue. Unlike generic feeds, it filters specifically for APT groups and C2 infrastructure targeting a &lt;strong&gt;specific geographic region&lt;/strong&gt;.&lt;/p&gt;
-&lt;h2&gt;Architecture&lt;span class=&#34;hx:absolute hx:-mt-20&#34; id=&#34;architecture&#34;&gt;&lt;/span&gt;
-    &lt;a href=&#34;#architecture&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;The system runs on a containerized microservices architecture:&lt;/p&gt;
+        &lt;h1&gt;CTI Dashboard: Engineering for Relevance&lt;/h1&gt;&lt;h2&gt;Overview&lt;span class=&#34;hx:absolute hx:-mt-20&#34; id=&#34;overview&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#overview&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;This custom-built CTI dashboard solves the critical problem of alert fatigue by engineering a system that filters high-volume open-source feeds (OSINT) down to a high-fidelity list of indicators (IOCs). The system focuses exclusively on APT activity and C2 infrastructure relevant to a &lt;strong&gt;defined threat landscape&lt;/strong&gt;.&lt;/p&gt;
+&lt;h2&gt;1. Technical Architecture and Data Flow&lt;span class=&#34;hx:absolute hx:-mt-20&#34; id=&#34;1-technical-architecture-and-data-flow&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#1-technical-architecture-and-data-flow&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;The system runs on a containerized microservices architecture to ensure resilience and maintainability:&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;Core:&lt;/strong&gt; Python-based collectors acting as API glue.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Storage:&lt;/strong&gt; PostgreSQL (&lt;code&gt;threat_db&lt;/code&gt;) for structured IOC retention.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Visualization:&lt;/strong&gt; Grafana for real-time monitoring of active campaigns.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Core Logic:&lt;/strong&gt; Python-based collector services act as API consumers and data parsers.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Storage:&lt;/strong&gt; PostgreSQL (&lt;code&gt;threat_db&lt;/code&gt;) provides robust relational storage for structured IOCs.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Visualization:&lt;/strong&gt; Grafana is used for real-time monitoring and threat landscape visualization.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h2&gt;Custom Collectors&lt;span class=&#34;hx:absolute hx:-mt-20&#34; id=&#34;custom-collectors&#34;&gt;&lt;/span&gt;
-    &lt;a href=&#34;#custom-collectors&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;I developed independent services for specific intelligence vectors:&lt;/p&gt;
+&lt;h3&gt;Data Aggregation and Filtering&lt;span class=&#34;hx:absolute hx:-mt-20&#34; id=&#34;data-aggregation-and-filtering&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#data-aggregation-and-filtering&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;Independent collectors manage the ingestion and scoring:&lt;/p&gt;
 &lt;ol&gt;
-&lt;li&gt;&lt;strong&gt;&lt;code&gt;collector-news&lt;/code&gt;&lt;/strong&gt;: Parses RSS feeds and scores articles based on regional keywords.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;&lt;code&gt;collector-ioc-threatfox&lt;/code&gt;&lt;/strong&gt;: Ingests technical indicators (IP/Hash) from ThreatFox.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;&lt;code&gt;collector-otx&lt;/code&gt;&lt;/strong&gt;: Polls AlienVault OTX for &amp;ldquo;pulses&amp;rdquo; related to specific APTs.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;&lt;code&gt;collector-c2feeds&lt;/code&gt;&lt;/strong&gt;: Automates the tracking of active Command &amp;amp; Control servers.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;collector-news&lt;/code&gt;:&lt;/strong&gt; Parses RSS feeds and scores articles based on high-relevance keywords (e.g., &amp;ldquo;Critical Infrastructure,&amp;rdquo; &amp;ldquo;Cyber Attack,&amp;rdquo; &amp;ldquo;Vulnerability Disclosure&amp;rdquo;) and regional filters.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;collector-ioc-threatfox&lt;/code&gt; / &lt;code&gt;collector-otx&lt;/code&gt;:&lt;/strong&gt; Ingests technical indicators (IPs, Hashes) from open feeds, applying a geographical and campaign-based filter before insertion into the database.&lt;/li&gt;
 &lt;/ol&gt;
-&lt;h2&gt;Integration: Cisco Stealthwatch&lt;span class=&#34;hx:absolute hx:-mt-20&#34; id=&#34;integration-cisco-stealthwatch&#34;&gt;&lt;/span&gt;
-    &lt;a href=&#34;#integration-cisco-stealthwatch&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;To operationalize the data, I built a direct integration for network security tools.&lt;/p&gt;
+&lt;h2&gt;2. Operationalizing Intelligence&lt;span class=&#34;hx:absolute hx:-mt-20&#34; id=&#34;2-operationalizing-intelligence&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#2-operationalizing-intelligence&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;The system&amp;rsquo;s value is in its downstream integration with defensive tools:&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;Method:&lt;/strong&gt; Created a read-only PostgreSQL user (&lt;code&gt;stealthwatch_user&lt;/code&gt;) allowed to query the &lt;code&gt;public&lt;/code&gt; schema.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Impact:&lt;/strong&gt; Allows the internal firewall/NDR to pull high-fidelity blocklists directly from the CTI database without manual export.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Firewall/NDR Integration:&lt;/strong&gt; A dedicated, read-only PostgreSQL user is created (&lt;code&gt;threat_user&lt;/code&gt;).&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Method:&lt;/strong&gt; This allows internal network security solutions to pull the high-fidelity, filtered blocklist directly from the CTI database every hour, automating the defense loop.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;hr&gt;
-&lt;p&gt;&lt;em&gt;Deployment is managed via Docker Compose. Source code includes a custom importer for historical MaxMind and OTX data.&lt;/em&gt;&lt;/p&gt;
+&lt;h2&gt;3. Deployment and Environment Configuration&lt;span class=&#34;hx:absolute hx:-mt-20&#34; id=&#34;3-deployment-and-environment-configuration&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#3-deployment-and-environment-configuration&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;The entire stack is deployed via Docker Compose to guarantee portability and fast rebuilds.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Security:&lt;/strong&gt; The system is deployed behind an Nginx Reverse Proxy with an SSL/TLS certificate to secure the Grafana web interface.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Database Access:&lt;/strong&gt; To prevent credential leakage, Grafana is configured to connect to the internal &lt;code&gt;postgres:5432&lt;/code&gt; container using environment variables and a shared internal network.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Deployment Snippet:&lt;/strong&gt;
+&lt;em&gt;The following example shows the configuration required for Grafana to secure the web UI and connect to the internal database.&lt;/em&gt;&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code&#34;&gt;
+
+&lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-yml&#34; data-lang=&#34;yml&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nt&#34;&gt;grafana&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;c&#34;&gt;# ... (details omitted)&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;environment&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;      &lt;/span&gt;- &lt;span class=&#34;l&#34;&gt;GF_SECURITY_ADMIN_USER=${GF_ADMIN_USER}&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;      &lt;/span&gt;&lt;span class=&#34;c&#34;&gt;# The database connection uses the internal Docker network name&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;      &lt;/span&gt;- &lt;span class=&#34;l&#34;&gt;GF_SERVER_ROOT_URL=https://IP_OR_DOMAIN/  &lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;networks&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;      &lt;/span&gt;- &lt;span class=&#34;l&#34;&gt;cti_network&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;depends_on&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;      &lt;/span&gt;- &lt;span class=&#34;l&#34;&gt;postgres&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx:group/copybtn hx:cursor-pointer hx:transition-all hx:active:opacity-50 hx:bg-primary-700/5 hx:border hx:border-black/5 hx:text-gray-600 hx:hover:text-gray-900 hx:rounded-md hx:p-1.5 hx:dark:bg-primary-300/10 hx:dark:border-white/10 hx:dark:text-gray-400 hx:dark:hover:text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;hextra-copy-icon hx:group-[.copied]/copybtn:hidden hx:pointer-events-none hx:h-4 hx:w-4&#34;&gt;&lt;/div&gt;
+&lt;div class=&#34;hextra-success-icon hx:hidden hx:group-[.copied]/copybtn:block hx:pointer-events-none hx:h-4 hx:w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;Disclaimer: Specific regional filtering keywords, API keys, and sensitive production configuration details are omitted. This report focuses on the architectural decisions and filtering methodology employed to solve the high-volume CTI problem.&lt;/p&gt;
+
+&lt;/blockquote&gt;
 
       </description>
     </item>
