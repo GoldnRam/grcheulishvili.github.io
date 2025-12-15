@@ -1,33 +1,54 @@
 ---
-title: "Regional CTI Dashboard"
+title: "Project: High-Fidelity Threat Aggregation Platform (CTI Case Study)"
 date: 2025-11-27
 draft: false
-description: "A specialized Threat Intelligence platform filtering OTX and ThreatFox data for the specific geographic region using Grafana and PostgreSQL."
-tags: ["CTI", "Python", "Grafana", "PostgreSQL"]
+description: "A custom Threat Intelligence (CTI) aggregation platform designed to filter open-source feeds (OTX, ThreatFox) for high-relevance threats, reducing alert fatigue."
+tags: ["CTI", "Python", "Grafana", "PostgreSQL", "Engineering"]
 ---
 
-# Project Status: [Production]
+# CTI Dashboard: Engineering for Relevance
 
-## System Overview
-The CTI Dashboard is a custom intelligence aggregation platform designed to combat alert fatigue. Unlike generic feeds, it filters specifically for APT groups and C2 infrastructure targeting a **specific geographic region**.
+## Overview
+This custom-built CTI dashboard solves the critical problem of alert fatigue by engineering a system that filters high-volume open-source feeds (OSINT) down to a high-fidelity list of indicators (IOCs). The system focuses exclusively on APT activity and C2 infrastructure relevant to a **defined threat landscape**.
 
-## Architecture
-The system runs on a containerized microservices architecture:
-* **Core:** Python-based collectors acting as API glue.
-* **Storage:** PostgreSQL (`threat_db`) for structured IOC retention.
-* **Visualization:** Grafana for real-time monitoring of active campaigns.
+## 1. Technical Architecture and Data Flow
 
-## Custom Collectors
-I developed independent services for specific intelligence vectors:
-1.  **`collector-news`**: Parses RSS feeds and scores articles based on regional keywords.
-2.  **`collector-ioc-threatfox`**: Ingests technical indicators (IP/Hash) from ThreatFox.
-3.  **`collector-otx`**: Polls AlienVault OTX for "pulses" related to specific APTs.
-4.  **`collector-c2feeds`**: Automates the tracking of active Command & Control servers.
+The system runs on a containerized microservices architecture to ensure resilience and maintainability:
+* **Core Logic:** Python-based collector services act as API consumers and data parsers.
+* **Storage:** PostgreSQL (`threat_db`) provides robust relational storage for structured IOCs.
+* **Visualization:** Grafana is used for real-time monitoring and threat landscape visualization.
 
-## Integration: Cisco Stealthwatch
-To operationalize the data, I built a direct integration for network security tools.
-* **Method:** Created a read-only PostgreSQL user (`stealthwatch_user`) allowed to query the `public` schema.
-* **Impact:** Allows the internal firewall/NDR to pull high-fidelity blocklists directly from the CTI database without manual export.
+### Data Aggregation and Filtering
+Independent collectors manage the ingestion and scoring:
+1.  **`collector-news`:** Parses RSS feeds and scores articles based on high-relevance keywords (e.g., "Critical Infrastructure," "Cyber Attack," "Vulnerability Disclosure") and regional filters.
+2.  **`collector-ioc-threatfox` / `collector-otx`:** Ingests technical indicators (IPs, Hashes) from open feeds, applying a geographical and campaign-based filter before insertion into the database.
 
----
-*Deployment is managed via Docker Compose. Source code includes a custom importer for historical MaxMind and OTX data.*
+## 2. Operationalizing Intelligence
+
+The system's value is in its downstream integration with defensive tools:
+* **Firewall/NDR Integration:** A dedicated, read-only PostgreSQL user is created (`threat_user`).
+* **Method:** This allows internal network security solutions (e.g., Cisco Stealthwatch, custom scripts) to pull the high-fidelity, filtered blocklist directly from the CTI database every hour, automating the defense loop.
+
+## 3. Deployment and Environment Configuration
+
+The entire stack is deployed via Docker Compose to guarantee portability and fast rebuilds.
+
+* **Security:** The system is deployed behind an Nginx Reverse Proxy with an SSL/TLS certificate to secure the Grafana web interface.
+* **Database Access:** To prevent credential leakage, Grafana is configured to connect to the internal `postgres:5432` container using environment variables and a shared internal network.
+
+**Deployment Snippet:**
+*The following example shows the configuration required for Grafana to secure the web UI and connect to the internal database.*
+
+```yml
+grafana:
+    # ... (details omitted)
+    environment:
+      - GF_SECURITY_ADMIN_USER=${GF_ADMIN_USER}
+      # The database connection uses the internal Docker network name
+      - GF_SERVER_ROOT_URL=https://IP_OR_DOMAIN/  
+    networks:
+      - cti_network
+    depends_on:
+      - postgres
+```
+> Disclaimer: Specific regional filtering keywords, API keys, and sensitive production configuration details are omitted. This report focuses on the architectural decisions and filtering methodology employed to solve the high-volume CTI problem.
