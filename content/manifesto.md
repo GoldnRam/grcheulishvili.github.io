@@ -7,18 +7,18 @@ sidebar:
   enable: false   
 ---
 
-# Engineering Philosophy
+# The Engineering Philosophy
 
-IERI.SH is my independent R&D lab, built to pursue technical depth in security engineering. My goal is to bridge the knowledge gap between security theory and demonstrable, executable system reality.
+IERI.SH operates as my independent R&D lab, dedicated to achieving technical depth in security engineering. My work aims to consistently bridge the knowledge gap between academic theory and executable system reality.
 
-### 1. Build to Understand
-True technical credibility comes from building solutions, not just configuring tools. My focus is on **capability development**—creating security validation tools from first principles—rather than simple administrative setup.
+### 1. The Core Principle: Build to Understand
+I believe true mastery is demonstrated not by configuring vendor tools, but by engineering functional solutions from first principles. My focus is on **capability development**—creating the tooling required for security validation—over simple administration.
 
-### 2. Focus on System Internals
-Effective engineering requires understanding the system beneath the abstraction layer. My research targets **system internals and core protocols** to ensure solutions are robust, transparent, and independent of high-level, vendor frameworks.
+### 2. Mastery of System Internals
+Effective offensive and defensive engineering requires understanding the system beneath the abstraction layer. My research is dedicated to **system internals and underlying protocols**. I prioritize **self-reliant engineering and minimal dependence on external frameworks**, ensuring all solutions are transparent, robust, and maintainable.
 
-### 3. Open Publication
-All findings derived from this research are documented here. My commitment is to contribute high-effort, transparent engineering knowledge back to the technical community for peer review and structured learning.
+### 3. Open Publication Protocol
+All findings derived from this research are documented here. My commitment is to facilitate structured learning, external validation, and to contribute transparent, high-effort engineering knowledge back to the technical community.
 
 ---
 *Depth. Precision. Execution.*
