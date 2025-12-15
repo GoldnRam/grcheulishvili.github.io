@@ -18,7 +18,7 @@ I believe true mastery is demonstrated not by configuring vendor tools, but by e
 Effective offensive and defensive engineering requires understanding the system beneath the abstraction layer. My research is dedicated to **system internals and underlying protocols**. I prioritize **self-reliant engineering and minimal dependence on external frameworks**, ensuring all solutions are transparent, robust, and maintainable.
 
 ### 3. Open Publication Protocol
-All findings derived from this research are documented here. My commitment is to facilitate structured learning, external validation, and to contribute transparent, high-effort engineering knowledge back to the technical community.
+All findings derived from this research are documented here. My commitment is to facilitate structured learning, external validation, and to contribute transparent, high-effort engineering knowledge back to the technical community. **External contributions and collaboration are welcome to expand the research baseline.**
 
 ---
 *Depth. Precision. Execution.*
