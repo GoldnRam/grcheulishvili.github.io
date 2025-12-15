@@ -20,5 +20,5 @@ toc: false
 {{< /cards >}}
 
 <div style="margin-top: 4rem; border-top: 1px solid #222; padding-top: 2rem; color: #666; font-size: 0.9rem;">
-  An independent initiative dedicated to proving theoretical security concepts through executable engineering and code.
+  Research builds capability. The knowledge is open.
 </div>
