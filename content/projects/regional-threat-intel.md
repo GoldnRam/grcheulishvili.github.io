@@ -27,7 +27,7 @@ Independent collectors manage the ingestion and scoring:
 
 The system's value is in its downstream integration with defensive tools:
 * **Firewall/NDR Integration:** A dedicated, read-only PostgreSQL user is created (`threat_user`).
-* **Method:** This allows internal network security solutions (e.g., Cisco Stealthwatch, custom scripts) to pull the high-fidelity, filtered blocklist directly from the CTI database every hour, automating the defense loop.
+* **Method:** This allows internal network security solutions to pull the high-fidelity, filtered blocklist directly from the CTI database every hour, automating the defense loop.
 
 ## 3. Deployment and Environment Configuration
 
