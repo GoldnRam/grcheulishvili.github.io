@@ -7,7 +7,7 @@ toc: false
 ---
 
 <div style="margin-top: 1rem; margin-bottom: 2rem; color: #DC143C; font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; letter-spacing: 0.02em;">
-  <i>Creating an offensive tool to validate security controls, presented as a defense research asset.</i>
+  <i>Implementing and detailing advanced offensive capabilities and tooling to demonstrate complex techniques and operational cleverness.</i>
 </div>
 
 {{< auto-cards >}}
