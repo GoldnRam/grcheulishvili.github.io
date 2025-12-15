@@ -1,22 +1,23 @@
 ---
-title: "Whoami"
-date: 2023-01-01
+title: "Operator"
+date: 2025-12-15
 type: page        
 layout: full       
 sidebar:
   enable: false   
 ---
 
-I am a Security Engineer and developer focused on **Offensive Security** and **Infrastructure Automation**. 
+# Whoami
 
-My background is rooted in general computing and cybersecurity. Unlike the theoretical approach of academia, I learn by **problem-oriented engineering**: breaking complex concepts down into bite-sized coding tasks and building the tools I need to solve them.
+I am a Systems Architect and Security Researcher focused on **Capability Development** and **Infrastructure Resilience**.
 
-## Technical Philosophy
-* **Code First:** Theory is necessary, but implementation is proof. I prefer writing a tool to understand a vulnerability over reading a paper about it.
-* **Deep Dives:** I do not settle for high-level abstractions. Whether it's understanding the Windows API for malware development or dissecting network packets for CTI, I aim for the fundamental level.
+My work bridges the gap between offensive research (understanding how systems fail) and defensive engineering (building systems that endure). I operate on the principle that you cannot secure a system you do not fundamentally understand.
 
-## Core Competencies
-* **Languages:** Go, Python, C/C++
-* **Infrastructure:** Proxmox VE, Docker, Linux Hardening, AWS.
-* **Data & Vis:** PostgreSQL, Elasticsearch (ELK), Grafana.
-* **Focus:** Malware Development, Reverse Engineering, Threat Intelligence.
+## Research Focus
+
+* **Offensive Engineering:** Developing custom instrumentation to validate security assumptions against modern threats.
+* **Sovereign Infrastructure:** Designing self-reliant telemetry and monitoring stacks that minimize external dependencies.
+* **Systems Architecture:** Low-level interaction with Windows/Linux internals to build performant, transparent security tooling.
+
+---
+*Building the baseline.*

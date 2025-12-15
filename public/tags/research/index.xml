@@ -1,8 +1,8 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Cybrealm – Research</title>
+    <title>IERI.SH – Research</title>
     <link>http://localhost:1313/tags/research/</link>
-    <description>Recent content in Research on Cybrealm</description>
+    <description>Recent content in Research on IERI.SH</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Thu, 27 Nov 2025 00:00:00 +0000</lastBuildDate>
@@ -17,10 +17,10 @@
     
     <item>
       <title>Research: Bypassing Modern File Upload Filters</title>
-      <link>http://localhost:1313/research/bypassing-file-upload-filters/</link>
+      <link>http://localhost:1313/archive/bypassing-file-upload-filters/</link>
       <pubDate>Thu, 27 Nov 2025 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/research/bypassing-file-upload-filters/</guid>
+      <guid>http://localhost:1313/archive/bypassing-file-upload-filters/</guid>
       <description>
         
         

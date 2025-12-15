@@ -1,8 +1,8 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Cybrealm – Web Security</title>
+    <title>IERI.SH – Web Security</title>
     <link>http://localhost:1313/tags/web-security/</link>
-    <description>Recent content in Web Security on Cybrealm</description>
+    <description>Recent content in Web Security on IERI.SH</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Thu, 27 Nov 2025 00:00:00 +0000</lastBuildDate>
@@ -17,10 +17,10 @@
     
     <item>
       <title>Research: Boolean &amp; Logic-Based SQL Injection</title>
-      <link>http://localhost:1313/research/sql-injection-patterns/</link>
+      <link>http://localhost:1313/archive/sql-injection-patterns/</link>
       <pubDate>Thu, 27 Nov 2025 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/research/sql-injection-patterns/</guid>
+      <guid>http://localhost:1313/archive/sql-injection-patterns/</guid>
       <description>
         
         
@@ -117,10 +117,10 @@ By appending the SQL comment sequence (&lt;code&gt;--&lt;/code&gt;), we can trun
     
     <item>
       <title>Research: Bypassing Modern File Upload Filters</title>
-      <link>http://localhost:1313/research/bypassing-file-upload-filters/</link>
+      <link>http://localhost:1313/archive/bypassing-file-upload-filters/</link>
       <pubDate>Thu, 27 Nov 2025 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/research/bypassing-file-upload-filters/</guid>
+      <guid>http://localhost:1313/archive/bypassing-file-upload-filters/</guid>
       <description>
         
         
@@ -187,10 +187,10 @@ By appending the SQL comment sequence (&lt;code&gt;--&lt;/code&gt;), we can trun
     
     <item>
       <title>Research: OS Command Injection Execution Flow</title>
-      <link>http://localhost:1313/research/os-command-injection-patterns/</link>
+      <link>http://localhost:1313/archive/os-command-injection-patterns/</link>
       <pubDate>Thu, 27 Nov 2025 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/research/os-command-injection-patterns/</guid>
+      <guid>http://localhost:1313/archive/os-command-injection-patterns/</guid>
       <description>
         
         
@@ -263,10 +263,10 @@ By appending the SQL comment sequence (&lt;code&gt;--&lt;/code&gt;), we can trun
     
     <item>
       <title>Research: Server-Side Request Forgery (SSRF) Mechanics</title>
-      <link>http://localhost:1313/research/ssrf-exploitation/</link>
+      <link>http://localhost:1313/archive/ssrf-exploitation/</link>
       <pubDate>Thu, 27 Nov 2025 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/research/ssrf-exploitation/</guid>
+      <guid>http://localhost:1313/archive/ssrf-exploitation/</guid>
       <description>
         
         

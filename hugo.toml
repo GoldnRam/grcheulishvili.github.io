@@ -1,6 +1,6 @@
-baseURL = 'https://grcheulishvili.github.io/'
+baseURL = 'https://ieri.sh/'
 languageCode = 'en-us'
-title = "Cybrealm"
+title = "IERI.SH"
 theme = ["github.com/imfing/hextra"]
 
 [markup]
@@ -11,12 +11,11 @@ theme = ["github.com/imfing/hextra"]
     noClasses = false
 
 [params]
-  description = "Security Engineer | MalDev | Go"
+  description = "Offensive Systems Research | Kernel | C2"
   
-  # Corrected Theme Settings
   [params.theme]
     default = "dark"
-    displayToggle = true
+    displayToggle = false
 
   [params.search]
     enable = true
@@ -25,11 +24,17 @@ theme = ["github.com/imfing/hextra"]
   [params.sidebar]
     enable = true
     autoCollapse = true
-
+    
   [params.footer]
     enable = true
     displayCopyright = true
 
   [params.navbar]
     displayTitle = true
-    displayLogo = false
+    displayLogo = true
+
+  [params.navbar.logo]
+      path = "/images/logo.png" 
+      link = "/"
+      width = 80
+      height = 80

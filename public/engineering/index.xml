@@ -1,8 +1,8 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Cybrealm – Engineering Logs</title>
+    <title>IERI.SH – Engineering Logs</title>
     <link>http://localhost:1313/engineering/</link>
-    <description>Recent content in Engineering Logs on Cybrealm</description>
+    <description>Recent content in Engineering Logs on IERI.SH</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sun, 12 May 2024 00:00:00 +0000</lastBuildDate>

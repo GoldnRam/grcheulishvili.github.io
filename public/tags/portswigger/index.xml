@@ -1,8 +1,8 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Cybrealm – PortSwigger</title>
+    <title>IERI.SH – PortSwigger</title>
     <link>http://localhost:1313/tags/portswigger/</link>
-    <description>Recent content in PortSwigger on Cybrealm</description>
+    <description>Recent content in PortSwigger on IERI.SH</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Thu, 27 Nov 2025 00:00:00 +0000</lastBuildDate>
@@ -17,10 +17,10 @@
     
     <item>
       <title>Research: OS Command Injection Execution Flow</title>
-      <link>http://localhost:1313/research/os-command-injection-patterns/</link>
+      <link>http://localhost:1313/archive/os-command-injection-patterns/</link>
       <pubDate>Thu, 27 Nov 2025 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/research/os-command-injection-patterns/</guid>
+      <guid>http://localhost:1313/archive/os-command-injection-patterns/</guid>
       <description>
         
         

@@ -1,111 +1,170 @@
-/* assets/css/custom.css */
+/* IERI.SH - KINETIC INTERFACE (v5) */
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap');
 
-
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap');
+:root {
+    --crimson: #DC143C;
+    --void: #0a0a0a;
+    --surface: #111111;
+    --text-main: #e0e0e0;
+    --text-muted: #999999;
+    
+    /* HEXTRA CONFIG */
+    --hextra-max-page-width: 95% !important;
+    --content-width: 100% !important;
+    --primary-hue: 348 !important;
+    --primary-saturation: 83% !important;
+    --primary-lightness: 47% !important;
+}
 
 html {
-    font-size: 17px; 
-}
-
-.dark h1, .dark h2, .dark h3, 
-.dark .hextra-card-title,
-.terminal-status {
     font-family: 'JetBrains Mono', monospace !important;
-    letter-spacing: -0.03em;
+    background-color: var(--void) !important;
+    font-size: 17px;
 }
 
-code, pre, .chroma {
-    font-size: 0.90rem !important;
-    font-family: 'JetBrains Mono', monospace !important;
-}
-
-.dark body {
-    background-color: #050508 !important;
+body {
+    background-color: var(--void) !important;
+    color: var(--text-main) !important;
+    line-height: 1.75;
     background-image: 
-        radial-gradient(circle at 50% 0%, #1a1a2e 0%, transparent 60%),
-        radial-gradient(circle at 85% 30%, rgba(124, 58, 237, 0.08) 0%, transparent 40%);
-    background-attachment: fixed;
-    background-repeat: no-repeat;
-    min-height: 100vh;
-    color: #e2e8f0;
+        linear-gradient(rgba(30, 30, 30, 0.3) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(30, 30, 30, 0.3) 1px, transparent 1px);
+    background-size: 50px 50px;
 }
 
-.dark .hextra-content, 
-.dark main, 
-.dark article {
-    background-color: transparent !important;
-    background: transparent !important;
-}
-
-
-.hextra-content, 
-main .container,
-main .mx-auto {
-    margin-left: 0 !important;
-    margin-right: auto !important;
-    width: 100% !important; 
-    max-width: 95vw !important;   
-    padding-left: 2rem !important; 
-    padding-right: 2rem !important;
-}
-
-article {
-    max-width: 100% !important;
-    width: 100% !important;
-}
-
-.hextra-toc {
-    right: 1rem !important;
-    max-width: 250px !important;
-}
-
-
-.dark .hextra-card {
-    background-color: rgba(10, 10, 12, 0.6) !important;
-    backdrop-filter: blur(12px);                       
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.dark .hextra-card:hover {
-    border-color: #a78bfa !important;
-    transform: translateY(-4px) scale(1.01);
-    box-shadow: 
-        0 0 20px rgba(139, 92, 246, 0.15),    
-        inset 0 0 20px rgba(139, 92, 246, 0.05);
-}
-
-.dark .hextra-card-subtitle {
-    font-family: sans-serif;
-    opacity: 0.7;
-    color: #9ca3af;
-}
-
-
+/* --- 1. NAVBAR & KINETIC MENUS --- */
 .hextra-nav-container {
-    background-color: rgba(5, 5, 8, 0.8) !important;
-    backdrop-filter: blur(20px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    background-color: rgba(10, 10, 10, 0.95) !important;
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid #222;
+    height: 100px !important;
+    display: flex;
+    align-items: center;
 }
 
-::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
+.hextra-nav-container nav {
+    max-width: 95% !important;
+    margin: 0 auto;
+    width: 100%;
+    padding: 0 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
-::-webkit-scrollbar-track {
-    background: #050508; 
+
+/* The "Target Lock" Link Animation */
+.hextra-nav-options a, .menu-item {
+    position: relative;
+    font-weight: 600 !important;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-muted) !important;
+    transition: color 0.3s ease;
 }
-::-webkit-scrollbar-thumb {
-    background: #2a2a35; 
+
+/* The Red Laser Line */
+.hextra-nav-options a::after, .menu-item::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -4px;
+    left: 0;
+    background-color: var(--crimson);
+    transition: width 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    box-shadow: 0 0 8px var(--crimson);
+}
+
+.hextra-nav-options a:hover::after, .menu-item:hover::after {
+    width: 100%; /* Expands on hover */
+}
+
+.hextra-nav-options a:hover, .menu-item:hover {
+    color: var(--text-main) !important;
+}
+
+/* Logo Alignment */
+.hextra-navbar-logo {
+    display: flex !important;
+    align-items: center !important;
+    gap: 1rem;
+}
+.hextra-navbar-logo img {
+    margin-top: 5px;
+    transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.hextra-navbar-logo:hover img {
+    transform: rotate(90deg) scale(1.1); /* Mechanical Unlock Animation */
+}
+
+/* --- 2. TACTICAL CARDS (The "Data Cartridge" Feel) --- */
+.hextra-card {
+    background-color: var(--surface) !important;
+    border: 1px solid #222;
+    border-left: 3px solid #333;
     border-radius: 4px;
-}
-::-webkit-scrollbar-thumb:hover {
-    background: #3f3f4e; 
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
 }
 
+/* The "Power Up" Hover State */
+.hextra-card:hover {
+    border-color: var(--crimson) !important;
+    border-left-color: var(--crimson) !important;
+    transform: translateY(-4px) scale(1.01);
+    box-shadow: 0 10px 30px -10px rgba(220, 20, 60, 0.3);
+}
 
-@keyframes blink { 
-    0% { opacity: 1; } 
-    50% { opacity: 0.4; } 
-    100% { opacity: 1; } 
+/* Subtle Scanline on Cards */
+.hextra-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.03), transparent);
+    transition: left 0.5s;
+}
+.hextra-card:hover::before {
+    left: 100%; /* Sweep effect on hover */
+}
+
+/* --- 3. LAYOUT & TYPOGRAPHY --- */
+.mx-auto.flex {
+    max-width: 95vw !important;
+    width: 95vw !important;
+    justify-content: flex-start !important;
+}
+
+article.w-full {
+    max-width: 100% !important; 
+    padding-right: 3rem !important;
+    padding-left: 0 !important;
+    flex-grow: 1;
+}
+
+aside.sidebar-container {
+    margin-right: 2rem;
+}
+
+.chroma {
+    background-color: #050505 !important;
+    border: 1px solid #222;
+    border-radius: 6px;
+    font-size: 0.95rem !important;
+    margin: 1.5rem 0;
+}
+
+/* Standard Links in Text */
+article a {
+    color: var(--text-main) !important;
+    text-decoration-color: var(--crimson) !important;
+    text-underline-offset: 4px;
+    transition: all 0.2s;
+}
+article a:hover {
+    color: var(--crimson) !important;
+    background: rgba(220, 20, 60, 0.1);
 }

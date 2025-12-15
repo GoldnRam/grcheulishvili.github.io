@@ -1,8 +1,8 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Cybrealm – SSRF</title>
+    <title>IERI.SH – SSRF</title>
     <link>http://localhost:1313/tags/ssrf/</link>
-    <description>Recent content in SSRF on Cybrealm</description>
+    <description>Recent content in SSRF on IERI.SH</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Thu, 27 Nov 2025 00:00:00 +0000</lastBuildDate>
@@ -17,10 +17,10 @@
     
     <item>
       <title>Research: Server-Side Request Forgery (SSRF) Mechanics</title>
-      <link>http://localhost:1313/research/ssrf-exploitation/</link>
+      <link>http://localhost:1313/archive/ssrf-exploitation/</link>
       <pubDate>Thu, 27 Nov 2025 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/research/ssrf-exploitation/</guid>
+      <guid>http://localhost:1313/archive/ssrf-exploitation/</guid>
       <description>
         
         

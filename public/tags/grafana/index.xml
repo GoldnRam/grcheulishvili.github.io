@@ -1,8 +1,8 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Cybrealm – Grafana</title>
+    <title>IERI.SH – Grafana</title>
     <link>http://localhost:1313/tags/grafana/</link>
-    <description>Recent content in Grafana on Cybrealm</description>
+    <description>Recent content in Grafana on IERI.SH</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Thu, 27 Nov 2025 00:00:00 +0000</lastBuildDate>
