@@ -19,12 +19,6 @@ toc: false
   {{< card link="manifesto" title="📜 Doctrine" subtitle="Technological Sovereignty" >}}
 {{< /cards >}}
 
-<div style="margin-top: 4rem; border-top: 1px solid #222; padding-top: 2rem; color: #888; font-size: 0.95rem; line-height: 1.6;">
-  <p style="margin-bottom: 1rem;">
-    <i>A nation that relies entirely on foreign security vendors and closed-source tools has outsourced its sovereignty.</i>
-  </p>
-  <p>
-    <strong>IERI.SH</strong> is an initiative to reclaim that capability. We are moving the regional baseline from "Configuration" to "Engineering." <br><br>
-    We do not just use tools; we build them.
-  </p>
+<div style="margin-top: 4rem; border-top: 1px solid #222; padding-top: 2rem; color: #666; font-size: 0.9rem;">
+  An independent initiative dedicated to proving theoretical security concepts through executable engineering and code.
 </div>
