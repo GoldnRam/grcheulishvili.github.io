@@ -15,6 +15,7 @@ toc: false
   {{< card link="research" title="🔬 Research" subtitle="System Internals & Evasion" >}}
   {{< card link="engineering" title="⚙️ Engineering" subtitle="Infrastructure Independence" >}}
   {{< card link="projects" title="🛡️ Armory" subtitle="Capability Development" >}}
+  {{< card link="infrastructure" title="🏗️ Lab Architecture" subtitle="Internal R&D Topology" >}}
   {{< card link="about" title="👤 Operator" subtitle="Whoami" >}}
   {{< card link="manifesto" title="📜 Doctrine" subtitle="Engineering Philosophy" >}}
 {{< /cards >}}

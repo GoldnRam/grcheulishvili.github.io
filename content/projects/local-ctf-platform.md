@@ -31,17 +31,16 @@ For high-risk challenges (e.g., the **Bravo** category), a Docker-based architec
 * The vulnerable target is run in an ephemeral container, isolated from the host OS.
 * **Self-Healing:** A nightly reset script automatically tears down and redeploys the container, guaranteeing a fresh, known-good environment for every session.
 
-## 2. The Progressive Scenario Mechanic
+### 3. "Charlie" (Forensics & Reversing)
+* **Concept:** Self-contained analysis tasks.
+* **Tooling:** Custom access groups (e.g., `tools-gef`) grant access to debuggers like `GDB/GEF` or `Radare2` only to specific users, keeping the environment clean.
 
-The platform uses a **Flag = Password** progression, forcing users to fully compromise a system before moving on. This mechanic is implemented via intentional flaws:
+## Operational Utility
+While currently an internal research asset, this architecture addresses a critical gap in technical hiring: **The lack of operational validation.**
 
-* **Alpha (Privilege Escalation):** Exploits a single, deliberate flaw (e.g., SUID binaries owned by the next user) to pivot from `user N` to `user N+1`. The flag is the password for `user N+1`.
-* **Charlie (Forensics & Reversing):** Users are restricted to their home directory but are granted specific tool access (e.g., GDB/GEF) via group membership (`tools-gef`), isolating the tooling risk.
+Most interview processes rely on theoretical questions. This platform allows for "Live-Fire" assessment:
+1.  **Candidate Access:** Generates an ephemeral environment (Concept).
+2.  **Task:** "Fix the broken Nginx config" (Blue Team) or "Escalate to Root" (Red Team).
+3.  **Result:** A binary Pass/Fail based on flag submission, proving actual keyboard competence.
 
-## 3. Maintenance Philosophy
-
-The design prioritizes stability and clean re-deployment:
-* **User Provisioning:** Access to specialized reversing tools is controlled via simple Linux groups (`sudo usermod -aG tools-gef user`).
-* **Challenge Isolation:** Creation of "Alpha" challenges involves setting specific group ownership (`sudo chown Alpha1:Alpha0 /home/Alpha1`) to restrict access to the flag file to only the intended user group.
-
-> **Disclaimer:** *Specific server IP addresses and administrative command sequences are omitted from this public review. This document focuses on the defensive architecture and principles used to manage risk in a hostile multi-tenant environment.*
+*This system is currently deployed as a private Proxmox lab for infrastructure hardening research.*
