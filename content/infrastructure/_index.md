@@ -9,10 +9,10 @@ layout: full
 </div>
 
 ## 1. The Validation Range (Bastion)
-**Status:** [INTERNAL / PROXMOX]
-**Architecture:** Hybrid (CTFd Container + Hardened VMs)
-**Role:**
-A live-fire assessment environment running on a segmented Proxmox cluster.
+
+* **Status:** [INTERNAL / PROXMOX]
+* **Architecture:** Hybrid (CTFd Container + Hardened VMs)
+**Role:** A live-fire assessment environment running on a segmented Proxmox cluster.
 * **Engineering Focus:** Designed to simulate "breach scenarios" safely. Uses `Split-SSH` and `ForceCommand` restrictions to isolate attacker sessions from the hypervisor.
 * **Utility:** Serves as the primary testing ground for my offensive tooling and persistence scripts.
 
