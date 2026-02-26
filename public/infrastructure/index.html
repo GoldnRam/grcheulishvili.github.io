@@ -8,32 +8,29 @@
 <link rel="icon" href="/favicon-32x32.png" type="image/png" sizes="32x32" />
 <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180" />
 <link fetchpriority="low" href="/site.webmanifest" rel="manifest" />
-<title>Linux – IERI.SH</title>
-  <meta name="description" content="" /><link rel="canonical" href="http://localhost:1313/tags/linux/" itemprop="url" />
+<title>Lab Architecture – IERI.SH</title>
+  <meta name="description" content="The internal engineering environment powering IERI.SH R&amp;D." /><link rel="canonical" href="http://localhost:1313/infrastructure/" itemprop="url" />
 
-<meta property="og:title" content="Linux">
+<meta property="og:title" content="Lab Architecture">
 <meta
   property="og:description"
   content="
-    
-      Offensive Systems Research | Kernel | C2
-    
+    The internal engineering environment powering IERI.SH R&amp;D.
   ">
 <meta
   property="og:type"
   content="
     website
   ">
-<meta property="og:url" content="http://localhost:1313/tags/linux/">
+<meta property="og:url" content="http://localhost:1313/infrastructure/">
 
 
-  <meta itemprop="name" content="Linux">
-  <meta itemprop="description" content="Offensive Systems Research | Kernel | C2">
-  <meta itemprop="datePublished" content="2025-11-27T00:00:00+00:00">
-  <meta itemprop="dateModified" content="2025-11-27T00:00:00+00:00">
+  <meta itemprop="name" content="Lab Architecture">
+  <meta itemprop="description" content="The internal engineering environment powering IERI.SH R&amp;D.">
+  <meta itemprop="wordCount" content="166">
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Linux">
-  <meta name="twitter:description" content="Offensive Systems Research | Kernel | C2">
+  <meta name="twitter:title" content="Lab Architecture">
+  <meta name="twitter:description" content="The internal engineering environment powering IERI.SH R&amp;D.">
 <link href="/css/compiled/main.css" rel="stylesheet" />
     <link href="/css/variables.css" rel="stylesheet" />
     <link href="/css/custom.css" rel="stylesheet" />
@@ -87,7 +84,7 @@
 </div>
 
   <div class='hx:mx-auto hx:flex hextra-max-page-width'>
-    <aside class="hextra-sidebar-container hx:flex hx:flex-col hx:print:hidden hx:md:top-16 hx:md:shrink-0 hx:md:w-64 hx:md:self-start hx:max-md:[transform:translate3d(0,-100%,0)] hx:md:hidden hx:xl:block">
+    <aside class="hextra-sidebar-container hx:flex hx:flex-col hx:print:hidden hx:md:top-16 hx:md:shrink-0 hx:md:w-64 hx:md:self-start hx:max-md:[transform:translate3d(0,-100%,0)] hx:md:sticky">
   
   <div class="hx:px-4 hx:pt-4 hx:md:hidden">
     <div class="hextra-search-wrapper hx:relative hx:md:w-64">
@@ -420,43 +417,106 @@
               
             </li></ul>
       </div></li>
-          <li class=""><a
+          <li class="open"><a
     class="hx:flex hx:items-center hx:justify-between hx:gap-2 hx:cursor-pointer hx:rounded-sm hx:px-2 hx:py-1.5 hx:text-sm hx:transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
-      hx:text-gray-500 hx:hover:bg-gray-100 hx:hover:text-gray-900 hx:contrast-more:border hx:contrast-more:border-transparent hx:contrast-more:text-gray-900 hx:contrast-more:hover:border-gray-900 hx:dark:text-neutral-400 hx:dark:hover:bg-primary-100/5 hx:dark:hover:text-gray-50 hx:contrast-more:dark:text-gray-50 hx:contrast-more:dark:hover:border-gray-50"
+      hextra-sidebar-active-item hx:bg-primary-100 hx:font-semibold hx:text-primary-800 hx:contrast-more:border hx:contrast-more:border-primary-500 hx:dark:bg-primary-400/10 hx:dark:text-primary-600 hx:contrast-more:dark:border-primary-500"
     href="/infrastructure/"
     
   >Lab Architecture
-    </a></li>
+    </a>
+  
+    <ul class='hx:flex hx:flex-col hx:gap-1 hx:relative hx:before:absolute hx:before:inset-y-1 hx:before:w-px hx:before:bg-gray-200 hx:before:content-[""] hx:dark:before:bg-neutral-800 hx:ltr:pl-3 hx:ltr:before:left-0 hx:rtl:pr-3 hx:rtl:before:right-0 hx:ltr:ml-3 hx:rtl:mr-3'><li>
+              <a
+                href="#1-the-validation-range-bastion"
+                class="hx:flex hx:rounded-sm hx:px-2 hx:py-1.5 hx:text-sm hx:transition-colors [word-break:break-word] hx:cursor-pointer [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] hx:contrast-more:border hx:gap-2 hx:before:opacity-25 hx:before:content-['#'] hx:text-gray-500 hx:hover:bg-gray-100 hx:hover:text-gray-900 hx:dark:text-neutral-400 hx:dark:hover:bg-primary-100/5 hx:dark:hover:text-gray-50 hx:contrast-more:text-gray-900 hx:contrast-more:dark:text-gray-50 hx:contrast-more:border-transparent hx:contrast-more:hover:border-gray-900 hx:contrast-more:dark:hover:border-gray-50"
+              >1. The Validation Range (Bastion)</a>
+            </li>
+          <li>
+              <a
+                href="#2-threat-aggregation-node-cti"
+                class="hx:flex hx:rounded-sm hx:px-2 hx:py-1.5 hx:text-sm hx:transition-colors [word-break:break-word] hx:cursor-pointer [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] hx:contrast-more:border hx:gap-2 hx:before:opacity-25 hx:before:content-['#'] hx:text-gray-500 hx:hover:bg-gray-100 hx:hover:text-gray-900 hx:dark:text-neutral-400 hx:dark:hover:bg-primary-100/5 hx:dark:hover:text-gray-50 hx:contrast-more:text-gray-900 hx:contrast-more:dark:text-gray-50 hx:contrast-more:border-transparent hx:contrast-more:hover:border-gray-900 hx:contrast-more:dark:hover:border-gray-50"
+              >2. Threat Aggregation Node (CTI)</a>
+            </li>
+          <li>
+              <a
+                href="#3-future-roadmap-advanced-telemetry"
+                class="hx:flex hx:rounded-sm hx:px-2 hx:py-1.5 hx:text-sm hx:transition-colors [word-break:break-word] hx:cursor-pointer [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] hx:contrast-more:border hx:gap-2 hx:before:opacity-25 hx:before:content-['#'] hx:text-gray-500 hx:hover:bg-gray-100 hx:hover:text-gray-900 hx:dark:text-neutral-400 hx:dark:hover:bg-primary-100/5 hx:dark:hover:text-gray-50 hx:contrast-more:text-gray-900 hx:contrast-more:dark:text-gray-50 hx:contrast-more:border-transparent hx:contrast-more:hover:border-gray-900 hx:contrast-more:dark:hover:border-gray-50"
+              >3. Future Roadmap: Advanced Telemetry</a>
+            </li>
+          </ul>
+  </li>
     </ul>
 
-    <div class="hx:max-xl:hidden hx:h-0 hx:w-64 hx:shrink-0"></div></div>
+    <ul class="hx:flex hx:flex-col hx:gap-1 hx:max-md:hidden">
+        
+        
+      </ul>
+    </div>
   
   </aside>
     
-<nav class="hextra-toc hx:order-last hx:hidden hx:w-64 hx:shrink-0 hx:xl:block hx:print:hidden hx:px-4" aria-label="table of contents"></nav>
+<nav class="hextra-toc hx:order-last hx:hidden hx:w-64 hx:shrink-0 hx:xl:block hx:print:hidden hx:px-4" aria-label="table of contents">
+    <div class="hextra-scrollbar hx:sticky hx:top-16 hx:overflow-y-auto hx:pr-4 hx:pt-6 hx:text-sm [hyphens:auto] hx:max-h-[calc(100vh-var(--navbar-height)-env(safe-area-inset-bottom))] hx:ltr:-mr-4 hx:rtl:-ml-4"><p class="hx:mb-4 hx:font-semibold hx:tracking-tight">On this page</p><ul>
+      <li class="hx:my-2 hx:scroll-my-6 hx:scroll-py-6">
+        <a class="hx:font-medium hx:inline-block hx:text-gray-500 hx:hover:text-gray-900 hx:dark:text-gray-400 hx:dark:hover:text-gray-300 hx:contrast-more:text-gray-900 hx:contrast-more:underline hx:contrast-more:dark:text-gray-50 hx:w-full hx:break-words" href="#1-the-validation-range-bastion">1. The Validation Range (Bastion)
+        </a>
+      </li>
+      <li class="hx:my-2 hx:scroll-my-6 hx:scroll-py-6">
+        <a class="hx:font-medium hx:inline-block hx:text-gray-500 hx:hover:text-gray-900 hx:dark:text-gray-400 hx:dark:hover:text-gray-300 hx:contrast-more:text-gray-900 hx:contrast-more:underline hx:contrast-more:dark:text-gray-50 hx:w-full hx:break-words" href="#2-threat-aggregation-node-cti">2. Threat Aggregation Node (CTI)
+        </a>
+      </li>
+      <li class="hx:my-2 hx:scroll-my-6 hx:scroll-py-6">
+        <a class="hx:font-medium hx:inline-block hx:text-gray-500 hx:hover:text-gray-900 hx:dark:text-gray-400 hx:dark:hover:text-gray-300 hx:contrast-more:text-gray-900 hx:contrast-more:underline hx:contrast-more:dark:text-gray-50 hx:w-full hx:break-words" href="#3-future-roadmap-advanced-telemetry">3. Future Roadmap: Advanced Telemetry
+        </a>
+      </li></ul>
+      <div class="hx:mt-8 hx:border-t hx:bg-white hx:pt-8 hx:shadow-[0_-12px_16px_white] hx:dark:bg-dark hx:dark:shadow-[0_-12px_16px_#111] hx:sticky hx:bottom-0 hx:flex hx:flex-col hx:items-start hx:gap-2 hx:pb-8 hx:border-gray-200 hx:dark:border-neutral-800 hx:contrast-more:border-t hx:contrast-more:border-neutral-400 hx:contrast-more:shadow-none hx:contrast-more:dark:border-neutral-400">
+        <button aria-hidden="true" id="backToTop" onClick="scrollUp();" class="hx:cursor-pointer hx:transition-all hx:duration-75 hx:opacity-0 hx:text-xs hx:font-medium hx:text-gray-500 hx:hover:text-gray-900 hx:dark:text-gray-400 hx:dark:hover:text-gray-100 hx:contrast-more:text-gray-800 hx:contrast-more:dark:text-gray-50">
+          <span>Scroll to top</span>
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="hx:inline hx:ltr:ml-1 hx:rtl:mr-1 hx:h-3.5 hx:w-3.5 hx:rounded-full hx:border hx:border-gray-500 hx:hover:border-gray-900 hx:dark:border-gray-400 hx:dark:hover:border-gray-100 hx:contrast-more:border-gray-800 hx:contrast-more:dark:border-gray-50">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5" />
+          </svg>
+        </button>
+      </div>
+    </div>
+  </nav>
 
 
     <article class="hx:w-full hx:break-words hx:flex hx:min-h-[calc(100vh-var(--navbar-height))] hx:min-w-0 hx:justify-center hx:pb-8 hx:pr-[calc(env(safe-area-inset-right)-1.5rem)]">
       <main class="hx:w-full hx:min-w-0 hx:max-w-6xl hx:px-6 hx:pt-4 hx:md:px-12">
-        <br class="hx:mt-1.5 hx:text-sm" />
-        <h1 class="hx:text-center hx:mt-2 hx:text-4xl hx:font-bold hx:tracking-tight hx:text-slate-900 hx:dark:text-slate-100">Linux</h1>
-        <div class="hx:mb-16"></div>
+        
         <div class="content">
-          
+          <h1>Lab Architecture</h1>
+          <div style="margin-top: 1rem; margin-bottom: 3rem; text-align: center; font-family: 'JetBrains Mono', monospace;">
+  <span style="color: #DC143C;">///</span> INTERNAL R&D TOPOLOGY
+</div>
+<h2>1. The Validation Range (Bastion)<span class="hx:absolute hx:-mt-20" id="1-the-validation-range-bastion"></span>
+    <a href="#1-the-validation-range-bastion" class="subheading-anchor" aria-label="Permalink for this section"></a></h2><ul>
+<li><strong>Status:</strong> [INTERNAL / PROXMOX]</li>
+<li><strong>Architecture:</strong> Hybrid (CTFd Container + Hardened VMs)
+<strong>Role:</strong> A live-fire assessment environment running on a segmented Proxmox cluster.</li>
+<li><strong>Engineering Focus:</strong> Designed to simulate &ldquo;breach scenarios&rdquo; safely. Uses <code>Split-SSH</code> and <code>ForceCommand</code> restrictions to isolate attacker sessions from the hypervisor.</li>
+<li><strong>Utility:</strong> Serves as the primary testing ground for my offensive tooling and persistence scripts.</li>
+</ul>
+<h2>2. Threat Aggregation Node (CTI)<span class="hx:absolute hx:-mt-20" id="2-threat-aggregation-node-cti"></span>
+    <a href="#2-threat-aggregation-node-cti" class="subheading-anchor" aria-label="Permalink for this section"></a></h2><ul>
+<li><strong>Status:</strong> [LOCAL / DOCKER]</li>
+<li><strong>Architecture:</strong> Python Collectors / PostgreSQL / Grafana</li>
+<li><strong>Role:</strong> A custom intelligence pipeline that ingests and filters regional threat feeds.</li>
+<li><strong>Engineering Focus:</strong> Solves the &ldquo;Alert Fatigue&rdquo; problem by normalizing disparate feeds (OTX, ThreatFox) into a single high-fidelity PostgreSQL schema.</li>
+<li><strong>Utility:</strong> Generates the raw blocklists used in my firewall research.</li>
+</ul>
+<div style="margin-top: 3rem; margin-bottom: 2rem; border-top: 1px dashed #444;"></div>
+<h2>3. Future Roadmap: Advanced Telemetry<span class="hx:absolute hx:-mt-20" id="3-future-roadmap-advanced-telemetry"></span>
+    <a href="#3-future-roadmap-advanced-telemetry" class="subheading-anchor" aria-label="Permalink for this section"></a></h2><ul>
+<li><strong>Status:</strong> [DESIGN PHASE]</li>
+<li><strong>Concept:</strong> Replacing the default CTFd scoreboard logs with a custom ELK Stack to capture granular system-level telemetry (Syscalls, Process Creation).</li>
+<li><strong>Goal:</strong> To move from &ldquo;Flag-based&rdquo; validation to &ldquo;Behavior-based&rdquo; analysis, allowing for deeper insight into candidate methodology.</li>
+</ul>
+
         </div>
-        <div><div>
-              <h3>
-                <a
-                  style="color: inherit; text-decoration: none;"
-                  class="hx:block hx:font-semibold hx:mt-8 hx:text-2xl"
-                  href="/projects/local-ctf-platform/"
-                  title="Case Study: Engineering Multi-Tenant Security for a CTF Wargames Platform"
-                >
-                  Case Study: Engineering Multi-Tenant Security for a CTF Wargames Platform
-                </a>
-              </h3>
-              <p class="hx:opacity-50 hx:text-sm hx:leading-7">November 27, 2025</p>
-            </div></div>
+        <div class="hx:mt-16"></div>
+        <div class="hx:mt-16"></div>
+        
       </main>
     </article>
   </div>

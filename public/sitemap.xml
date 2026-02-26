@@ -184,5 +184,7 @@
     <loc>http://localhost:1313/archive/useful-cheatsheet-for-pentesting/</loc>
   </url><url>
     <loc>http://localhost:1313/categories/</loc>
+  </url><url>
+    <loc>http://localhost:1313/infrastructure/</loc>
   </url>
 </urlset>

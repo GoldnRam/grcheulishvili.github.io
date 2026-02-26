@@ -47,22 +47,20 @@
 &lt;li&gt;The vulnerable target is run in an ephemeral container, isolated from the host OS.&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;Self-Healing:&lt;/strong&gt; A nightly reset script automatically tears down and redeploys the container, guaranteeing a fresh, known-good environment for every session.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h2&gt;2. The Progressive Scenario Mechanic&lt;span class=&#34;hx:absolute hx:-mt-20&#34; id=&#34;2-the-progressive-scenario-mechanic&#34;&gt;&lt;/span&gt;
-    &lt;a href=&#34;#2-the-progressive-scenario-mechanic&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;The platform uses a &lt;strong&gt;Flag = Password&lt;/strong&gt; progression, forcing users to fully compromise a system before moving on. This mechanic is implemented via intentional flaws:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;Alpha (Privilege Escalation):&lt;/strong&gt; Exploits a single, deliberate flaw (e.g., SUID binaries owned by the next user) to pivot from &lt;code&gt;user N&lt;/code&gt; to &lt;code&gt;user N+1&lt;/code&gt;. The flag is the password for &lt;code&gt;user N+1&lt;/code&gt;.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Charlie (Forensics &amp;amp; Reversing):&lt;/strong&gt; Users are restricted to their home directory but are granted specific tool access (e.g., GDB/GEF) via group membership (&lt;code&gt;tools-gef&lt;/code&gt;), isolating the tooling risk.&lt;/li&gt;
+&lt;h3&gt;3. &amp;ldquo;Charlie&amp;rdquo; (Forensics &amp;amp; Reversing)&lt;span class=&#34;hx:absolute hx:-mt-20&#34; id=&#34;3-charlie-forensics--reversing&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#3-charlie-forensics--reversing&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Concept:&lt;/strong&gt; Self-contained analysis tasks.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Tooling:&lt;/strong&gt; Custom access groups (e.g., &lt;code&gt;tools-gef&lt;/code&gt;) grant access to debuggers like &lt;code&gt;GDB/GEF&lt;/code&gt; or &lt;code&gt;Radare2&lt;/code&gt; only to specific users, keeping the environment clean.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h2&gt;3. Maintenance Philosophy&lt;span class=&#34;hx:absolute hx:-mt-20&#34; id=&#34;3-maintenance-philosophy&#34;&gt;&lt;/span&gt;
-    &lt;a href=&#34;#3-maintenance-philosophy&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;The design prioritizes stability and clean re-deployment:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;User Provisioning:&lt;/strong&gt; Access to specialized reversing tools is controlled via simple Linux groups (&lt;code&gt;sudo usermod -aG tools-gef user&lt;/code&gt;).&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Challenge Isolation:&lt;/strong&gt; Creation of &amp;ldquo;Alpha&amp;rdquo; challenges involves setting specific group ownership (&lt;code&gt;sudo chown Alpha1:Alpha0 /home/Alpha1&lt;/code&gt;) to restrict access to the flag file to only the intended user group.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;blockquote&gt;
-  &lt;p&gt;&lt;strong&gt;Disclaimer:&lt;/strong&gt; &lt;em&gt;Specific server IP addresses and administrative command sequences are omitted from this public review. This document focuses on the defensive architecture and principles used to manage risk in a hostile multi-tenant environment.&lt;/em&gt;&lt;/p&gt;
-
-&lt;/blockquote&gt;
+&lt;h2&gt;Operational Utility&lt;span class=&#34;hx:absolute hx:-mt-20&#34; id=&#34;operational-utility&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#operational-utility&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;While currently an internal research asset, this architecture addresses a critical gap in technical hiring: &lt;strong&gt;The lack of operational validation.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Most interview processes rely on theoretical questions. This platform allows for &amp;ldquo;Live-Fire&amp;rdquo; assessment:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;Candidate Access:&lt;/strong&gt; Generates an ephemeral environment (Concept).&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Task:&lt;/strong&gt; &amp;ldquo;Fix the broken Nginx config&amp;rdquo; (Blue Team) or &amp;ldquo;Escalate to Root&amp;rdquo; (Red Team).&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Result:&lt;/strong&gt; A binary Pass/Fail based on flag submission, proving actual keyboard competence.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;em&gt;This system is currently deployed as a private Proxmox lab for infrastructure hardening research.&lt;/em&gt;&lt;/p&gt;
 
       </description>
     </item>

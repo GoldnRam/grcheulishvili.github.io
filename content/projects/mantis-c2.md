@@ -6,8 +6,6 @@ description: "An R&D project detailing a self-destructing, polymorphic Go-based 
 tags: ["MalDev", "Go", "C2", "Polymorphism", "Offensive Research"]
 ---
 
-# Project: Mantis C2 Framework - Agent R&D
-
 ## Overview
 This project is a Command & Control (C2) framework built as a research vehicle for testing modern evasion techniques and high-fidelity data extraction methods. The agent is designed for covert operations and is often deployed in internal honeypot environments to study attack TTPs (Tactics, Techniques, and Procedures).
 
