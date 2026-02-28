@@ -5,8 +5,6 @@ type: page
 layout: full
 ---
 
-# Engineering Principles
-
 This repository is governed by a strict, code-first approach to capability development and systems research.
 
 1. Tools break. Protocols do not. Understanding the low-level mechanics of a system is prioritized over memorizing the syntax of an exploit framework.

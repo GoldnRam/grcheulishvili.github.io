@@ -1,11 +1,9 @@
 ---
-title: "Background"
+title: "Technical Background"
 date: 2025-12-15
 type: page
 layout: full
 ---
-
-# Technical Background
 
 I am a cybersecurity professional and systems engineer. My work focuses on offensive security research, threat hunting, and infrastructure resilience. 
 
