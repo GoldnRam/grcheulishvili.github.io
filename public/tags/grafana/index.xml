@@ -1,86 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>IERI.SH – Grafana</title>
+    <title>IERI.SH</title>
     <link>http://localhost:1313/tags/grafana/</link>
-    <description>Recent content in Grafana on IERI.SH</description>
+    <description>Recent content on IERI.SH</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 27 Nov 2025 00:00:00 +0000</lastBuildDate>
-    
-	  <atom:link href="http://localhost:1313/tags/grafana/index.xml" rel="self" type="application/rss+xml" />
-    
-    
-      
-        
-      
-    
-    
     <item>
       <title>Project: High-Fidelity Threat Aggregation Platform (CTI Case Study)</title>
       <link>http://localhost:1313/projects/regional-threat-intel/</link>
       <pubDate>Thu, 27 Nov 2025 00:00:00 +0000</pubDate>
-      
       <guid>http://localhost:1313/projects/regional-threat-intel/</guid>
-      <description>
-        
-        
-        &lt;h1&gt;CTI Dashboard: Engineering for Relevance&lt;/h1&gt;&lt;h2&gt;Overview&lt;span class=&#34;hx:absolute hx:-mt-20&#34; id=&#34;overview&#34;&gt;&lt;/span&gt;
+      <description>&lt;h1&gt;CTI Dashboard: Engineering for Relevance&lt;/h1&gt;&lt;h2&gt;Overview&lt;span class=&#34;hx:absolute hx:-mt-20&#34; id=&#34;overview&#34;&gt;&lt;/span&gt;
     &lt;a href=&#34;#overview&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;This custom-built CTI dashboard solves the critical problem of alert fatigue by engineering a system that filters high-volume open-source feeds (OSINT) down to a high-fidelity list of indicators (IOCs). The system focuses exclusively on APT activity and C2 infrastructure relevant to a &lt;strong&gt;defined threat landscape&lt;/strong&gt;.&lt;/p&gt;
 &lt;h2&gt;1. Technical Architecture and Data Flow&lt;span class=&#34;hx:absolute hx:-mt-20&#34; id=&#34;1-technical-architecture-and-data-flow&#34;&gt;&lt;/span&gt;
-    &lt;a href=&#34;#1-technical-architecture-and-data-flow&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;The system runs on a containerized microservices architecture to ensure resilience and maintainability:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;Core Logic:&lt;/strong&gt; Python-based collector services act as API consumers and data parsers.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Storage:&lt;/strong&gt; PostgreSQL (&lt;code&gt;threat_db&lt;/code&gt;) provides robust relational storage for structured IOCs.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Visualization:&lt;/strong&gt; Grafana is used for real-time monitoring and threat landscape visualization.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3&gt;Data Aggregation and Filtering&lt;span class=&#34;hx:absolute hx:-mt-20&#34; id=&#34;data-aggregation-and-filtering&#34;&gt;&lt;/span&gt;
-    &lt;a href=&#34;#data-aggregation-and-filtering&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;Independent collectors manage the ingestion and scoring:&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;strong&gt;&lt;code&gt;collector-news&lt;/code&gt;:&lt;/strong&gt; Parses RSS feeds and scores articles based on high-relevance keywords (e.g., &amp;ldquo;Critical Infrastructure,&amp;rdquo; &amp;ldquo;Cyber Attack,&amp;rdquo; &amp;ldquo;Vulnerability Disclosure&amp;rdquo;) and regional filters.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;&lt;code&gt;collector-ioc-threatfox&lt;/code&gt; / &lt;code&gt;collector-otx&lt;/code&gt;:&lt;/strong&gt; Ingests technical indicators (IPs, Hashes) from open feeds, applying a geographical and campaign-based filter before insertion into the database.&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h2&gt;2. Operationalizing Intelligence&lt;span class=&#34;hx:absolute hx:-mt-20&#34; id=&#34;2-operationalizing-intelligence&#34;&gt;&lt;/span&gt;
-    &lt;a href=&#34;#2-operationalizing-intelligence&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;The system&amp;rsquo;s value is in its downstream integration with defensive tools:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;Firewall/NDR Integration:&lt;/strong&gt; A dedicated, read-only PostgreSQL user is created (&lt;code&gt;threat_user&lt;/code&gt;).&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Method:&lt;/strong&gt; This allows internal network security solutions to pull the high-fidelity, filtered blocklist directly from the CTI database every hour, automating the defense loop.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2&gt;3. Deployment and Environment Configuration&lt;span class=&#34;hx:absolute hx:-mt-20&#34; id=&#34;3-deployment-and-environment-configuration&#34;&gt;&lt;/span&gt;
-    &lt;a href=&#34;#3-deployment-and-environment-configuration&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;The entire stack is deployed via Docker Compose to guarantee portability and fast rebuilds.&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;Security:&lt;/strong&gt; The system is deployed behind an Nginx Reverse Proxy with an SSL/TLS certificate to secure the Grafana web interface.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Database Access:&lt;/strong&gt; To prevent credential leakage, Grafana is configured to connect to the internal &lt;code&gt;postgres:5432&lt;/code&gt; container using environment variables and a shared internal network.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;strong&gt;Deployment Snippet:&lt;/strong&gt;
-&lt;em&gt;The following example shows the configuration required for Grafana to secure the web UI and connect to the internal database.&lt;/em&gt;&lt;/p&gt;
-&lt;div class=&#34;hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code&#34;&gt;
-
-&lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-yml&#34; data-lang=&#34;yml&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nt&#34;&gt;grafana&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;c&#34;&gt;# ... (details omitted)&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;environment&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;      &lt;/span&gt;- &lt;span class=&#34;l&#34;&gt;GF_SECURITY_ADMIN_USER=${GF_ADMIN_USER}&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;      &lt;/span&gt;&lt;span class=&#34;c&#34;&gt;# The database connection uses the internal Docker network name&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;      &lt;/span&gt;- &lt;span class=&#34;l&#34;&gt;GF_SERVER_ROOT_URL=https://IP_OR_DOMAIN/  &lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;networks&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;      &lt;/span&gt;- &lt;span class=&#34;l&#34;&gt;cti_network&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;depends_on&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;      &lt;/span&gt;- &lt;span class=&#34;l&#34;&gt;postgres&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-0&#34;&gt;
-  &lt;button
-    class=&#34;hextra-code-copy-btn hx:group/copybtn hx:cursor-pointer hx:transition-all hx:active:opacity-50 hx:bg-primary-700/5 hx:border hx:border-black/5 hx:text-gray-600 hx:hover:text-gray-900 hx:rounded-md hx:p-1.5 hx:dark:bg-primary-300/10 hx:dark:border-white/10 hx:dark:text-gray-400 hx:dark:hover:text-gray-50&#34;
-    title=&#34;Copy code&#34;
-  &gt;
-    &lt;div class=&#34;hextra-copy-icon hx:group-[.copied]/copybtn:hidden hx:pointer-events-none hx:h-4 hx:w-4&#34;&gt;&lt;/div&gt;
-&lt;div class=&#34;hextra-success-icon hx:hidden hx:group-[.copied]/copybtn:block hx:pointer-events-none hx:h-4 hx:w-4&#34;&gt;&lt;/div&gt;
-  &lt;/button&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;blockquote&gt;
-  &lt;p&gt;Disclaimer: Specific regional filtering keywords, API keys, and sensitive production configuration details are omitted. This report focuses on the architectural decisions and filtering methodology employed to solve the high-volume CTI problem.&lt;/p&gt;
-
-&lt;/blockquote&gt;
-
-      </description>
+    &lt;a href=&#34;#1-technical-architecture-and-data-flow&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;The system runs on a containerized microservices architecture to ensure resilience and maintainability:&lt;/p&gt;</description>
     </item>
-    
   </channel>
 </rss>

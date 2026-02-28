@@ -9,14 +9,21 @@ theme = ["github.com/imfing/hextra"]
       unsafe = true
   [markup.highlight]
     noClasses = false
+    style = "dracula" 
 
 [params]
-  description = "Offensive Systems Research | Kernel | C2"
+  # Professional mission statement
+  description = "Offensive systems research and architecture. Methodical exploration of C2 development, Web3 security, and systems engineering."
   favicon = "/favicon.ico"
-  
+
+  # Author block for internal theme logic compatibility
+  [params.author]
+    name = "George"
+    email = "george@ieri.sh"
+
   [params.theme]
     default = "dark"
-    displayToggle = false
+    displayToggle = false 
 
   [params.search]
     enable = true
@@ -25,17 +32,19 @@ theme = ["github.com/imfing/hextra"]
   [params.sidebar]
     enable = true
     autoCollapse = true
-    
+    displayTitle = true
+
   [params.footer]
     enable = true
-    displayCopyright = false
+    displayCopyright = true
+    width = "wide"
 
   [params.navbar]
     displayTitle = true
     displayLogo = true
 
   [params.navbar.logo]
-      path = "/images/logo.png" 
+      path = "/images/logo.png"
       link = "/"
-      width = 80
-      height = 80
+      width = 40 
+      height = 40

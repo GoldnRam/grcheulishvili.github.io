@@ -8,14 +8,14 @@
 <link rel="icon" href="/favicon-32x32.png" type="image/png" sizes="32x32" />
 <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180" />
 <link fetchpriority="low" href="/site.webmanifest" rel="manifest" />
-<title>Project: High-Fidelity Threat Aggregation Platform (CTI Case Study) – IERI.SH</title>
-  <meta name="description" content="A custom Threat Intelligence (CTI) aggregation platform designed to filter open-source feeds (OTX, ThreatFox) for high-relevance threats, reducing alert fatigue." /><link rel="canonical" href="http://localhost:1313/projects/regional-threat-intel/" itemprop="url" />
+<title>Regional Threat Intel Aggregator – IERI.SH</title>
+  <meta name="description" content="A Python-based high-fidelity CTI aggregation engine for filtering open-source feeds." /><link rel="canonical" href="http://localhost:1313/projects/regional-threat-intel/" itemprop="url" />
 
-<meta property="og:title" content="Project: High-Fidelity Threat Aggregation Platform (CTI Case Study)">
+<meta property="og:title" content="Regional Threat Intel Aggregator">
 <meta
   property="og:description"
   content="
-    A custom Threat Intelligence (CTI) aggregation platform designed to filter open-source feeds (OTX, ThreatFox) for high-relevance threats, reducing alert fatigue.
+    A Python-based high-fidelity CTI aggregation engine for filtering open-source feeds.
   ">
 <meta
   property="og:type"
@@ -35,15 +35,15 @@
 
 
 
-  <meta itemprop="name" content="Project: High-Fidelity Threat Aggregation Platform (CTI Case Study)">
-  <meta itemprop="description" content="A custom Threat Intelligence (CTI) aggregation platform designed to filter open-source feeds (OTX, ThreatFox) for high-relevance threats, reducing alert fatigue.">
+  <meta itemprop="name" content="Regional Threat Intel Aggregator">
+  <meta itemprop="description" content="A Python-based high-fidelity CTI aggregation engine for filtering open-source feeds.">
   <meta itemprop="datePublished" content="2025-11-27T00:00:00+00:00">
   <meta itemprop="dateModified" content="2025-11-27T00:00:00+00:00">
-  <meta itemprop="wordCount" content="346">
+  <meta itemprop="wordCount" content="328">
   <meta itemprop="keywords" content="CTI,Python,Grafana,PostgreSQL,Engineering">
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Project: High-Fidelity Threat Aggregation Platform (CTI Case Study)">
-  <meta name="twitter:description" content="A custom Threat Intelligence (CTI) aggregation platform designed to filter open-source feeds (OTX, ThreatFox) for high-relevance threats, reducing alert fatigue.">
+  <meta name="twitter:title" content="Regional Threat Intel Aggregator">
+  <meta name="twitter:description" content="A Python-based high-fidelity CTI aggregation engine for filtering open-source feeds.">
 <link href="/css/compiled/main.css" rel="stylesheet" />
     <link href="/css/variables.css" rel="stylesheet" />
     <link href="/css/custom.css" rel="stylesheet" />
@@ -88,8 +88,8 @@
 
   <nav class="hextra-max-navbar-width hx:mx-auto hx:flex hx:items-center hx:justify-end hx:gap-2 hx:h-16 hx:px-6">
     <a class="hx:flex hx:items-center hx:hover:opacity-75 hx:ltr:mr-auto hx:rtl:ml-auto" href="/">
-    <img class="hx:mr-2 hx:block hx:dark:hidden" src="/images/logo.png" alt="Logo" height="80" width="80" />
-    <img class="hx:mr-2 hx:hidden hx:dark:block" src="/images/logo.png" alt="Dark Logo" height="80" width="80" />
+    <img class="hx:mr-2 hx:block hx:dark:hidden" src="/images/logo.png" alt="Logo" height="40" width="40" />
+    <img class="hx:mr-2 hx:hidden hx:dark:block" src="/images/logo.png" alt="Dark Logo" height="40" width="40" />
     <span class="hx:mr-2 hx:font-extrabold hx:inline hx:select-none" title="IERI.SH">IERI.SH</span>
 </a>
 <button type="button" aria-label="Menu" class="hextra-hamburger-menu hx:cursor-pointer hx:-mr-2 hx:rounded-sm hx:p-2 hx:active:bg-gray-400/20 hx:md:hidden"><svg height=24 fill="none" viewBox="0 0 24 24" stroke="currentColor"><g><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8H20"></path></g><g><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16H20"></path></g></svg></button>
@@ -134,14 +134,14 @@
       hx:text-gray-500 hx:hover:bg-gray-100 hx:hover:text-gray-900 hx:contrast-more:border hx:contrast-more:border-transparent hx:contrast-more:text-gray-900 hx:contrast-more:hover:border-gray-900 hx:dark:text-neutral-400 hx:dark:hover:bg-primary-100/5 hx:dark:hover:text-gray-50 hx:contrast-more:dark:text-gray-50 hx:contrast-more:dark:hover:border-gray-50"
     href="/about/"
     
-  >Operator
+  >Background
     </a></li>
           <li class=""><a
     class="hx:flex hx:items-center hx:justify-between hx:gap-2 hx:cursor-pointer hx:rounded-sm hx:px-2 hx:py-1.5 hx:text-sm hx:transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
       hx:text-gray-500 hx:hover:bg-gray-100 hx:hover:text-gray-900 hx:contrast-more:border hx:contrast-more:border-transparent hx:contrast-more:text-gray-900 hx:contrast-more:hover:border-gray-900 hx:dark:text-neutral-400 hx:dark:hover:bg-primary-100/5 hx:dark:hover:text-gray-50 hx:contrast-more:dark:text-gray-50 hx:contrast-more:dark:hover:border-gray-50"
     href="/manifesto/"
     
-  >The Doctrine
+  >Engineering Philosophy
     </a></li>
           <li class=""><a
     class="hx:flex hx:items-center hx:justify-between hx:gap-2 hx:cursor-pointer hx:rounded-sm hx:px-2 hx:py-1.5 hx:text-sm hx:transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
@@ -156,7 +156,7 @@
       hx:text-gray-500 hx:hover:bg-gray-100 hx:hover:text-gray-900 hx:contrast-more:border hx:contrast-more:border-transparent hx:contrast-more:text-gray-900 hx:contrast-more:hover:border-gray-900 hx:dark:text-neutral-400 hx:dark:hover:bg-primary-100/5 hx:dark:hover:text-gray-50 hx:contrast-more:dark:text-gray-50 hx:contrast-more:dark:hover:border-gray-50"
     href="/research/building-a-polymorphic-engine/"
     
-  >MalDev Logs: Building a Polymorphic Engine in Go
+  >Polymorphic Engine Development
     </a>
               
             </li><li class="hx:flex hx:flex-col "><a
@@ -383,7 +383,7 @@
       hx:text-gray-500 hx:hover:bg-gray-100 hx:hover:text-gray-900 hx:contrast-more:border hx:contrast-more:border-transparent hx:contrast-more:text-gray-900 hx:contrast-more:hover:border-gray-900 hx:dark:text-neutral-400 hx:dark:hover:bg-primary-100/5 hx:dark:hover:text-gray-50 hx:contrast-more:dark:text-gray-50 hx:contrast-more:dark:hover:border-gray-50"
     href="/projects/"
     
-  >Project Armory
+  >Development &amp; Tooling
         <span class="hextra-sidebar-collapsible-button"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" class="hx:h-[18px] hx:min-w-[18px] hx:rounded-xs hx:p-0.5 hx:hover:bg-gray-800/5 hx:dark:hover:bg-gray-100/5"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" class="hx:origin-center hx:transition-transform hx:rtl:-rotate-180"></path></svg></span>
     </a><div class="hx:ltr:pr-0 hx:overflow-hidden">
         <ul class='hx:relative hx:flex hx:flex-col hx:gap-1 hx:before:absolute hx:before:inset-y-1 hx:before:w-px hx:before:bg-gray-200 hx:before:content-[""] hx:ltr:ml-3 hx:ltr:pl-3 hx:ltr:before:left-0 hx:rtl:mr-3 hx:rtl:pr-3 hx:rtl:before:right-0 hx:dark:before:bg-neutral-800'><li class="hx:flex hx:flex-col "><a
@@ -391,7 +391,7 @@
       hx:text-gray-500 hx:hover:bg-gray-100 hx:hover:text-gray-900 hx:contrast-more:border hx:contrast-more:border-transparent hx:contrast-more:text-gray-900 hx:contrast-more:hover:border-gray-900 hx:dark:text-neutral-400 hx:dark:hover:bg-primary-100/5 hx:dark:hover:text-gray-50 hx:contrast-more:dark:text-gray-50 hx:contrast-more:dark:hover:border-gray-50"
     href="/projects/local-ctf-platform/"
     
-  >Case Study: Engineering Multi-Tenant Security for a CTF Wargames Platform
+  >Building Multi-Tenant CTF Wargames Platform
     </a>
               
             </li><li class="hx:flex hx:flex-col "><a
@@ -399,7 +399,7 @@
       hx:text-gray-500 hx:hover:bg-gray-100 hx:hover:text-gray-900 hx:contrast-more:border hx:contrast-more:border-transparent hx:contrast-more:text-gray-900 hx:contrast-more:hover:border-gray-900 hx:dark:text-neutral-400 hx:dark:hover:bg-primary-100/5 hx:dark:hover:text-gray-50 hx:contrast-more:dark:text-gray-50 hx:contrast-more:dark:hover:border-gray-50"
     href="/projects/mantis-c2/"
     
-  >Project: High-Fidelity Stealth Agent - Research in Evasion and C2 Telemetry
+  >Mantis C2 Architecture
     </a>
               
             </li><li class="hx:flex hx:flex-col open"><a
@@ -407,7 +407,7 @@
       hextra-sidebar-active-item hx:bg-primary-100 hx:font-semibold hx:text-primary-800 hx:contrast-more:border hx:contrast-more:border-primary-500 hx:dark:bg-primary-400/10 hx:dark:text-primary-600 hx:contrast-more:dark:border-primary-500"
     href="/projects/regional-threat-intel/"
     
-  >Project: High-Fidelity Threat Aggregation Platform (CTI Case Study)
+  >Regional Threat Intel Aggregator
     </a>
   
     <ul class='hx:flex hx:flex-col hx:gap-1 hx:relative hx:before:absolute hx:before:inset-y-1 hx:before:w-px hx:before:bg-gray-200 hx:before:content-[""] hx:dark:before:bg-neutral-800 hx:ltr:pl-3 hx:ltr:before:left-0 hx:rtl:pr-3 hx:rtl:before:right-0 hx:ltr:ml-3 hx:rtl:mr-3'><li>
@@ -444,7 +444,7 @@
       hx:text-gray-500 hx:hover:bg-gray-100 hx:hover:text-gray-900 hx:contrast-more:border hx:contrast-more:border-transparent hx:contrast-more:text-gray-900 hx:contrast-more:hover:border-gray-900 hx:dark:text-neutral-400 hx:dark:hover:bg-primary-100/5 hx:dark:hover:text-gray-50 hx:contrast-more:dark:text-gray-50 hx:contrast-more:dark:hover:border-gray-50"
     href="/engineering/"
     
-  >Engineering Logs
+  >Engineering
         <span class="hextra-sidebar-collapsible-button"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" class="hx:h-[18px] hx:min-w-[18px] hx:rounded-xs hx:p-0.5 hx:hover:bg-gray-800/5 hx:dark:hover:bg-gray-100/5"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" class="hx:origin-center hx:transition-transform hx:rtl:-rotate-180"></path></svg></span>
     </a><div class="hx:ltr:pr-0 hx:overflow-hidden">
         <ul class='hx:relative hx:flex hx:flex-col hx:gap-1 hx:before:absolute hx:before:inset-y-1 hx:before:w-px hx:before:bg-gray-200 hx:before:content-[""] hx:ltr:ml-3 hx:ltr:pl-3 hx:ltr:before:left-0 hx:rtl:mr-3 hx:rtl:pr-3 hx:rtl:before:right-0 hx:dark:before:bg-neutral-800'><li class="hx:flex hx:flex-col "><a
@@ -457,13 +457,6 @@
               
             </li></ul>
       </div></li>
-          <li class=""><a
-    class="hx:flex hx:items-center hx:justify-between hx:gap-2 hx:cursor-pointer hx:rounded-sm hx:px-2 hx:py-1.5 hx:text-sm hx:transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
-      hx:text-gray-500 hx:hover:bg-gray-100 hx:hover:text-gray-900 hx:contrast-more:border hx:contrast-more:border-transparent hx:contrast-more:text-gray-900 hx:contrast-more:hover:border-gray-900 hx:dark:text-neutral-400 hx:dark:hover:bg-primary-100/5 hx:dark:hover:text-gray-50 hx:contrast-more:dark:text-gray-50 hx:contrast-more:dark:hover:border-gray-50"
-    href="/infrastructure/"
-    
-  >Lab Architecture
-    </a></li>
     </ul>
 
     <div class="hx:max-xl:hidden hx:h-0 hx:w-64 hx:shrink-0"></div></div>
@@ -508,17 +501,17 @@
       <main class="hx:w-full hx:min-w-0 hx:max-w-6xl hx:px-6 hx:pt-4 hx:md:px-12">
         
         <br class="hx:mt-1.5 hx:text-sm" />
-        <h1 class="hx:text-center hx:mt-2 hx:text-4xl hx:font-bold hx:tracking-tight hx:text-slate-900 hx:dark:text-slate-100">Project: High-Fidelity Threat Aggregation Platform (CTI Case Study)</h1>
+        <h1 class="hx:text-center hx:mt-2 hx:text-4xl hx:font-bold hx:tracking-tight hx:text-slate-900 hx:dark:text-slate-100">Regional Threat Intel Aggregator</h1>
         <div class="hx:mb-16"></div>
         <div class="content">
-          <h1>CTI Dashboard: Engineering for Relevance</h1><h2>Overview<span class="hx:absolute hx:-mt-20" id="overview"></span>
-    <a href="#overview" class="subheading-anchor" aria-label="Permalink for this section"></a></h2><p>This custom-built CTI dashboard solves the critical problem of alert fatigue by engineering a system that filters high-volume open-source feeds (OSINT) down to a high-fidelity list of indicators (IOCs). The system focuses exclusively on APT activity and C2 infrastructure relevant to a <strong>defined threat landscape</strong>.</p>
+          <h2>Overview<span class="hx:absolute hx:-mt-20" id="overview"></span>
+    <a href="#overview" class="subheading-anchor" aria-label="Permalink for this section"></a></h2><p>This custom-built CTI dashboard solves the critical problem of alert fatigue by engineering a system that filters high-volume open-source feeds down to a high-fidelity list of indicators. The system focuses exclusively on APT activity and C2 infrastructure relevant to a <strong>defined threat landscape</strong>.</p>
 <h2>1. Technical Architecture and Data Flow<span class="hx:absolute hx:-mt-20" id="1-technical-architecture-and-data-flow"></span>
     <a href="#1-technical-architecture-and-data-flow" class="subheading-anchor" aria-label="Permalink for this section"></a></h2><p>The system runs on a containerized microservices architecture to ensure resilience and maintainability:</p>
 <ul>
-<li><strong>Core Logic:</strong> Python-based collector services act as API consumers and data parsers.</li>
-<li><strong>Storage:</strong> PostgreSQL (<code>threat_db</code>) provides robust relational storage for structured IOCs.</li>
-<li><strong>Visualization:</strong> Grafana is used for real-time monitoring and threat landscape visualization.</li>
+<li>Python-based collector services act as API consumers and data parsers.</li>
+<li>PostgreSQL provides robust relational storage for structured IOCs.</li>
+<li>Grafana is used for real-time monitoring and threat landscape visualization.</li>
 </ul>
 <h3>Data Aggregation and Filtering<span class="hx:absolute hx:-mt-20" id="data-aggregation-and-filtering"></span>
     <a href="#data-aggregation-and-filtering" class="subheading-anchor" aria-label="Permalink for this section"></a></h3><p>Independent collectors manage the ingestion and scoring:</p>
@@ -529,14 +522,14 @@
 <h2>2. Operationalizing Intelligence<span class="hx:absolute hx:-mt-20" id="2-operationalizing-intelligence"></span>
     <a href="#2-operationalizing-intelligence" class="subheading-anchor" aria-label="Permalink for this section"></a></h2><p>The system&rsquo;s value is in its downstream integration with defensive tools:</p>
 <ul>
-<li><strong>Firewall/NDR Integration:</strong> A dedicated, read-only PostgreSQL user is created (<code>threat_user</code>).</li>
-<li><strong>Method:</strong> This allows internal network security solutions to pull the high-fidelity, filtered blocklist directly from the CTI database every hour, automating the defense loop.</li>
+<li>A dedicated, read-only PostgreSQL user is created.</li>
+<li>This allows internal network security solutions to pull the high-fidelity, filtered blocklist directly from the CTI database every hour, automating the defense loop.</li>
 </ul>
 <h2>3. Deployment and Environment Configuration<span class="hx:absolute hx:-mt-20" id="3-deployment-and-environment-configuration"></span>
     <a href="#3-deployment-and-environment-configuration" class="subheading-anchor" aria-label="Permalink for this section"></a></h2><p>The entire stack is deployed via Docker Compose to guarantee portability and fast rebuilds.</p>
 <ul>
-<li><strong>Security:</strong> The system is deployed behind an Nginx Reverse Proxy with an SSL/TLS certificate to secure the Grafana web interface.</li>
-<li><strong>Database Access:</strong> To prevent credential leakage, Grafana is configured to connect to the internal <code>postgres:5432</code> container using environment variables and a shared internal network.</li>
+<li>The system is deployed behind an Nginx Reverse Proxy with an SSL/TLS certificate to secure the Grafana web interface.</li>
+<li>To prevent credential leakage, Grafana is configured to connect to the internal <code>postgres:5432</code> container using environment variables and a shared internal network.</li>
 </ul>
 <p><strong>Deployment Snippet:</strong>
 <em>The following example shows the configuration required for Grafana to secure the web UI and connect to the internal database.</em></p>
@@ -573,30 +566,18 @@
     </article>
   </div>
 
-      <footer class="hextra-footer">
-  <div class="system-status-bar">
-    
-    <div class="status-group">
-      <span class="status-dot"></span>
-      <span class="status-text">SYSTEM ONLINE</span>
-    </div>
-
-    <div class="status-group mobile-hide">
-      <span class="status-value">IERI.SH</span>
-      <span class="separator">/</span>
-      <span class="status-value">TBILISI</span>
-    </div>
-
-    <div class="status-group">
-      <span class="status-label">ENC:</span>
-      <span class="status-value">TLS 1.3</span>
-      <span class="separator">|</span>
-      <span class="status-label">UPTIME:</span>
-      <span class="status-value">99.9%</span>
-    </div>
-
+      <footer class="engineering-footer">
+  <div class="footer-left">
+    <span>&copy; 2026 IERI.SH. All rights reserved.</span>
+  </div>
+  <div class="footer-right">
+    <span style="margin: 0 0.5rem; color: var(--border);">|</span>
+    <a href="https://github.com/goldnram" target="_blank" rel="noopener">GitHub</a>
+    <span style="margin: 0 0.5rem; color: var(--border);">|</span>
+    <a href="https://www.linkedin.com/in/giorgi-rcheulishvili-bba988260/" target="_blank" rel="noopener">LinkedIn</a>
   </div>
 </footer>
+
     
     <script defer src="/js/main.js" integrity=""></script>
 <script defer src="/js/flexsearch.9f5b5908f93ae86f1ecd4b043b799f580c2d1654e703dd9357d568ac41b2547a.js" integrity="sha256-n1tZCPk66G8ezUsEO3mfWAwtFlTnA92TV9VorEGyVHo=" crossorigin="anonymous"></script>

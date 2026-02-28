@@ -1,23 +1,20 @@
 ---
-title: "Operator"
+title: "Background"
 date: 2025-12-15
-type: page        
-layout: full       
-sidebar:
-  enable: false   
+type: page
+layout: full
 ---
 
-# Whoami
+# Technical Background
 
-I am a Systems Architect and Security Researcher focused on **Capability Development** and **Infrastructure Resilience**.
+I am a cybersecurity professional and systems engineer. My work focuses on offensive security research, threat hunting, and infrastructure resilience. 
 
-My work bridges the gap between offensive research (understanding how systems fail) and defensive engineering (building systems that endure). I operate on the principle that you cannot secure a system you do not fundamentally understand.
+I approach security by seeking a fundamental-level understanding of systems, prioritizing methodical, problem-oriented tasks over purely theoretical concepts. If a system's architecture is understood at the lowest level, its flaws become mathematically predictable.
 
-## Research Focus
+### Core Focus Areas
+* **Offensive Systems:** C2 development, binary analysis, and red team capability engineering.
+* **Web3 Security:** Smart contract auditing, ZK-proof logic, and decentralized infrastructure.
+* **DevSecOps:** Hardened environments, automated deployments, and custom log parsing pipelines.
+* **Languages & Tooling:** Go, Python, Solidity, Foundry/Anvil, C/C++, Vagrant, Docker, Most of WAF and Monitoring tools.
 
-* **Offensive Engineering:** Developing custom instrumentation to validate security assumptions against modern threats.
-* **Sovereign Infrastructure:** Designing self-reliant telemetry and monitoring stacks that minimize external dependencies.
-* **Systems Architecture:** Low-level interaction with Windows/Linux internals to build performant, transparent security tooling.
-
----
-*Building the baseline.*
+[GitHub](https://github.com/GoldnRam) | [LinkedIn](https://www.linkedin.com/in/giorgi-rcheulishvili-bba988260/)

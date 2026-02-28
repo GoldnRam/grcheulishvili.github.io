@@ -1,244 +1,99 @@
-/* IERI.SH - KINETIC INTERFACE (v5) */
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap');
 
 :root {
-    --crimson: #DC143C;
-    --void: #0a0a0a;
-    --surface: #111111;
-    --text-main: #e0e0e0;
-    --text-muted: #999999;
-    
-    /* HEXTRA CONFIG */
-    --hextra-max-page-width: 95% !important;
-    --content-width: 100% !important;
-    --primary-hue: 348 !important;
-    --primary-saturation: 83% !important;
-    --primary-lightness: 47% !important;
+    --accent: #3b82f6;       
+    --void: #0d0f14;         
+    --surface: #161920;      
+    --text-main: #e2e8f0;    
+    --text-muted: #64748b;   
+    --border: #1e293b;
+
+    /* Maximize container width for wide-screen technical reading */
+    --hextra-max-page-width: 1440px !important; 
+    --primary-hue: 217 !important; 
 }
 
 html {
-    font-family: 'JetBrains Mono', monospace !important;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif !important;
     background-color: var(--void) !important;
-    font-size: 17px;
+    font-size: 16px;
 }
 
 body {
     background-color: var(--void) !important;
     color: var(--text-main) !important;
-    line-height: 1.75;
-    background-image: 
-        linear-gradient(rgba(30, 30, 30, 0.3) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(30, 30, 30, 0.3) 1px, transparent 1px);
-    background-size: 50px 50px;
+    line-height: 1.7; 
 }
 
-/* --- 1. NAVBAR & KINETIC MENUS --- */
-.hextra-nav-container {
-    background-color: rgba(10, 10, 10, 0.95) !important;
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid #222;
-    height: 100px !important;
-    display: flex;
-    align-items: center;
-}
-
-.hextra-nav-container nav {
-    max-width: 95% !important;
-    margin: 0 auto;
-    width: 100%;
-    padding: 0 1rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
-/* The "Target Lock" Link Animation */
-.hextra-nav-options a, .menu-item {
-    position: relative;
+h1, h2, h3, h4, .hextra-nav-options a {
+    font-family: 'JetBrains Mono', monospace !important;
     font-weight: 600 !important;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    color: var(--text-muted) !important;
-    transition: color 0.3s ease;
 }
 
-/* The Red Laser Line */
-.hextra-nav-options a::after, .menu-item::after {
-    content: '';
-    position: absolute;
-    width: 0;
-    height: 2px;
-    bottom: -4px;
-    left: 0;
-    background-color: var(--crimson);
-    transition: width 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-    box-shadow: 0 0 8px var(--crimson);
-}
-
-.hextra-nav-options a:hover::after, .menu-item:hover::after {
-    width: 100%; /* Expands on hover */
-}
-
-.hextra-nav-options a:hover, .menu-item:hover {
-    color: var(--text-main) !important;
-}
-
-/* Logo Alignment */
-.hextra-navbar-logo {
-    display: flex !important;
-    align-items: center !important;
-    gap: 1rem;
-}
-.hextra-navbar-logo img {
-    margin-top: 5px;
-    transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-.hextra-navbar-logo:hover img {
-    transform: rotate(90deg) scale(1.1); /* Mechanical Unlock Animation */
-}
-
-/* --- 2. TACTICAL CARDS (The "Data Cartridge" Feel) --- */
-.hextra-card {
-    background-color: var(--surface) !important;
-    border: 1px solid #222;
-    border-left: 3px solid #333;
-    border-radius: 4px;
-    position: relative;
-    overflow: hidden;
-    transition: all 0.3s ease;
-}
-
-/* The "Power Up" Hover State */
-.hextra-card:hover {
-    border-color: var(--crimson) !important;
-    border-left-color: var(--crimson) !important;
-    transform: translateY(-4px) scale(1.01);
-    box-shadow: 0 10px 30px -10px rgba(220, 20, 60, 0.3);
-}
-
-/* Subtle Scanline on Cards */
-.hextra-card::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.03), transparent);
-    transition: left 0.5s;
-}
-.hextra-card:hover::before {
-    left: 100%; /* Sweep effect on hover */
-}
-
-/* --- 3. LAYOUT & TYPOGRAPHY --- */
-.mx-auto.flex {
-    max-width: 95vw !important;
-    width: 95vw !important;
-    justify-content: flex-start !important;
-}
-
-article.w-full {
+/* Remove all artificial article constraints; let Hextra's grid dictate spacing */
+article {
     max-width: 100% !important; 
-    padding-right: 3rem !important;
-    padding-left: 0 !important;
-    flex-grow: 1;
-}
-
-aside.sidebar-container {
-    margin-right: 2rem;
+    margin: 0 !important;
+    padding: 0 1rem !important;
 }
 
 .chroma {
-    background-color: #050505 !important;
-    border: 1px solid #222;
-    border-radius: 6px;
-    font-size: 0.95rem !important;
-    margin: 1.5rem 0;
+    background-color: #010101 !important;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.25rem;
+    margin: 1.5rem 0; 
+    overflow-x: auto;
 }
 
-/* Standard Links in Text */
-article a {
-    color: var(--text-main) !important;
-    text-decoration-color: var(--crimson) !important;
-    text-underline-offset: 4px;
-    transition: all 0.2s;
-}
-article a:hover {
-    color: var(--crimson) !important;
-    background: rgba(220, 20, 60, 0.1);
+.hextra-nav-container {
+    background-color: rgba(13, 15, 20, 0.85) !important;
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    height: 64px !important;
 }
 
-/* --- SYSTEM STATUS FOOTER --- */
-.hextra-footer {
-    background: transparent !important; /* Remove default background */
-    margin-top: 0 !important;
-    padding-bottom: 0 !important;
+.hextra-card {
+    background-color: var(--surface) !important;
+    border: 1px solid var(--border) !important;
+    transition: all 0.2s ease;
 }
 
-.system-status-bar {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 36px;
-    background-color: rgba(5, 5, 5, 0.95);
-    border-top: 1px solid #222;
-    backdrop-filter: blur(5px);
-    
+.hextra-card:hover {
+    border-color: var(--accent) !important;
+    transform: translateY(-2px);
+}
+
+/* Professional Engineering Footer */
+.engineering-footer {
+    border-top: 1px solid var(--border);
+    background-color: var(--void);
+    padding: 1.5rem 2rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.8rem;
+    color: var(--text-muted);
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 1.5rem;
-    z-index: 100;
-    
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.7rem;
-    letter-spacing: 0.05em;
-    color: #666;
-    text-transform: uppercase;
+    flex-wrap: wrap;
+    gap: 1rem;
 }
 
-/* The Glowing Green Dot */
-.status-dot {
-    display: inline-block;
-    width: 6px;
-    height: 6px;
-    background-color: #00FF00; /* Pure Green */
-    border-radius: 50%;
-    margin-right: 8px;
-    box-shadow: 0 0 5px #00FF00;
-    animation: pulse 2s infinite;
+.engineering-footer a {
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.2s ease;
 }
 
-@keyframes pulse {
-    0% { opacity: 1; }
-    50% { opacity: 0.4; }
-    100% { opacity: 1; }
-}
-
-/* Text Styles */
-.status-text {
-    color: #e0e0e0;
-    font-weight: 700;
-}
-
-.status-label {
-    color: #444;
-    margin-right: 4px;
-}
-
-.status-value {
-    color: #888;
-}
-
-.separator {
-    color: #333;
-    margin: 0 10px;
+.engineering-footer a:hover {
+    color: var(--accent);
 }
 
 @media (max-width: 768px) {
-    .mobile-hide {
-        display: none;
+    .engineering-footer {
+        flex-direction: column;
+        text-align: center;
+        justify-content: center;
     }
 }
+

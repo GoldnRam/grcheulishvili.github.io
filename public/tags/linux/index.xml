@@ -1,69 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>IERI.SH – Linux</title>
+    <title>IERI.SH</title>
     <link>http://localhost:1313/tags/linux/</link>
-    <description>Recent content in Linux on IERI.SH</description>
+    <description>Recent content on IERI.SH</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 27 Nov 2025 00:00:00 +0000</lastBuildDate>
-    
-	  <atom:link href="http://localhost:1313/tags/linux/index.xml" rel="self" type="application/rss+xml" />
-    
-    
-      
-        
-      
-    
-    
     <item>
       <title>Case Study: Engineering Multi-Tenant Security for a CTF Wargames Platform</title>
       <link>http://localhost:1313/projects/local-ctf-platform/</link>
       <pubDate>Thu, 27 Nov 2025 00:00:00 +0000</pubDate>
-      
       <guid>http://localhost:1313/projects/local-ctf-platform/</guid>
-      <description>
-        
-        
-        &lt;h1&gt;Bastioni Platform: Multi-Tenant Hardening Case Study&lt;/h1&gt;&lt;h2&gt;Overview&lt;span class=&#34;hx:absolute hx:-mt-20&#34; id=&#34;overview&#34;&gt;&lt;/span&gt;
+      <description>&lt;h1&gt;Bastioni Platform: Multi-Tenant Hardening Case Study&lt;/h1&gt;&lt;h2&gt;Overview&lt;span class=&#34;hx:absolute hx:-mt-20&#34; id=&#34;overview&#34;&gt;&lt;/span&gt;
     &lt;a href=&#34;#overview&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Bastioni is a hybrid wargames platform built for scenario-based cybersecurity training. The primary technical challenge was engineering a secure, multi-tenant Linux environment where players (tenants) could exploit vulnerabilities against adjacent targets without compromising the entire system or affecting other players.&lt;/p&gt;
 &lt;h2&gt;1. Isolation Architecture (Defense in Depth)&lt;span class=&#34;hx:absolute hx:-mt-20&#34; id=&#34;1-isolation-architecture-defense-in-depth&#34;&gt;&lt;/span&gt;
-    &lt;a href=&#34;#1-isolation-architecture-defense-in-depth&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;The platform implements three core layers of isolation to maintain stability and prevent cross-user pivoting:&lt;/p&gt;
-&lt;h3&gt;A. Split-SSH Access Control&lt;span class=&#34;hx:absolute hx:-mt-20&#34; id=&#34;a-split-ssh-access-control&#34;&gt;&lt;/span&gt;
-    &lt;a href=&#34;#a-split-ssh-access-control&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;Access is segregated at the network port level:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;Port 22:&lt;/strong&gt; Restricted to administrators only (key-based authentication).&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Port 2222:&lt;/strong&gt; Dedicated to players only (password-based authentication via the &lt;code&gt;game_users&lt;/code&gt; group).&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Defense:&lt;/strong&gt; This ensures administrative traffic is isolated from potential player brute-force attempts or protocol abuses, and allows separate Fail2Ban rules for each service.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3&gt;B. Process and File Hiding&lt;span class=&#34;hx:absolute hx:-mt-20&#34; id=&#34;b-process-and-file-hiding&#34;&gt;&lt;/span&gt;
-    &lt;a href=&#34;#b-process-and-file-hiding&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;The environment is hardened using system-level controls:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;&lt;code&gt;hidepid=2&lt;/code&gt;:&lt;/strong&gt; Ensures that players cannot see processes belonging to other users or challenge levels, preventing simple scanning for running exploits or user IDs.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;&lt;code&gt;chmod 700&lt;/code&gt;:&lt;/strong&gt; Enforced across all user home directories, ensuring strict privacy for player files and challenge assets.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3&gt;C. Containerized Boot-to-Root Scenarios&lt;span class=&#34;hx:absolute hx:-mt-20&#34; id=&#34;c-containerized-boot-to-root-scenarios&#34;&gt;&lt;/span&gt;
-    &lt;a href=&#34;#c-containerized-boot-to-root-scenarios&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;For high-risk challenges (e.g., the &lt;strong&gt;Bravo&lt;/strong&gt; category), a Docker-based architecture is used.&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;The vulnerable target is run in an ephemeral container, isolated from the host OS.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Self-Healing:&lt;/strong&gt; A nightly reset script automatically tears down and redeploys the container, guaranteeing a fresh, known-good environment for every session.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3&gt;3. &amp;ldquo;Charlie&amp;rdquo; (Forensics &amp;amp; Reversing)&lt;span class=&#34;hx:absolute hx:-mt-20&#34; id=&#34;3-charlie-forensics--reversing&#34;&gt;&lt;/span&gt;
-    &lt;a href=&#34;#3-charlie-forensics--reversing&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;Concept:&lt;/strong&gt; Self-contained analysis tasks.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Tooling:&lt;/strong&gt; Custom access groups (e.g., &lt;code&gt;tools-gef&lt;/code&gt;) grant access to debuggers like &lt;code&gt;GDB/GEF&lt;/code&gt; or &lt;code&gt;Radare2&lt;/code&gt; only to specific users, keeping the environment clean.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2&gt;Operational Utility&lt;span class=&#34;hx:absolute hx:-mt-20&#34; id=&#34;operational-utility&#34;&gt;&lt;/span&gt;
-    &lt;a href=&#34;#operational-utility&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;While currently an internal research asset, this architecture addresses a critical gap in technical hiring: &lt;strong&gt;The lack of operational validation.&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;Most interview processes rely on theoretical questions. This platform allows for &amp;ldquo;Live-Fire&amp;rdquo; assessment:&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;strong&gt;Candidate Access:&lt;/strong&gt; Generates an ephemeral environment (Concept).&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Task:&lt;/strong&gt; &amp;ldquo;Fix the broken Nginx config&amp;rdquo; (Blue Team) or &amp;ldquo;Escalate to Root&amp;rdquo; (Red Team).&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Result:&lt;/strong&gt; A binary Pass/Fail based on flag submission, proving actual keyboard competence.&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;&lt;em&gt;This system is currently deployed as a private Proxmox lab for infrastructure hardening research.&lt;/em&gt;&lt;/p&gt;
-
-      </description>
+    &lt;a href=&#34;#1-isolation-architecture-defense-in-depth&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;The platform implements three core layers of isolation to maintain stability and prevent cross-user pivoting:&lt;/p&gt;</description>
     </item>
-    
   </channel>
 </rss>

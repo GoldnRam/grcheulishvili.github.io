@@ -1,17 +1,15 @@
 ---
-title: "Case Study: Engineering Multi-Tenant Security for a CTF Wargames Platform"
+title: "Building Multi-Tenant CTF Wargames Platform"
 date: 2025-11-27
 draft: false
 description: "A technical review of the Bastioni platform architecture, detailing the use of Split-SSH, user isolation, and intentional flaws for security training."
 tags: ["Infrastructure", "Hardening", "Linux", "CTFd", "Engineering"]
 ---
 
-# Bastioni Platform: Multi-Tenant Hardening Case Study
-
 ## Overview
 Bastioni is a hybrid wargames platform built for scenario-based cybersecurity training. The primary technical challenge was engineering a secure, multi-tenant Linux environment where players (tenants) could exploit vulnerabilities against adjacent targets without compromising the entire system or affecting other players.
 
-## 1. Isolation Architecture (Defense in Depth)
+## 1. Isolation Architecture 
 
 The platform implements three core layers of isolation to maintain stability and prevent cross-user pivoting:
 
@@ -27,19 +25,15 @@ The environment is hardened using system-level controls:
 * **`chmod 700`:** Enforced across all user home directories, ensuring strict privacy for player files and challenge assets.
 
 ### C. Containerized Boot-to-Root Scenarios
-For high-risk challenges (e.g., the **Bravo** category), a Docker-based architecture is used.
-* The vulnerable target is run in an ephemeral container, isolated from the host OS.
+For high-risk challenges, a Docker-based architecture is used.
+* The vulnerable target is run in an ephemeral, resource limited container.
 * **Self-Healing:** A nightly reset script automatically tears down and redeploys the container, guaranteeing a fresh, known-good environment for every session.
 
-### 3. "Charlie" (Forensics & Reversing)
-* **Concept:** Self-contained analysis tasks.
-* **Tooling:** Custom access groups (e.g., `tools-gef`) grant access to debuggers like `GDB/GEF` or `Radare2` only to specific users, keeping the environment clean.
-
-## Operational Utility
+## Utility
 While currently an internal research asset, this architecture addresses a critical gap in technical hiring: **The lack of operational validation.**
 
 Most interview processes rely on theoretical questions. This platform allows for "Live-Fire" assessment:
-1.  **Candidate Access:** Generates an ephemeral environment (Concept).
+1.  **Candidate Access:** Generates an ephemeral environment.
 2.  **Task:** "Fix the broken Nginx config" (Blue Team) or "Escalate to Root" (Red Team).
 3.  **Result:** A binary Pass/Fail based on flag submission, proving actual keyboard competence.
 

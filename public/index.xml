@@ -1,18 +1,676 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>IERI.SH – IERI.SH</title>
+    <title>IERI.SH</title>
     <link>http://localhost:1313/</link>
     <description>Recent content on IERI.SH</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 15 Dec 2025 00:00:00 +0000</lastBuildDate>
-    
-	  <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
-    
-    
-      
-      
-    
-    
+    <item>
+      <title>Background</title>
+      <link>http://localhost:1313/about/</link>
+      <pubDate>Mon, 15 Dec 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/about/</guid>
+      <description>&lt;h1&gt;Technical Background&lt;/h1&gt;&lt;p&gt;I am a cybersecurity professional and systems engineer. My work focuses on offensive security research, threat hunting, and infrastructure resilience.&lt;/p&gt;
+&lt;p&gt;I approach security by seeking a fundamental-level understanding of systems, prioritizing methodical, problem-oriented tasks over purely theoretical concepts. If a system&amp;rsquo;s architecture is understood at the lowest level, its flaws become mathematically predictable.&lt;/p&gt;
+&lt;h3&gt;Core Focus Areas&lt;span class=&#34;hx:absolute hx:-mt-20&#34; id=&#34;core-focus-areas&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#core-focus-areas&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Offensive Systems:&lt;/strong&gt; C2 development, binary analysis, and red team capability engineering.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Web3 Security:&lt;/strong&gt; Smart contract auditing, ZK-proof logic, and decentralized infrastructure.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;DevSecOps:&lt;/strong&gt; Hardened environments, automated deployments, and custom log parsing pipelines.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Languages &amp;amp; Tooling:&lt;/strong&gt; Go, Python, Solidity, Foundry/Anvil, C/C++, Vagrant, Docker, Most of WAF and Monitoring tools.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/GoldnRam&#34;target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;GitHub&lt;/a&gt; | &lt;a href=&#34;https://www.linkedin.com/in/giorgi-rcheulishvili-bba988260/&#34;target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;LinkedIn&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Engineering Philosophy</title>
+      <link>http://localhost:1313/manifesto/</link>
+      <pubDate>Mon, 15 Dec 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/manifesto/</guid>
+      <description>&lt;h1&gt;Engineering Principles&lt;/h1&gt;&lt;p&gt;This repository is governed by a strict, code-first approach to capability development and systems research.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Tools break. Protocols do not. Understanding the low-level mechanics of a system is prioritized over memorizing the syntax of an exploit framework.&lt;/li&gt;
+&lt;li&gt;Research should result in functional, modular code. Variables must be configurable; nothing should be hardcoded. Snippets are insufficient; full execution context is required.&lt;/li&gt;
+&lt;li&gt;Every architectural idea has a weakness. Analysis must prioritize identifying logical inconsistencies, performance bottlenecks, and security flaws over theoretical perfection.&lt;/li&gt;
+&lt;li&gt;Infrastructure must adhere to strict operational security. Systems should be built with compliance, zero-knowledge principles, and sovereign data ownership in mind.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;There is no &amp;ldquo;unhackable&amp;rdquo; system, only a lack of methodical analysis.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Polymorphic Engine Development</title>
+      <link>http://localhost:1313/research/building-a-polymorphic-engine/</link>
+      <pubDate>Mon, 08 Dec 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/research/building-a-polymorphic-engine/</guid>
+      <description>&lt;h2&gt;The &amp;ldquo;Make&amp;rdquo; Trick (And Why It Failed)&lt;span class=&#34;hx:absolute hx:-mt-20&#34; id=&#34;the-make-trick-and-why-it-failed&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#the-make-trick-and-why-it-failed&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;My initial approach to evading static analysis was lazy. I used a simple Makefile trick to inject a random &lt;code&gt;BUILD_ID&lt;/code&gt; string into the binary metadata at compile time.&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code&#34;&gt;
+
+&lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-makefile&#34; data-lang=&#34;makefile&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c&#34;&gt;# The &amp;#34;Script Kiddie&amp;#34; approach
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nv&#34;&gt;LDFLAGS&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;:=&lt;/span&gt; -X main.buildID&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;$(&lt;/span&gt;shell openssl rand -hex 8&lt;span class=&#34;k&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;go&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;build&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;-ldflags&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;$(&lt;/span&gt;LDFLAGS&lt;span class=&#34;k&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt; -o agent.exe
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx:group/copybtn hx:cursor-pointer hx:transition-all hx:active:opacity-50 hx:bg-primary-700/5 hx:border hx:border-black/5 hx:text-gray-600 hx:hover:text-gray-900 hx:rounded-md hx:p-1.5 hx:dark:bg-primary-300/10 hx:dark:border-white/10 hx:dark:text-gray-400 hx:dark:hover:text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;hextra-copy-icon hx:group-[.copied]/copybtn:hidden hx:pointer-events-none hx:h-4 hx:w-4&#34;&gt;&lt;/div&gt;
+&lt;div class=&#34;hextra-success-icon hx:hidden hx:group-[.copied]/copybtn:block hx:pointer-events-none hx:h-4 hx:w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;Plot Twist&lt;/strong&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Engineering Log: The Mechanical Inevitability of Buffer Overflows</title>
+      <link>http://localhost:1313/research/stack-mechanics-and-overflows/</link>
+      <pubDate>Fri, 28 Nov 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/research/stack-mechanics-and-overflows/</guid>
+      <description>&lt;h2&gt;The &amp;ldquo;Black Box&amp;rdquo; Problem&lt;span class=&#34;hx:absolute hx:-mt-20&#34; id=&#34;the-black-box-problem&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#the-black-box-problem&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;For a long time, I treated assembly instructions like black boxes. I knew that &lt;code&gt;CALL&lt;/code&gt; started a function and &lt;code&gt;RET&lt;/code&gt; ended it. I knew that if I threw enough &amp;ldquo;A&amp;quot;s at a buffer, the program would crash.&lt;/p&gt;
+&lt;p&gt;But I didn&amp;rsquo;t understand the &lt;em&gt;mechanics&lt;/em&gt; of the crash. I didn&amp;rsquo;t understand why the CPU—a machine built for precision—would so easily confuse my user input for a code address.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Building Multi-Tenant CTF Wargames Platform</title>
+      <link>http://localhost:1313/projects/local-ctf-platform/</link>
+      <pubDate>Thu, 27 Nov 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/projects/local-ctf-platform/</guid>
+      <description>&lt;h2&gt;Overview&lt;span class=&#34;hx:absolute hx:-mt-20&#34; id=&#34;overview&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#overview&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Bastioni is a hybrid wargames platform built for scenario-based cybersecurity training. The primary technical challenge was engineering a secure, multi-tenant Linux environment where players (tenants) could exploit vulnerabilities against adjacent targets without compromising the entire system or affecting other players.&lt;/p&gt;
+&lt;h2&gt;1. Isolation Architecture&lt;span class=&#34;hx:absolute hx:-mt-20&#34; id=&#34;1-isolation-architecture&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#1-isolation-architecture&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;The platform implements three core layers of isolation to maintain stability and prevent cross-user pivoting:&lt;/p&gt;
+&lt;h3&gt;A. Split-SSH Access Control&lt;span class=&#34;hx:absolute hx:-mt-20&#34; id=&#34;a-split-ssh-access-control&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#a-split-ssh-access-control&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;Access is segregated at the network port level:&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Mantis C2 Architecture</title>
+      <link>http://localhost:1313/projects/mantis-c2/</link>
+      <pubDate>Thu, 27 Nov 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/projects/mantis-c2/</guid>
+      <description>&lt;h2&gt;Overview&lt;span class=&#34;hx:absolute hx:-mt-20&#34; id=&#34;overview&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#overview&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Mantis C2 is a custom Command and Control framework developed to test and bypass modern EDR telemetry. Commercial and widely available C2 frameworks often carry heavily signatured stubs; Mantis was built from the ground up to minimize static and behavioral footprint.&lt;/p&gt;
+&lt;h2&gt;1. Evasion and Persistence Architecture&lt;span class=&#34;hx:absolute hx:-mt-20&#34; id=&#34;1-evasion-and-persistence-architecture&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#1-evasion-and-persistence-architecture&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;h3&gt;AST-Driven Polymorphism Protocol&lt;span class=&#34;hx:absolute hx:-mt-20&#34; id=&#34;ast-driven-polymorphism-protocol&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#ast-driven-polymorphism-protocol&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;To defeat static analysis, the builder utilizes a custom source-code mutation protocol:&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Regional Threat Intel Aggregator</title>
+      <link>http://localhost:1313/projects/regional-threat-intel/</link>
+      <pubDate>Thu, 27 Nov 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/projects/regional-threat-intel/</guid>
+      <description>&lt;h2&gt;Overview&lt;span class=&#34;hx:absolute hx:-mt-20&#34; id=&#34;overview&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#overview&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;This custom-built CTI dashboard solves the critical problem of alert fatigue by engineering a system that filters high-volume open-source feeds down to a high-fidelity list of indicators. The system focuses exclusively on APT activity and C2 infrastructure relevant to a &lt;strong&gt;defined threat landscape&lt;/strong&gt;.&lt;/p&gt;
+&lt;h2&gt;1. Technical Architecture and Data Flow&lt;span class=&#34;hx:absolute hx:-mt-20&#34; id=&#34;1-technical-architecture-and-data-flow&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#1-technical-architecture-and-data-flow&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;The system runs on a containerized microservices architecture to ensure resilience and maintainability:&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Research: Boolean &amp; Logic-Based SQL Injection</title>
+      <link>http://localhost:1313/archive/sql-injection-patterns/</link>
+      <pubDate>Thu, 27 Nov 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/archive/sql-injection-patterns/</guid>
+      <description>&lt;h2&gt;1. Authentication Bypass via Comment Injection&lt;span class=&#34;hx:absolute hx:-mt-20&#34; id=&#34;1-authentication-bypass-via-comment-injection&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#1-authentication-bypass-via-comment-injection&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Login mechanisms frequently construct queries by concatenating user input directly into a string.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Backend Logic:&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code&#34;&gt;
+
+&lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;SELECT&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;FROM&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;users&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;WHERE&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;username&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;$user&amp;#39;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;AND&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;password&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;$pass&amp;#39;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx:group/copybtn hx:cursor-pointer hx:transition-all hx:active:opacity-50 hx:bg-primary-700/5 hx:border hx:border-black/5 hx:text-gray-600 hx:hover:text-gray-900 hx:rounded-md hx:p-1.5 hx:dark:bg-primary-300/10 hx:dark:border-white/10 hx:dark:text-gray-400 hx:dark:hover:text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;hextra-copy-icon hx:group-[.copied]/copybtn:hidden hx:pointer-events-none hx:h-4 hx:w-4&#34;&gt;&lt;/div&gt;
+&lt;div class=&#34;hextra-success-icon hx:hidden hx:group-[.copied]/copybtn:block hx:pointer-events-none hx:h-4 hx:w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;Injection Vector:&lt;/strong&gt;
+By appending the SQL comment sequence (&lt;code&gt;--&lt;/code&gt;), we can truncate the query immediately after the username, effectively removing the password validation requirement.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Research: Bypassing Modern File Upload Filters</title>
+      <link>http://localhost:1313/archive/bypassing-file-upload-filters/</link>
+      <pubDate>Thu, 27 Nov 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/archive/bypassing-file-upload-filters/</guid>
+      <description>&lt;h2&gt;Abstract&lt;span class=&#34;hx:absolute hx:-mt-20&#34; id=&#34;abstract&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#abstract&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;File upload vulnerabilities remain a critical vector for Remote Code Execution (RCE). While developers often implement validation mechanisms (MIME type checks, blacklists), these are frequently based on &amp;ldquo;trusting user input.&amp;rdquo; This report documents specific bypass techniques I analyzed during recent research.&lt;/p&gt;
+&lt;h2&gt;1. Content-Type Spoofing&lt;span class=&#34;hx:absolute hx:-mt-20&#34; id=&#34;1-content-type-spoofing&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#1-content-type-spoofing&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Many applications validate the &lt;code&gt;Content-Type&lt;/code&gt; header sent by the browser but fail to validate the actual file magic bytes.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Research: OS Command Injection Execution Flow</title>
+      <link>http://localhost:1313/archive/os-command-injection-patterns/</link>
+      <pubDate>Thu, 27 Nov 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/archive/os-command-injection-patterns/</guid>
+      <description>&lt;h2&gt;Injection Context&lt;span class=&#34;hx:absolute hx:-mt-20&#34; id=&#34;injection-context&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#injection-context&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Legacy applications often interface with the operating system using shell wrappers. A common pattern observed in inventory systems involves passing user IDs directly to backend scripts.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Vulnerable Logic:&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code&#34;&gt;
+
+&lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;stockreport.pl &amp;lt;productID&amp;gt; &amp;lt;storeID&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx:group/copybtn hx:cursor-pointer hx:transition-all hx:active:opacity-50 hx:bg-primary-700/5 hx:border hx:border-black/5 hx:text-gray-600 hx:hover:text-gray-900 hx:rounded-md hx:p-1.5 hx:dark:bg-primary-300/10 hx:dark:border-white/10 hx:dark:text-gray-400 hx:dark:hover:text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;hextra-copy-icon hx:group-[.copied]/copybtn:hidden hx:pointer-events-none hx:h-4 hx:w-4&#34;&gt;&lt;/div&gt;
+&lt;div class=&#34;hextra-success-icon hx:hidden hx:group-[.copied]/copybtn:block hx:pointer-events-none hx:h-4 hx:w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;If the application fails to sanitize &lt;code&gt;productID&lt;/code&gt;, the shell&amp;rsquo;s command separator logic can be abused to chain execution.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Research: Server-Side Request Forgery (SSRF) Mechanics</title>
+      <link>http://localhost:1313/archive/ssrf-exploitation/</link>
+      <pubDate>Thu, 27 Nov 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/archive/ssrf-exploitation/</guid>
+      <description>&lt;h2&gt;Mechanism of Action&lt;span class=&#34;hx:absolute hx:-mt-20&#34; id=&#34;mechanism-of-action&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#mechanism-of-action&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;SSRF occurs when an application fetches a remote resource based on user-supplied URLs without validation. This trust relationship allows an attacker to coerce the server into making requests on their behalf.&lt;/p&gt;
+&lt;h2&gt;Target Analysis: Stock API&lt;span class=&#34;hx:absolute hx:-mt-20&#34; id=&#34;target-analysis-stock-api&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#target-analysis-stock-api&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;The application uses a specific parameter to query an internal stock management API:&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code&#34;&gt;
+
+&lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-http&#34; data-lang=&#34;http&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nf&#34;&gt;POST&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;/product/stock&lt;/span&gt; &lt;span class=&#34;kr&#34;&gt;HTTP&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;1.0&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;...&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;g&#34;&gt;stockApi=http://stock.weliketoshop.net:8080/product/stock/check?productId=1&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx:group/copybtn hx:cursor-pointer hx:transition-all hx:active:opacity-50 hx:bg-primary-700/5 hx:border hx:border-black/5 hx:text-gray-600 hx:hover:text-gray-900 hx:rounded-md hx:p-1.5 hx:dark:bg-primary-300/10 hx:dark:border-white/10 hx:dark:text-gray-400 hx:dark:hover:text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;hextra-copy-icon hx:group-[.copied]/copybtn:hidden hx:pointer-events-none hx:h-4 hx:w-4&#34;&gt;&lt;/div&gt;
+&lt;div class=&#34;hextra-success-icon hx:hidden hx:group-[.copied]/copybtn:block hx:pointer-events-none hx:h-4 hx:w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;h2&gt;Exploitation: Localhost Pivot&lt;span class=&#34;hx:absolute hx:-mt-20&#34; id=&#34;exploitation-localhost-pivot&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#exploitation-localhost-pivot&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;By modifying the &lt;code&gt;stockApi&lt;/code&gt; parameter, we can direct the server to query its own loopback interface (&lt;code&gt;127.0.0.1&lt;/code&gt;). This is critical because many administrative services listen only on localhost to avoid external exposure.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Assembly Basics</title>
+      <link>http://localhost:1313/archive/reverse-engineering-and-binary-exploitation/assembly-basics/</link>
+      <pubDate>Sat, 12 Jul 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/archive/reverse-engineering-and-binary-exploitation/assembly-basics/</guid>
+      <description>&lt;hr&gt;
+&lt;h2&gt;description: &amp;hellip;because to build a house, you must first lay its foundation.&lt;span class=&#34;hx:absolute hx:-mt-20&#34; id=&#34;description-because-to-build-a-house-you-must-first-lay-its-foundation&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#description-because-to-build-a-house-you-must-first-lay-its-foundation&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;h1&gt;🔤 Assembly Basics&lt;/h1&gt;&lt;h2&gt;Assembly&lt;span class=&#34;hx:absolute hx:-mt-20&#34; id=&#34;assembly&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#assembly&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;Assembly language&lt;/strong&gt; at its basic is an symbolic language that directly ties a language machine can understand and a language that is easy for humans to understand.&lt;/p&gt;
+&lt;p&gt;An instruction like &lt;code&gt;add rax, 1&lt;/code&gt; is simpler than machine shellcode equivalent &lt;code&gt;4883C001&lt;/code&gt; or binary machine code &lt;code&gt;01001000 10000011 11000000 00000001&lt;/code&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>HackTheBox Machine - Cicada</title>
+      <link>http://localhost:1313/archive/htb-cicada-analysis/</link>
+      <pubDate>Wed, 20 Nov 2024 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/archive/htb-cicada-analysis/</guid>
+      <description>&lt;p&gt;IP: 10.10.11.35&lt;/p&gt;
+&lt;p&gt;Nmap scan results for 10.10.11.35 machine. &lt;/p&gt;
+&lt;p&gt;Parameters:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;`sV` - Probe open ports to determine service/version info&lt;/li&gt;
+&lt;li&gt;&amp;lsquo;sC&amp;rsquo; - equivalent to &amp;ndash;script=default&lt;/li&gt;
+&lt;li&gt;&amp;lsquo;Pn&amp;rsquo; - Treat all hosts as online &amp;ndash; skip host discovery&lt;/li&gt;
+&lt;li&gt;&amp;lsquo;&amp;ndash;max-rate=1000&amp;rsquo; - Send packets no faster than 1000 packets per second&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code&#34;&gt;
+
+&lt;div&gt;&lt;pre&gt;&lt;code&gt;nmap -sV -sC -Pn 10.10.11.35 --max-rate=1000
+
+Starting Nmap 7.94SVN ( https://nmap.org ) at 2024-11-18 10:22 &amp;#43;04
+Nmap scan report for cicada.htb (10.10.11.35)
+Host is up (0.098s latency).
+Not shown: 989 filtered tcp ports (no-response)
+PORT     STATE SERVICE       VERSION
+53/tcp   open  domain        Simple DNS Plus
+88/tcp   open  kerberos-sec  Microsoft Windows Kerberos (server time: 2024-11-18 13:22:50Z)
+135/tcp  open  msrpc         Microsoft Windows RPC
+139/tcp  open  netbios-ssn   Microsoft Windows netbios-ssn
+389/tcp  open  ldap          Microsoft Windows Active Directory LDAP (Domain: cicada.htb0., Site: Default-First-Site-Name)
+|_ssl-date: TLS randomness does not represent time
+| ssl-cert: Subject: commonName=CICADA-DC.cicada.htb
+| Subject Alternative Name: othername: 1.3.6.1.4.1.311.25.1::&amp;lt;unsupported&amp;gt;, DNS:CICADA-DC.cicada.htb
+| Not valid before: 2024-08-22T20:24:16
+|_Not valid after:  2025-08-22T20:24:16
+445/tcp  open  microsoft-ds?
+464/tcp  open  kpasswd5?
+593/tcp  open  ncacn_http    Microsoft Windows RPC over HTTP 1.0
+636/tcp  open  ssl/ldap      Microsoft Windows Active Directory LDAP (Domain: cicada.htb0., Site: Default-First-Site-Name)
+| ssl-cert: Subject: commonName=CICADA-DC.cicada.htb
+| Subject Alternative Name: othername: 1.3.6.1.4.1.311.25.1::&amp;lt;unsupported&amp;gt;, DNS:CICADA-DC.cicada.htb
+| Not valid before: 2024-08-22T20:24:16
+|_Not valid after:  2025-08-22T20:24:16
+|_ssl-date: TLS randomness does not represent time
+3268/tcp open  ldap          Microsoft Windows Active Directory LDAP (Domain: cicada.htb0., Site: Default-First-Site-Name)
+| ssl-cert: Subject: commonName=CICADA-DC.cicada.htb
+| Subject Alternative Name: othername: 1.3.6.1.4.1.311.25.1::&amp;lt;unsupported&amp;gt;, DNS:CICADA-DC.cicada.htb
+| Not valid before: 2024-08-22T20:24:16
+|_Not valid after:  2025-08-22T20:24:16
+|_ssl-date: TLS randomness does not represent time
+3269/tcp open  ssl/ldap      Microsoft Windows Active Directory LDAP (Domain: cicada.htb0., Site: Default-First-Site-Name)
+|_ssl-date: TLS randomness does not represent time
+| ssl-cert: Subject: commonName=CICADA-DC.cicada.htb
+| Subject Alternative Name: othername: 1.3.6.1.4.1.311.25.1::&amp;lt;unsupported&amp;gt;, DNS:CICADA-DC.cicada.htb
+| Not valid before: 2024-08-22T20:24:16
+|_Not valid after:  2025-08-22T20:24:16
+Service Info: Host: CICADA-DC; OS: Windows; CPE: cpe:/o:microsoft:windows
+
+Host script results:
+| smb2-security-mode: 
+|   3:1:1: 
+|_    Message signing enabled and required
+| smb2-time: 
+|   date: 2024-11-18T13:23:35
+|_  start_date: N/A
+|_clock-skew: 6h59m59s
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 96.30 seconds&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx:group/copybtn hx:cursor-pointer hx:transition-all hx:active:opacity-50 hx:bg-primary-700/5 hx:border hx:border-black/5 hx:text-gray-600 hx:hover:text-gray-900 hx:rounded-md hx:p-1.5 hx:dark:bg-primary-300/10 hx:dark:border-white/10 hx:dark:text-gray-400 hx:dark:hover:text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;hextra-copy-icon hx:group-[.copied]/copybtn:hidden hx:pointer-events-none hx:h-4 hx:w-4&#34;&gt;&lt;/div&gt;
+&lt;div class=&#34;hextra-success-icon hx:hidden hx:group-[.copied]/copybtn:block hx:pointer-events-none hx:h-4 hx:w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;ol&gt;
+&lt;li&gt;We find out that 10.10.11.35 host has cicada.htb domain.&lt;/li&gt;
+&lt;li&gt;The system has active SMB, LDAP, RPC over HTTP services enabled, which can be further studied and dissected for weaknesses and vulnerabilities.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Listing NULL(unauthorized/anonymous) SMB SHARES&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>1f4 - Web shell upload via extension blacklist bypass \[PortSwigger Lab]</title>
+      <link>http://localhost:1313/archive/notes/1-web-applications/1f-file-upload-vulnerabilities/1f4-web-shell-upload-via-extension-blacklist-bypass-portswigger-lab/</link>
+      <pubDate>Tue, 16 Jul 2024 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/archive/notes/1-web-applications/1f-file-upload-vulnerabilities/1f4-web-shell-upload-via-extension-blacklist-bypass-portswigger-lab/</guid>
+      <description>&lt;p&gt;This lab contains a vulnerable image upload function. Certain file extensions are blacklisted, but this defense can be bypassed due to a fundamental flaw in the configuration of this blacklist.&lt;/p&gt;
+&lt;p&gt;To solve the lab, upload a basic PHP web shell, then use it to exfiltrate the contents of the file &lt;code&gt;/home/carlos/secret&lt;/code&gt;. Submit this secret.&lt;/p&gt;
+&lt;p&gt;You can log in to your own account using the following credentials: &lt;code&gt;wiener:peter&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Solution:&lt;/p&gt;
+&lt;p&gt;So once again User&amp;rsquo;s page has an avatar upload function which uploads an image at &lt;code&gt;/files/avatars&lt;/code&gt; directory.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>1f3 - Web shell upload via Path Traversal \[PortSwigger Lab]</title>
+      <link>http://localhost:1313/archive/notes/1-web-applications/1f-file-upload-vulnerabilities/1f3-web-shell-upload-via-path-traversal-portswigger-lab/</link>
+      <pubDate>Tue, 09 Jul 2024 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/archive/notes/1-web-applications/1f-file-upload-vulnerabilities/1f3-web-shell-upload-via-path-traversal-portswigger-lab/</guid>
+      <description>&lt;p&gt;This lab contains a vulnerable image upload function. The server is configured to prevent execution of user-supplied files, but this restriction can be bypassed by exploiting a secondary vulnerability.&lt;/p&gt;
+&lt;p&gt;To solve the lab, upload a basic PHP web shell and use it to exfiltrate the contents of the file &lt;code&gt;/home/carlos/secret&lt;/code&gt;. Submit this secret.&lt;/p&gt;
+&lt;p&gt;You can log in to your own account using the following credentials: &lt;code&gt;wiener:peter&lt;/code&gt;&lt;/p&gt;
+&lt;h3&gt;Solution:&lt;span class=&#34;hx:absolute hx:-mt-20&#34; id=&#34;solution&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#solution&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;So, User&amp;rsquo;s page includes avatar upload function. just to upload &lt;code&gt;mal.php&lt;/code&gt; with contents &lt;code&gt;&amp;lt;?php echo system($_GET[&#39;command&#39;]); ?&amp;gt;&lt;/code&gt; will just return plaintext version of this script.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>1f2 - Web shell upload via Content-Type restriction bypass \[Portswigger Lab]</title>
+      <link>http://localhost:1313/archive/notes/1-web-applications/1f-file-upload-vulnerabilities/1f2-web-shell-upload-via-content-type-restriction-bypass-portswigger-lab/</link>
+      <pubDate>Sat, 06 Jul 2024 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/archive/notes/1-web-applications/1f-file-upload-vulnerabilities/1f2-web-shell-upload-via-content-type-restriction-bypass-portswigger-lab/</guid>
+      <description>&lt;p&gt;This lab contains a vulnerable image upload function. It attempts to prevent users from uploading unexpected file types, but relies on checking user-controllable input to verify this.&lt;/p&gt;
+&lt;p&gt;To solve the lab, upload a basic PHP web shell and use it to exfiltrate the contents of the file &lt;code&gt;/home/carlos/secret&lt;/code&gt;. Submit this secret.&lt;/p&gt;
+&lt;p&gt;You can log in to your own account using the following credentials: &lt;code&gt;wiener:peter&lt;/code&gt;&lt;/p&gt;
+&lt;h3&gt;Solution:&lt;span class=&#34;hx:absolute hx:-mt-20&#34; id=&#34;solution&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#solution&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;So upon logging in my account, I can see the avatar upload field.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Configuring an ELK Stack Part 1</title>
+      <link>http://localhost:1313/engineering/configuring-an-elk-stack-part-1/</link>
+      <pubDate>Sun, 12 May 2024 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/engineering/configuring-an-elk-stack-part-1/</guid>
+      <description>&lt;p&gt;In this article, I&amp;rsquo;ll be configuring ELK stack in docker. This will be 2 part series where first one will focus on configuring base ELK and second one more advanced stuff.&lt;/p&gt;
+&lt;p&gt;I&amp;rsquo;m following the official &lt;a href=&#34;https://www.elastic.co/blog/getting-started-with-the-elastic-stack-and-docker-compose&#34;target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Elastic guide&lt;/a&gt; on setting it up in docker using docker-compose.&lt;/p&gt;
+&lt;p&gt;Let&amp;rsquo;s begin.&lt;/p&gt;
+&lt;h3&gt;File structure&lt;span class=&#34;hx:absolute hx:-mt-20&#34; id=&#34;file-structure&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#file-structure&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;First thing, I&amp;rsquo;m going to create initial file structure for docker, where Kibana, Metricbeat and Logstash will be able to use these files.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title></title>
+      <link>http://localhost:1313/archive/learning-powershell/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/archive/learning-powershell/</guid>
+      <description>&lt;h1&gt;0b - Learning Powershell&lt;/h1&gt;&lt;p&gt;Getting available modules on the system&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code&#34;&gt;
+
+&lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-powershell&#34; data-lang=&#34;powershell&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;Get-Module&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;-ListAvailable&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx:group/copybtn hx:cursor-pointer hx:transition-all hx:active:opacity-50 hx:bg-primary-700/5 hx:border hx:border-black/5 hx:text-gray-600 hx:hover:text-gray-900 hx:rounded-md hx:p-1.5 hx:dark:bg-primary-300/10 hx:dark:border-white/10 hx:dark:text-gray-400 hx:dark:hover:text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;hextra-copy-icon hx:group-[.copied]/copybtn:hidden hx:pointer-events-none hx:h-4 hx:w-4&#34;&gt;&lt;/div&gt;
+&lt;div class=&#34;hextra-success-icon hx:hidden hx:group-[.copied]/copybtn:block hx:pointer-events-none hx:h-4 hx:w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;Getting only loaded modules on the system&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code&#34;&gt;
+
+&lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-powershell&#34; data-lang=&#34;powershell&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;Get-Module&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx:group/copybtn hx:cursor-pointer hx:transition-all hx:active:opacity-50 hx:bg-primary-700/5 hx:border hx:border-black/5 hx:text-gray-600 hx:hover:text-gray-900 hx:rounded-md hx:p-1.5 hx:dark:bg-primary-300/10 hx:dark:border-white/10 hx:dark:text-gray-400 hx:dark:hover:text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;hextra-copy-icon hx:group-[.copied]/copybtn:hidden hx:pointer-events-none hx:h-4 hx:w-4&#34;&gt;&lt;/div&gt;
+&lt;div class=&#34;hextra-success-icon hx:hidden hx:group-[.copied]/copybtn:block hx:pointer-events-none hx:h-4 hx:w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;Loading Module on the system&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title></title>
+      <link>http://localhost:1313/archive/notes/1-web-applications/1a-web-requests/1a1-http-requests/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/archive/notes/1-web-applications/1a-web-requests/1a1-http-requests/</guid>
+      <description>&lt;h1&gt;1a1 - HTTP requests&lt;/h1&gt;&lt;p&gt;HTTP headers are used to transfer information from the client or server. &lt;/p&gt;
+&lt;p&gt;The client function can be implemented by the &lt;a href=&#34;1a2-curl.md&#34;&gt;cURL &lt;/a&gt;program, which is a good tool for pentesting. &lt;/p&gt;
+&lt;p&gt;We have the following categories of headers&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;General Headers&lt;/li&gt;
+&lt;li&gt;Entity Headers&lt;/li&gt;
+&lt;li&gt;Request Headers&lt;/li&gt;
+&lt;li&gt;Response Headers&lt;/li&gt;
+&lt;li&gt;Security Headers&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;&lt;code&gt;General Headers&lt;/code&gt;&lt;/strong&gt; are used to describe the message, not its content. They are found in HTTP requests and responses.&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;Header&lt;/th&gt;
+          &lt;th&gt;Example&lt;/th&gt;
+          &lt;th&gt;Description&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;Date&lt;/td&gt;
+          &lt;td&gt;Date: Wed, 16 Feb 2022 10:38:44 GMT&lt;/td&gt;
+          &lt;td&gt;Message creation date&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;Connection&lt;/td&gt;
+          &lt;td&gt;Connection: Keep-Alive&lt;/td&gt;
+          &lt;td&gt;Determines whether the connection should remain open or be closed with the following tags: &lt;code&gt;close&lt;/code&gt; or &lt;code&gt;Keep-Alive&lt;/code&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;strong&gt;&lt;code&gt;Entity Headers&lt;/code&gt;&lt;/strong&gt; are used to describe the content of a message and are found in POST and PUT headers.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title></title>
+      <link>http://localhost:1313/archive/notes/1-web-applications/1a-web-requests/1a2-curl/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/archive/notes/1-web-applications/1a-web-requests/1a2-curl/</guid>
+      <description>&lt;h1&gt;1a2 - cURL&lt;/h1&gt;&lt;p&gt;cURL (Client URL) is a CLI program used to establish communication with various protocols and retrieve information. It is a good tool for pentesting because it provides raw data from a web application.&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code&#34;&gt;
+
+&lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Usage: curl &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;options...&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; &amp;lt;url&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt; -d, --data &amp;lt;data&amp;gt;           HTTP POST data
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt; -f, --fail                  Fail fast with no output on HTTP errors
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt; -h, --help &amp;lt;category&amp;gt;       Get &lt;span class=&#34;nb&#34;&gt;help&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; commands
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt; -i, --include               Include response headers in output
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt; -o, --output &amp;lt;file&amp;gt;         Write to file instead of stdout
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt; -O, --remote-name           Write output to file named as remote file
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt; -s, --silent                Silent mode
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt; -T, --upload-file &amp;lt;file&amp;gt;    Transfer &lt;span class=&#34;nb&#34;&gt;local&lt;/span&gt; FILE to destination
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt; -u, --user &amp;lt;user:password&amp;gt;  Server user and password
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt; -A, --user-agent &amp;lt;name&amp;gt;     Send User-Agent &amp;lt;name&amp;gt; to server
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt; -v, --verbose               Make the operation more talkative
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt; -V, --version               Show version number and quit&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx:group/copybtn hx:cursor-pointer hx:transition-all hx:active:opacity-50 hx:bg-primary-700/5 hx:border hx:border-black/5 hx:text-gray-600 hx:hover:text-gray-900 hx:rounded-md hx:p-1.5 hx:dark:bg-primary-300/10 hx:dark:border-white/10 hx:dark:text-gray-400 hx:dark:hover:text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;hextra-copy-icon hx:group-[.copied]/copybtn:hidden hx:pointer-events-none hx:h-4 hx:w-4&#34;&gt;&lt;/div&gt;
+&lt;div class=&#34;hextra-success-icon hx:hidden hx:group-[.copied]/copybtn:block hx:pointer-events-none hx:h-4 hx:w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&#34;hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code&#34;&gt;
+
+&lt;div&gt;&lt;pre&gt;&lt;code&gt;-d is used to insert information into the URL
+-H is used to specify HTTP Headers
+-X is used to specify the request type (GET, POST, PUT, DELETE...)
+- POST create/upload
+- PUT replace
+- DELETE delete
+- GET read
+-v print verbose
+-i print response header
+-I show header only
+-u authentication arguments `curl -u admin:admin http://example.com/auth.php`&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx:group/copybtn hx:cursor-pointer hx:transition-all hx:active:opacity-50 hx:bg-primary-700/5 hx:border hx:border-black/5 hx:text-gray-600 hx:hover:text-gray-900 hx:rounded-md hx:p-1.5 hx:dark:bg-primary-300/10 hx:dark:border-white/10 hx:dark:text-gray-400 hx:dark:hover:text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;hextra-copy-icon hx:group-[.copied]/copybtn:hidden hx:pointer-events-none hx:h-4 hx:w-4&#34;&gt;&lt;/div&gt;
+&lt;div class=&#34;hextra-success-icon hx:hidden hx:group-[.copied]/copybtn:block hx:pointer-events-none hx:h-4 hx:w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;Replacing information in the database using the CRUD API on the website&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title></title>
+      <link>http://localhost:1313/archive/notes/1-web-applications/1b-owasp-top-10-2021/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/archive/notes/1-web-applications/1b-owasp-top-10-2021/</guid>
+      <description>&lt;h1&gt;1b - OWASP TOP 10 2021&lt;/h1&gt;&lt;h2&gt;1. Broken Access Control&lt;span class=&#34;hx:absolute hx:-mt-20&#34; id=&#34;1-broken-access-control&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#1-broken-access-control&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;An application has multiple access points from the outside. The goal of Access Control is to allow authorized users to access it and block unauthorized users. BAC means that an unauthorized user will gain access to the data of an authorized user. For example, by using an API.&lt;/p&gt;
+&lt;h2&gt;2. Cryptographic Failures&lt;span class=&#34;hx:absolute hx:-mt-20&#34; id=&#34;2-cryptographic-failures&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#2-cryptographic-failures&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;Weak encryption of sensitive information or no encryption at all. &lt;/li&gt;
+&lt;li&gt;Certificate management &lt;/li&gt;
+&lt;li&gt;Downgrade attacks &lt;/li&gt;
+&lt;li&gt;Automatic encryption (good) &amp;amp; automatic decryption (bad)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;3. Injection&lt;span class=&#34;hx:absolute hx:-mt-20&#34; id=&#34;3-injection&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#3-injection&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;LDAP&lt;/li&gt;
+&lt;li&gt;SQL&lt;/li&gt;
+&lt;li&gt;XSS&lt;/li&gt;
+&lt;li&gt;Incorrect Sanitization&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;4. Insecure Design&lt;span class=&#34;hx:absolute hx:-mt-20&#34; id=&#34;4-insecure-design&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#4-insecure-design&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Related to application design and architectural flaws. Anything that can be exploited by an attacker to cause damage is Insecure Design.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title></title>
+      <link>http://localhost:1313/archive/notes/1-web-applications/1f-file-upload-vulnerabilities/1f1-remote-code-execution-via-web-shell-upload-portswigger-lab/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/archive/notes/1-web-applications/1f-file-upload-vulnerabilities/1f1-remote-code-execution-via-web-shell-upload-portswigger-lab/</guid>
+      <description>&lt;h1&gt;1f1 - Remote code execution via web shell upload [PortSwigger Lab]&lt;/h1&gt;&lt;p&gt;This lab contains a vulnerable image upload function. It doesn&amp;rsquo;t perform any validation on the files users upload before storing them on the server&amp;rsquo;s filesystem.&lt;/p&gt;
+&lt;p&gt;To solve the lab, upload a basic PHP web shell and use it to exfiltrate the contents of the file &lt;code&gt;/home/carlos/secret&lt;/code&gt;. Submit this secret.&lt;/p&gt;
+&lt;p&gt;You can log in to your own account using the following credentials: &lt;code&gt;wiener:peter&lt;/code&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title></title>
+      <link>http://localhost:1313/archive/notetaking-and-random-stuff/thoughts-about-my-cybersec-journey/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/archive/notetaking-and-random-stuff/thoughts-about-my-cybersec-journey/</guid>
+      <description>&lt;h1&gt;0a - Thoughts about my Cybersec Journey&lt;/h1&gt;&lt;p&gt;Over the years, I have explored diverse disciplines within computer science. My interests have spanned programming, operating systems, and the intricacies of Unix and Windows systems. I delved into game development, experimenting with various engines and libraries, resulting in several completed and unfinished projects that provided valuable experience. Amateur 3D modeling with Blender further broadened my skill set. I consistently engage with technical content, including CS/IT conference recordings. My formal training includes CSIRT and Threat Hunting, and I currently hold a CCNA certification. More recently, I have developed an interest in hardware hacking and IoT, though my electronics knowledge is currently limited. This breadth of experience has provided me with a foundation of knowledge that I believe is sufficient for specializing in any area of cybersecurity.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title></title>
+      <link>http://localhost:1313/archive/raw-notes-ssrf/1c1-ssrf-against-local-interface-portswigger-lab/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/archive/raw-notes-ssrf/1c1-ssrf-against-local-interface-portswigger-lab/</guid>
+      <description>&lt;h1&gt;1c1 - SSRF against local interface [Portswigger Lab]&lt;/h1&gt;&lt;h3&gt;&lt;strong&gt;Problem&lt;/strong&gt;&lt;span class=&#34;hx:absolute hx:-mt-20&#34; id=&#34;problem&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#problem&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;div class=&#34;hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code&#34;&gt;
+
+&lt;div&gt;&lt;pre&gt;&lt;code&gt;This lab has a stock check feature which fetches data from an internal system.
+
+To solve the lab, change the stock check URL to access the admin interface at `http://localhost/admin` and delete the user `carlos`.&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx:group/copybtn hx:cursor-pointer hx:transition-all hx:active:opacity-50 hx:bg-primary-700/5 hx:border hx:border-black/5 hx:text-gray-600 hx:hover:text-gray-900 hx:rounded-md hx:p-1.5 hx:dark:bg-primary-300/10 hx:dark:border-white/10 hx:dark:text-gray-400 hx:dark:hover:text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;hextra-copy-icon hx:group-[.copied]/copybtn:hidden hx:pointer-events-none hx:h-4 hx:w-4&#34;&gt;&lt;/div&gt;
+&lt;div class=&#34;hextra-success-icon hx:hidden hx:group-[.copied]/copybtn:block hx:pointer-events-none hx:h-4 hx:w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;URL: &lt;a href=&#34;https://0a4f00b403f04c6c8165a70d000b0073.web-security-academy.net/&#34;target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;https://0a4f00b403f04c6c8165a70d000b0073.web-security-academy.net/&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title></title>
+      <link>http://localhost:1313/archive/raw-notes-ssrf/1c2-ssrf-against-external-back-end-system-portswigger-lab/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/archive/raw-notes-ssrf/1c2-ssrf-against-external-back-end-system-portswigger-lab/</guid>
+      <description>&lt;h1&gt;1c2 - SSRF against external back-end system [PortSwigger Lab]&lt;/h1&gt;&lt;p&gt;The same principle applies for remote SSRF. An attacker can submit the following request to access the admin interface&lt;/p&gt;
+&lt;div class=&#34;hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code&#34;&gt;
+
+&lt;div&gt;&lt;pre&gt;&lt;code&gt;POST /product/stock HTTP/1.0 
+Content-Type: application/x-www-form-urlencoded 
+Content-Length: 118
+
+stockApi=http://192.168.0.68/admin&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx:group/copybtn hx:cursor-pointer hx:transition-all hx:active:opacity-50 hx:bg-primary-700/5 hx:border hx:border-black/5 hx:text-gray-600 hx:hover:text-gray-900 hx:rounded-md hx:p-1.5 hx:dark:bg-primary-300/10 hx:dark:border-white/10 hx:dark:text-gray-400 hx:dark:hover:text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;hextra-copy-icon hx:group-[.copied]/copybtn:hidden hx:pointer-events-none hx:h-4 hx:w-4&#34;&gt;&lt;/div&gt;
+&lt;div class=&#34;hextra-success-icon hx:hidden hx:group-[.copied]/copybtn:block hx:pointer-events-none hx:h-4 hx:w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;The same example as previous, but for remote API:&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title></title>
+      <link>http://localhost:1313/archive/useful-cheatsheet-for-pentesting/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/archive/useful-cheatsheet-for-pentesting/</guid>
+      <description>&lt;h1&gt;0c - Useful cheatsheet for pentesting&lt;/h1&gt;&lt;ul&gt;
+&lt;li&gt;Tools are only as effective as their operator is knowledgeable.&lt;/li&gt;
+&lt;li&gt;Have ready to use virtual machines of GNU/Linux and Windows alike.&lt;/li&gt;
+&lt;li&gt;Use password managers and use strong passwords, preferably&lt;/li&gt;
+&lt;li&gt;keep pentesting and personal workspaces separate&lt;/li&gt;
+&lt;li&gt;document everything and have legal confirmations before doing any target assessment&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4&gt;Full upgrade &amp;amp; update of the system&lt;span class=&#34;hx:absolute hx:-mt-20&#34; id=&#34;full-upgrade--update-of-the-system&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#full-upgrade--update-of-the-system&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h4&gt;&lt;div class=&#34;hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code&#34;&gt;
+
+&lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;sudo apt update -y &lt;span class=&#34;o&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; sudo apt full-upgrade -y &lt;span class=&#34;o&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; sudo apt autoremove -y &lt;span class=&#34;o&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; sudo apt autoclean -y&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx:group/copybtn hx:cursor-pointer hx:transition-all hx:active:opacity-50 hx:bg-primary-700/5 hx:border hx:border-black/5 hx:text-gray-600 hx:hover:text-gray-900 hx:rounded-md hx:p-1.5 hx:dark:bg-primary-300/10 hx:dark:border-white/10 hx:dark:text-gray-400 hx:dark:hover:text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;hextra-copy-icon hx:group-[.copied]/copybtn:hidden hx:pointer-events-none hx:h-4 hx:w-4&#34;&gt;&lt;/div&gt;
+&lt;div class=&#34;hextra-success-icon hx:hidden hx:group-[.copied]/copybtn:block hx:pointer-events-none hx:h-4 hx:w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;h4&gt;Installing multiple packages at once&lt;span class=&#34;hx:absolute hx:-mt-20&#34; id=&#34;installing-multiple-packages-at-once&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#installing-multiple-packages-at-once&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h4&gt;&lt;div class=&#34;hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code&#34;&gt;
+
+&lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;└──╼ $ cat install.list
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;netcat
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;radare2
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;nmap
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;seclists
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;tcpdump
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;hashcat
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;wireshark
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;git
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;gobuster&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx:group/copybtn hx:cursor-pointer hx:transition-all hx:active:opacity-50 hx:bg-primary-700/5 hx:border hx:border-black/5 hx:text-gray-600 hx:hover:text-gray-900 hx:rounded-md hx:p-1.5 hx:dark:bg-primary-300/10 hx:dark:border-white/10 hx:dark:text-gray-400 hx:dark:hover:text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;hextra-copy-icon hx:group-[.copied]/copybtn:hidden hx:pointer-events-none hx:h-4 hx:w-4&#34;&gt;&lt;/div&gt;
+&lt;div class=&#34;hextra-success-icon hx:hidden hx:group-[.copied]/copybtn:block hx:pointer-events-none hx:h-4 hx:w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&#34;hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code&#34;&gt;
+
+&lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;sudo apt install &lt;span class=&#34;k&#34;&gt;$(&lt;/span&gt;cat install.list &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; tr &lt;span class=&#34;s2&#34;&gt;&amp;#34;\n&amp;#34;&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34; &amp;#34;&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;)&lt;/span&gt; -y&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx:group/copybtn hx:cursor-pointer hx:transition-all hx:active:opacity-50 hx:bg-primary-700/5 hx:border hx:border-black/5 hx:text-gray-600 hx:hover:text-gray-900 hx:rounded-md hx:p-1.5 hx:dark:bg-primary-300/10 hx:dark:border-white/10 hx:dark:text-gray-400 hx:dark:hover:text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;hextra-copy-icon hx:group-[.copied]/copybtn:hidden hx:pointer-events-none hx:h-4 hx:w-4&#34;&gt;&lt;/div&gt;
+&lt;div class=&#34;hextra-success-icon hx:hidden hx:group-[.copied]/copybtn:block hx:pointer-events-none hx:h-4 hx:w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;h4&gt;Running multiple &lt;code&gt;bash&lt;/code&gt; configurations at once on the system&lt;span class=&#34;hx:absolute hx:-mt-20&#34; id=&#34;running-multiple-bash-configurations-at-once-on-the-system&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#running-multiple-bash-configurations-at-once-on-the-system&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h4&gt;&lt;div class=&#34;hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code&#34;&gt;
+
+&lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;user@user:~$ cat automation_scripts.txt
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;terminal.sh
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;tools.sh
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;GUI.sh
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;network.sh
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;vim.sh&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx:group/copybtn hx:cursor-pointer hx:transition-all hx:active:opacity-50 hx:bg-primary-700/5 hx:border hx:border-black/5 hx:text-gray-600 hx:hover:text-gray-900 hx:rounded-md hx:p-1.5 hx:dark:bg-primary-300/10 hx:dark:border-white/10 hx:dark:text-gray-400 hx:dark:hover:text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;hextra-copy-icon hx:group-[.copied]/copybtn:hidden hx:pointer-events-none hx:h-4 hx:w-4&#34;&gt;&lt;/div&gt;
+&lt;div class=&#34;hextra-success-icon hx:hidden hx:group-[.copied]/copybtn:block hx:pointer-events-none hx:h-4 hx:w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&#34;hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code&#34;&gt;
+
+&lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; script in &lt;span class=&#34;k&#34;&gt;$(&lt;/span&gt;cat customization-scripts.txt&lt;span class=&#34;k&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;do&lt;/span&gt; curl -s http://myvps.vps-provider.net/&lt;span class=&#34;nv&#34;&gt;$script&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; bash&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;done&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx:group/copybtn hx:cursor-pointer hx:transition-all hx:active:opacity-50 hx:bg-primary-700/5 hx:border hx:border-black/5 hx:text-gray-600 hx:hover:text-gray-900 hx:rounded-md hx:p-1.5 hx:dark:bg-primary-300/10 hx:dark:border-white/10 hx:dark:text-gray-400 hx:dark:hover:text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;hextra-copy-icon hx:group-[.copied]/copybtn:hidden hx:pointer-events-none hx:h-4 hx:w-4&#34;&gt;&lt;/div&gt;
+&lt;div class=&#34;hextra-success-icon hx:hidden hx:group-[.copied]/copybtn:block hx:pointer-events-none hx:h-4 hx:w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;h4&gt;Example penetration testing project folder structure might look like the following&lt;span class=&#34;hx:absolute hx:-mt-20&#34; id=&#34;example-penetration-testing-project-folder-structure-might-look-like-the-following&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#example-penetration-testing-project-folder-structure-might-look-like-the-following&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h4&gt;&lt;div class=&#34;hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code&#34;&gt;
+
+&lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;george@LTP51&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;/PEN1&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;$ tree .
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;.
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;└── Penetration-Testing
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	│
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	├── Pre-Engagement
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	│       └── ...
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    ├── Network-Pentesting
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	│       ├── Linux
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	│       │   ├── Information-Gathering
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	│		│   │   └── ...
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	│       │   ├── Vulnerability-Assessment
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    │       │   │	└── ...
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    │       │	└── ...
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    │       │    	└── ...
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    │		├── Windows
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    │ 		│   ├── Information-Gathering
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    │		│   │   └── ...
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    │		│   └── ...
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    │       └── ...
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    ├── WebApp-Pentesting
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	│       └── ...
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    ├── Social-Engineering
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	│       └── ...
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    ├── .......
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	│       └── ...
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    ├── Reporting
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    │   └── ...
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	└── Results
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	    └── ...&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-0&#34;&gt;
+  &lt;button
+    class=&#34;hextra-code-copy-btn hx:group/copybtn hx:cursor-pointer hx:transition-all hx:active:opacity-50 hx:bg-primary-700/5 hx:border hx:border-black/5 hx:text-gray-600 hx:hover:text-gray-900 hx:rounded-md hx:p-1.5 hx:dark:bg-primary-300/10 hx:dark:border-white/10 hx:dark:text-gray-400 hx:dark:hover:text-gray-50&#34;
+    title=&#34;Copy code&#34;
+  &gt;
+    &lt;div class=&#34;hextra-copy-icon hx:group-[.copied]/copybtn:hidden hx:pointer-events-none hx:h-4 hx:w-4&#34;&gt;&lt;/div&gt;
+&lt;div class=&#34;hextra-success-icon hx:hidden hx:group-[.copied]/copybtn:block hx:pointer-events-none hx:h-4 hx:w-4&#34;&gt;&lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;h4&gt;General categories for note-taking during target assessment&lt;span class=&#34;hx:absolute hx:-mt-20&#34; id=&#34;general-categories-for-note-taking-during-target-assessment&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#general-categories-for-note-taking-during-target-assessment&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h4&gt;&lt;ol&gt;
+&lt;li&gt;Newly discovered information&lt;/li&gt;
+&lt;/ol&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;Take note of every newly discovered vulnerabilities, targets or points of access, IP addresses, usernames, passwords, source code, etc. that you identified and are related to the penetration testing engagement and process.&lt;/p&gt;</description>
+    </item>
   </channel>
 </rss>

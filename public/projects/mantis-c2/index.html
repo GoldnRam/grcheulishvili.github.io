@@ -8,14 +8,14 @@
 <link rel="icon" href="/favicon-32x32.png" type="image/png" sizes="32x32" />
 <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180" />
 <link fetchpriority="low" href="/site.webmanifest" rel="manifest" />
-<title>Project: High-Fidelity Stealth Agent - Research in Evasion and C2 Telemetry – IERI.SH</title>
-  <meta name="description" content="An R&amp;D project detailing a self-destructing, polymorphic Go-based agent designed to stress-test EDR and Blue Team detection strategies." /><link rel="canonical" href="http://localhost:1313/projects/mantis-c2/" itemprop="url" />
+<title>Mantis C2 Architecture – IERI.SH</title>
+  <meta name="description" content="A custom Command and Control framework focusing on signature evasion and resilient communication." /><link rel="canonical" href="http://localhost:1313/projects/mantis-c2/" itemprop="url" />
 
-<meta property="og:title" content="Project: High-Fidelity Stealth Agent - Research in Evasion and C2 Telemetry">
+<meta property="og:title" content="Mantis C2 Architecture">
 <meta
   property="og:description"
   content="
-    An R&amp;D project detailing a self-destructing, polymorphic Go-based agent designed to stress-test EDR and Blue Team detection strategies.
+    A custom Command and Control framework focusing on signature evasion and resilient communication.
   ">
 <meta
   property="og:type"
@@ -35,15 +35,15 @@
 
 
 
-  <meta itemprop="name" content="Project: High-Fidelity Stealth Agent - Research in Evasion and C2 Telemetry">
-  <meta itemprop="description" content="An R&amp;D project detailing a self-destructing, polymorphic Go-based agent designed to stress-test EDR and Blue Team detection strategies.">
+  <meta itemprop="name" content="Mantis C2 Architecture">
+  <meta itemprop="description" content="A custom Command and Control framework focusing on signature evasion and resilient communication.">
   <meta itemprop="datePublished" content="2025-11-27T00:00:00+00:00">
   <meta itemprop="dateModified" content="2025-11-27T00:00:00+00:00">
-  <meta itemprop="wordCount" content="450">
+  <meta itemprop="wordCount" content="406">
   <meta itemprop="keywords" content="MalDev,Go,C2,Polymorphism,Offensive Research">
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Project: High-Fidelity Stealth Agent - Research in Evasion and C2 Telemetry">
-  <meta name="twitter:description" content="An R&amp;D project detailing a self-destructing, polymorphic Go-based agent designed to stress-test EDR and Blue Team detection strategies.">
+  <meta name="twitter:title" content="Mantis C2 Architecture">
+  <meta name="twitter:description" content="A custom Command and Control framework focusing on signature evasion and resilient communication.">
 <link href="/css/compiled/main.css" rel="stylesheet" />
     <link href="/css/variables.css" rel="stylesheet" />
     <link href="/css/custom.css" rel="stylesheet" />
@@ -88,8 +88,8 @@
 
   <nav class="hextra-max-navbar-width hx:mx-auto hx:flex hx:items-center hx:justify-end hx:gap-2 hx:h-16 hx:px-6">
     <a class="hx:flex hx:items-center hx:hover:opacity-75 hx:ltr:mr-auto hx:rtl:ml-auto" href="/">
-    <img class="hx:mr-2 hx:block hx:dark:hidden" src="/images/logo.png" alt="Logo" height="80" width="80" />
-    <img class="hx:mr-2 hx:hidden hx:dark:block" src="/images/logo.png" alt="Dark Logo" height="80" width="80" />
+    <img class="hx:mr-2 hx:block hx:dark:hidden" src="/images/logo.png" alt="Logo" height="40" width="40" />
+    <img class="hx:mr-2 hx:hidden hx:dark:block" src="/images/logo.png" alt="Dark Logo" height="40" width="40" />
     <span class="hx:mr-2 hx:font-extrabold hx:inline hx:select-none" title="IERI.SH">IERI.SH</span>
 </a>
 <button type="button" aria-label="Menu" class="hextra-hamburger-menu hx:cursor-pointer hx:-mr-2 hx:rounded-sm hx:p-2 hx:active:bg-gray-400/20 hx:md:hidden"><svg height=24 fill="none" viewBox="0 0 24 24" stroke="currentColor"><g><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8H20"></path></g><g><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16H20"></path></g></svg></button>
@@ -134,14 +134,14 @@
       hx:text-gray-500 hx:hover:bg-gray-100 hx:hover:text-gray-900 hx:contrast-more:border hx:contrast-more:border-transparent hx:contrast-more:text-gray-900 hx:contrast-more:hover:border-gray-900 hx:dark:text-neutral-400 hx:dark:hover:bg-primary-100/5 hx:dark:hover:text-gray-50 hx:contrast-more:dark:text-gray-50 hx:contrast-more:dark:hover:border-gray-50"
     href="/about/"
     
-  >Operator
+  >Background
     </a></li>
           <li class=""><a
     class="hx:flex hx:items-center hx:justify-between hx:gap-2 hx:cursor-pointer hx:rounded-sm hx:px-2 hx:py-1.5 hx:text-sm hx:transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
       hx:text-gray-500 hx:hover:bg-gray-100 hx:hover:text-gray-900 hx:contrast-more:border hx:contrast-more:border-transparent hx:contrast-more:text-gray-900 hx:contrast-more:hover:border-gray-900 hx:dark:text-neutral-400 hx:dark:hover:bg-primary-100/5 hx:dark:hover:text-gray-50 hx:contrast-more:dark:text-gray-50 hx:contrast-more:dark:hover:border-gray-50"
     href="/manifesto/"
     
-  >The Doctrine
+  >Engineering Philosophy
     </a></li>
           <li class=""><a
     class="hx:flex hx:items-center hx:justify-between hx:gap-2 hx:cursor-pointer hx:rounded-sm hx:px-2 hx:py-1.5 hx:text-sm hx:transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
@@ -156,7 +156,7 @@
       hx:text-gray-500 hx:hover:bg-gray-100 hx:hover:text-gray-900 hx:contrast-more:border hx:contrast-more:border-transparent hx:contrast-more:text-gray-900 hx:contrast-more:hover:border-gray-900 hx:dark:text-neutral-400 hx:dark:hover:bg-primary-100/5 hx:dark:hover:text-gray-50 hx:contrast-more:dark:text-gray-50 hx:contrast-more:dark:hover:border-gray-50"
     href="/research/building-a-polymorphic-engine/"
     
-  >MalDev Logs: Building a Polymorphic Engine in Go
+  >Polymorphic Engine Development
     </a>
               
             </li><li class="hx:flex hx:flex-col "><a
@@ -383,7 +383,7 @@
       hx:text-gray-500 hx:hover:bg-gray-100 hx:hover:text-gray-900 hx:contrast-more:border hx:contrast-more:border-transparent hx:contrast-more:text-gray-900 hx:contrast-more:hover:border-gray-900 hx:dark:text-neutral-400 hx:dark:hover:bg-primary-100/5 hx:dark:hover:text-gray-50 hx:contrast-more:dark:text-gray-50 hx:contrast-more:dark:hover:border-gray-50"
     href="/projects/"
     
-  >Project Armory
+  >Development &amp; Tooling
         <span class="hextra-sidebar-collapsible-button"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" class="hx:h-[18px] hx:min-w-[18px] hx:rounded-xs hx:p-0.5 hx:hover:bg-gray-800/5 hx:dark:hover:bg-gray-100/5"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" class="hx:origin-center hx:transition-transform hx:rtl:-rotate-180"></path></svg></span>
     </a><div class="hx:ltr:pr-0 hx:overflow-hidden">
         <ul class='hx:relative hx:flex hx:flex-col hx:gap-1 hx:before:absolute hx:before:inset-y-1 hx:before:w-px hx:before:bg-gray-200 hx:before:content-[""] hx:ltr:ml-3 hx:ltr:pl-3 hx:ltr:before:left-0 hx:rtl:mr-3 hx:rtl:pr-3 hx:rtl:before:right-0 hx:dark:before:bg-neutral-800'><li class="hx:flex hx:flex-col "><a
@@ -391,7 +391,7 @@
       hx:text-gray-500 hx:hover:bg-gray-100 hx:hover:text-gray-900 hx:contrast-more:border hx:contrast-more:border-transparent hx:contrast-more:text-gray-900 hx:contrast-more:hover:border-gray-900 hx:dark:text-neutral-400 hx:dark:hover:bg-primary-100/5 hx:dark:hover:text-gray-50 hx:contrast-more:dark:text-gray-50 hx:contrast-more:dark:hover:border-gray-50"
     href="/projects/local-ctf-platform/"
     
-  >Case Study: Engineering Multi-Tenant Security for a CTF Wargames Platform
+  >Building Multi-Tenant CTF Wargames Platform
     </a>
               
             </li><li class="hx:flex hx:flex-col open"><a
@@ -399,7 +399,7 @@
       hextra-sidebar-active-item hx:bg-primary-100 hx:font-semibold hx:text-primary-800 hx:contrast-more:border hx:contrast-more:border-primary-500 hx:dark:bg-primary-400/10 hx:dark:text-primary-600 hx:contrast-more:dark:border-primary-500"
     href="/projects/mantis-c2/"
     
-  >Project: High-Fidelity Stealth Agent - Research in Evasion and C2 Telemetry
+  >Mantis C2 Architecture
     </a>
   
     <ul class='hx:flex hx:flex-col hx:gap-1 hx:relative hx:before:absolute hx:before:inset-y-1 hx:before:w-px hx:before:bg-gray-200 hx:before:content-[""] hx:dark:before:bg-neutral-800 hx:ltr:pl-3 hx:ltr:before:left-0 hx:rtl:pr-3 hx:rtl:before:right-0 hx:ltr:ml-3 hx:rtl:mr-3'><li>
@@ -434,7 +434,7 @@
       hx:text-gray-500 hx:hover:bg-gray-100 hx:hover:text-gray-900 hx:contrast-more:border hx:contrast-more:border-transparent hx:contrast-more:text-gray-900 hx:contrast-more:hover:border-gray-900 hx:dark:text-neutral-400 hx:dark:hover:bg-primary-100/5 hx:dark:hover:text-gray-50 hx:contrast-more:dark:text-gray-50 hx:contrast-more:dark:hover:border-gray-50"
     href="/projects/regional-threat-intel/"
     
-  >Project: High-Fidelity Threat Aggregation Platform (CTI Case Study)
+  >Regional Threat Intel Aggregator
     </a>
               
             </li></ul>
@@ -444,7 +444,7 @@
       hx:text-gray-500 hx:hover:bg-gray-100 hx:hover:text-gray-900 hx:contrast-more:border hx:contrast-more:border-transparent hx:contrast-more:text-gray-900 hx:contrast-more:hover:border-gray-900 hx:dark:text-neutral-400 hx:dark:hover:bg-primary-100/5 hx:dark:hover:text-gray-50 hx:contrast-more:dark:text-gray-50 hx:contrast-more:dark:hover:border-gray-50"
     href="/engineering/"
     
-  >Engineering Logs
+  >Engineering
         <span class="hextra-sidebar-collapsible-button"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" class="hx:h-[18px] hx:min-w-[18px] hx:rounded-xs hx:p-0.5 hx:hover:bg-gray-800/5 hx:dark:hover:bg-gray-100/5"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" class="hx:origin-center hx:transition-transform hx:rtl:-rotate-180"></path></svg></span>
     </a><div class="hx:ltr:pr-0 hx:overflow-hidden">
         <ul class='hx:relative hx:flex hx:flex-col hx:gap-1 hx:before:absolute hx:before:inset-y-1 hx:before:w-px hx:before:bg-gray-200 hx:before:content-[""] hx:ltr:ml-3 hx:ltr:pl-3 hx:ltr:before:left-0 hx:rtl:mr-3 hx:rtl:pr-3 hx:rtl:before:right-0 hx:dark:before:bg-neutral-800'><li class="hx:flex hx:flex-col "><a
@@ -457,13 +457,6 @@
               
             </li></ul>
       </div></li>
-          <li class=""><a
-    class="hx:flex hx:items-center hx:justify-between hx:gap-2 hx:cursor-pointer hx:rounded-sm hx:px-2 hx:py-1.5 hx:text-sm hx:transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
-      hx:text-gray-500 hx:hover:bg-gray-100 hx:hover:text-gray-900 hx:contrast-more:border hx:contrast-more:border-transparent hx:contrast-more:text-gray-900 hx:contrast-more:hover:border-gray-900 hx:dark:text-neutral-400 hx:dark:hover:bg-primary-100/5 hx:dark:hover:text-gray-50 hx:contrast-more:dark:text-gray-50 hx:contrast-more:dark:hover:border-gray-50"
-    href="/infrastructure/"
-    
-  >Lab Architecture
-    </a></li>
     </ul>
 
     <div class="hx:max-xl:hidden hx:h-0 hx:w-64 hx:shrink-0"></div></div>
@@ -485,11 +478,11 @@
         </a>
       </li>
       <li class="hx:my-2 hx:scroll-my-6 hx:scroll-py-6">
-        <a class="hx:ltr:pl-4 hx:rtl:pr-4 hx:inline-block hx:text-gray-500 hx:hover:text-gray-900 hx:dark:text-gray-400 hx:dark:hover:text-gray-300 hx:contrast-more:text-gray-900 hx:contrast-more:underline hx:contrast-more:dark:text-gray-50 hx:w-full hx:break-words" href="#operational-stealth">Operational Stealth
+        <a class="hx:ltr:pl-4 hx:rtl:pr-4 hx:inline-block hx:text-gray-500 hx:hover:text-gray-900 hx:dark:text-gray-400 hx:dark:hover:text-gray-300 hx:contrast-more:text-gray-900 hx:contrast-more:underline hx:contrast-more:dark:text-gray-50 hx:w-full hx:break-words" href="#stealth">Stealth
         </a>
       </li>
       <li class="hx:my-2 hx:scroll-my-6 hx:scroll-py-6">
-        <a class="hx:ltr:pl-4 hx:rtl:pr-4 hx:inline-block hx:text-gray-500 hx:hover:text-gray-900 hx:dark:text-gray-400 hx:dark:hover:text-gray-300 hx:contrast-more:text-gray-900 hx:contrast-more:underline hx:contrast-more:dark:text-gray-50 hx:w-full hx:break-words" href="#self-contained-opsec">Self-Contained OPSEC
+        <a class="hx:ltr:pl-4 hx:rtl:pr-4 hx:inline-block hx:text-gray-500 hx:hover:text-gray-900 hx:dark:text-gray-400 hx:dark:hover:text-gray-300 hx:contrast-more:text-gray-900 hx:contrast-more:underline hx:contrast-more:dark:text-gray-50 hx:w-full hx:break-words" href="#self-contained-destruction">Self-Contained destruction
         </a>
       </li>
       <li class="hx:my-2 hx:scroll-my-6 hx:scroll-py-6">
@@ -516,26 +509,27 @@
       <main class="hx:w-full hx:min-w-0 hx:max-w-6xl hx:px-6 hx:pt-4 hx:md:px-12">
         
         <br class="hx:mt-1.5 hx:text-sm" />
-        <h1 class="hx:text-center hx:mt-2 hx:text-4xl hx:font-bold hx:tracking-tight hx:text-slate-900 hx:dark:text-slate-100">Project: High-Fidelity Stealth Agent - Research in Evasion and C2 Telemetry</h1>
+        <h1 class="hx:text-center hx:mt-2 hx:text-4xl hx:font-bold hx:tracking-tight hx:text-slate-900 hx:dark:text-slate-100">Mantis C2 Architecture</h1>
         <div class="hx:mb-16"></div>
         <div class="content">
           <h2>Overview<span class="hx:absolute hx:-mt-20" id="overview"></span>
-    <a href="#overview" class="subheading-anchor" aria-label="Permalink for this section"></a></h2><p>This project is a Command &amp; Control (C2) framework built as a research vehicle for testing modern evasion techniques and high-fidelity data extraction methods. The agent is designed for covert operations and is often deployed in internal honeypot environments to study attack TTPs (Tactics, Techniques, and Procedures).</p>
+    <a href="#overview" class="subheading-anchor" aria-label="Permalink for this section"></a></h2><p>Mantis C2 is a custom Command and Control framework developed to test and bypass modern EDR telemetry. Commercial and widely available C2 frameworks often carry heavily signatured stubs; Mantis was built from the ground up to minimize static and behavioral footprint.</p>
 <h2>1. Evasion and Persistence Architecture<span class="hx:absolute hx:-mt-20" id="1-evasion-and-persistence-architecture"></span>
     <a href="#1-evasion-and-persistence-architecture" class="subheading-anchor" aria-label="Permalink for this section"></a></h2><h3>AST-Driven Polymorphism Protocol<span class="hx:absolute hx:-mt-20" id="ast-driven-polymorphism-protocol"></span>
     <a href="#ast-driven-polymorphism-protocol" class="subheading-anchor" aria-label="Permalink for this section"></a></h3><p>To defeat static analysis, the builder utilizes a custom source-code mutation protocol:</p>
 <ul>
-<li><strong>AST-Driven Mutation:</strong> The agent is processed by a custom pre-compiler that mutates the Abstract Syntax Tree (AST) to generate <strong>structurally unique binaries</strong> for every deployment. This defeats Control Flow Graph (CFG) analysis and static signatures, a key step beyond simple file hash mutation.</li>
-<li><strong>String Context Encryption:</strong> All sensitive strings (e.g., C2 domains, commands) are automatically detected and encrypted at the source-code level and decrypted at runtime using a file-local key.</li>
-<li><strong>Debug Stripping:</strong> All DWARF tables and symbol information are automatically removed during cross-compilation to severely complicate reverse engineering efforts.</li>
+<li>The agent is processed by a custom pre-compiler that mutates the AST to generate <strong>structurally unique binaries</strong> for every deployment. This defeats Control Flow Graph (CFG) analysis and static signatures, a key step beyond simple file hash mutation.</li>
+<li>All sensitive strings (e.g., C2 domains, commands) are automatically detected and encrypted at the source-code level and decrypted at runtime using a file-local key.</li>
+<li>Rather than dropping secondary stages to disk, Mantis allocates memory dynamically (using <code>VirtualAlloc</code>/<code>VirtualProtect</code> equivalents) and executes position-independent shellcode directly.</li>
+<li>All DWARF tables and symbol information are automatically removed during cross-compilation to severely complicate reverse engineering efforts.</li>
 </ul>
-<h3>Operational Stealth<span class="hx:absolute hx:-mt-20" id="operational-stealth"></span>
-    <a href="#operational-stealth" class="subheading-anchor" aria-label="Permalink for this section"></a></h3><ul>
-<li>The agent runs silently as a background process (<code>-H=windowsgui</code> flag).</li>
-<li><strong>Jitter Beacon:</strong> Network heartbeat uses randomized intervals (Base ± Jitter%) to defeat detection rules based on static frequency analysis.</li>
+<h3>Stealth<span class="hx:absolute hx:-mt-20" id="stealth"></span>
+    <a href="#stealth" class="subheading-anchor" aria-label="Permalink for this section"></a></h3><ul>
+<li>The agent runs silently as a background process.</li>
+<li>Check-in intervals are heavily randomized. During sleep cycles, the agent masks its memory regions to prevent in-memory scanning from flagging dormant malicious threads.</li>
 </ul>
-<h3>Self-Contained OPSEC<span class="hx:absolute hx:-mt-20" id="self-contained-opsec"></span>
-    <a href="#self-contained-opsec" class="subheading-anchor" aria-label="Permalink for this section"></a></h3><p>The <strong><code>quit</code></strong> command initiates a self-destruct routine, which is critical for operational cleanup:</p>
+<h3>Self-Contained destruction<span class="hx:absolute hx:-mt-20" id="self-contained-destruction"></span>
+    <a href="#self-contained-destruction" class="subheading-anchor" aria-label="Permalink for this section"></a></h3><p>The <strong><code>quit</code></strong> command initiates a self-destruct routine, which is critical for operational cleanup:</p>
 <ol>
 <li>Removes Windows Registry Run keys used for persistence.</li>
 <li>Securely deletes the executable binary from the disk.</li>
@@ -543,32 +537,15 @@
 </ol>
 <h2>2. Streaming Data Telemetry<span class="hx:absolute hx:-mt-20" id="2-streaming-data-telemetry"></span>
     <a href="#2-streaming-data-telemetry" class="subheading-anchor" aria-label="Permalink for this section"></a></h2><p>The core innovation is the streaming telemetry model, designed for high-volume, low-latency exfiltration:</p>
-<ul>
-<li><strong>Streaming C2:</strong> Data is sent immediately in small, encrypted batches (ZIPs) over a covert TCP channel. This ensures data capture is continuous, even if the session is unexpectedly terminated.</li>
-<li><strong>Auto-Pillage:</strong> An immediate <strong>Stage 1 Recon Report</strong> is generated upon connection, providing the operator with critical system and file metadata before any manual command is issued.</li>
-<li><strong>Large File Handling:</strong> Files exceeding a defined threshold (<strong>50MB</strong>) are automatically streamed raw in chunks, bypassing the compression engine to prevent memory spikes and keep CPU load minimal.</li>
-</ul>
+<ol>
+<li>Data is sent immediately in small, encrypted batches over a covert TCP channel. This ensures data capture is continuous, even if the session is unexpectedly terminated.</li>
+<li>An immediate <strong>Stage 1 Recon Report</strong> is generated upon connection, providing the operator with critical system and file metadata before any manual command is issued.</li>
+<li>Files exceeding a defined threshold are automatically streamed raw in chunks, bypassing the compression engine to prevent memory spikes and keep CPU load minimal.</li>
+</ol>
 <h2>3. Tooling and Sanitization<span class="hx:absolute hx:-mt-20" id="3-tooling-and-sanitization"></span>
-    <a href="#3-tooling-and-sanitization" class="subheading-anchor" aria-label="Permalink for this section"></a></h2><p>The framework includes a custom Builder tool to generate payloads. The code is structured to enforce responsible R&amp;D principles.</p>
-<p><strong>Code Snippet: Stealth Compilation</strong>
-<em>The following sanitized Makefile snippet shows the cross-compilation flags used to ensure a minimal, quiet Windows binary.</em></p>
-<div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code">
-
-<div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-makefile" data-lang="makefile"><span class="line"><span class="cl"><span class="c"># Example of build automation for stealth
-</span></span></span><span class="line"><span class="cl"><span class="nf">build_stealer_windows</span><span class="o">:</span>
-</span></span><span class="line"><span class="cl">    <span class="nv">GOOS</span><span class="o">=</span>windows <span class="nv">GOARCH</span><span class="o">=</span>amd64 go build -ldflags<span class="o">=</span><span class="s2">&#34;-s -w -H=windowsgui&#34;</span> -o dist/agent.exe
-</span></span></code></pre></div></div><div class="hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-0">
-  <button
-    class="hextra-code-copy-btn hx:group/copybtn hx:cursor-pointer hx:transition-all hx:active:opacity-50 hx:bg-primary-700/5 hx:border hx:border-black/5 hx:text-gray-600 hx:hover:text-gray-900 hx:rounded-md hx:p-1.5 hx:dark:bg-primary-300/10 hx:dark:border-white/10 hx:dark:text-gray-400 hx:dark:hover:text-gray-50"
-    title="Copy code"
-  >
-    <div class="hextra-copy-icon hx:group-[.copied]/copybtn:hidden hx:pointer-events-none hx:h-4 hx:w-4"></div>
-<div class="hextra-success-icon hx:hidden hx:group-[.copied]/copybtn:block hx:pointer-events-none hx:h-4 hx:w-4"></div>
-  </button>
-</div>
-</div>
+    <a href="#3-tooling-and-sanitization" class="subheading-anchor" aria-label="Permalink for this section"></a></h2><p>The framework includes a custom Builder tool to generate payloads. The code is structured to enforce responsible usage.</p>
 <blockquote>
-  <p><strong>Disclaimer:</strong> <em>Core OPSEC features, including the encryption/decryption keys, C2 IP/Port configuration, and the full multi-threaded session management logic, are omitted from this public documentation to prevent weaponization and maintain responsible disclosure standards. For the technical mechanism behind the polymorphic build, please refer to the dedicated research: <a href="https://ieri.sh/research/building-a-polymorphic-engine/"target="_blank" rel="noopener">Go AST Polymorphic Engine</a>.</em></p>
+  <p><strong>Disclaimer:</strong> <em>Core features, including the encryption/decryption keys, C2 IP/Port configuration, and the full multi-threaded session management logic, are omitted from this public documentation to prevent weaponization and maintain responsible disclosure standards. For the technical mechanism behind the polymorphic build, please refer to the dedicated research: <a href="https://ieri.sh/research/building-a-polymorphic-engine/"target="_blank" rel="noopener">Go AST Polymorphic Engine</a>.</em></p>
 
 </blockquote>
 <hr>
@@ -581,30 +558,18 @@
     </article>
   </div>
 
-      <footer class="hextra-footer">
-  <div class="system-status-bar">
-    
-    <div class="status-group">
-      <span class="status-dot"></span>
-      <span class="status-text">SYSTEM ONLINE</span>
-    </div>
-
-    <div class="status-group mobile-hide">
-      <span class="status-value">IERI.SH</span>
-      <span class="separator">/</span>
-      <span class="status-value">TBILISI</span>
-    </div>
-
-    <div class="status-group">
-      <span class="status-label">ENC:</span>
-      <span class="status-value">TLS 1.3</span>
-      <span class="separator">|</span>
-      <span class="status-label">UPTIME:</span>
-      <span class="status-value">99.9%</span>
-    </div>
-
+      <footer class="engineering-footer">
+  <div class="footer-left">
+    <span>&copy; 2026 IERI.SH. All rights reserved.</span>
+  </div>
+  <div class="footer-right">
+    <span style="margin: 0 0.5rem; color: var(--border);">|</span>
+    <a href="https://github.com/goldnram" target="_blank" rel="noopener">GitHub</a>
+    <span style="margin: 0 0.5rem; color: var(--border);">|</span>
+    <a href="https://www.linkedin.com/in/giorgi-rcheulishvili-bba988260/" target="_blank" rel="noopener">LinkedIn</a>
   </div>
 </footer>
+
     
     <script defer src="/js/main.js" integrity=""></script>
 <script defer src="/js/flexsearch.9f5b5908f93ae86f1ecd4b043b799f580c2d1654e703dd9357d568ac41b2547a.js" integrity="sha256-n1tZCPk66G8ezUsEO3mfWAwtFlTnA92TV9VorEGyVHo=" crossorigin="anonymous"></script>

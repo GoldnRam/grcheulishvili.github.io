@@ -1,8 +1,8 @@
 ---
-title: "MalDev Logs: Building a Polymorphic Engine in Go"
+title: "Polymorphic Engine Development"
 date: 2025-12-08
 draft: false
-description: "Why simple hash mutation failed me, and how I used Go's AST to build a true polymorphic compiler."
+description: "Analysis of dynamic code mutation in Go to bypass static signature detection."
 tags: ["MalDev", "Go", "Red Team", "Engineering"]
 ---
 

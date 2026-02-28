@@ -1,86 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>IERI.SH – C2</title>
+    <title>IERI.SH</title>
     <link>http://localhost:1313/tags/c2/</link>
-    <description>Recent content in C2 on IERI.SH</description>
+    <description>Recent content on IERI.SH</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 27 Nov 2025 00:00:00 +0000</lastBuildDate>
-    
-	  <atom:link href="http://localhost:1313/tags/c2/index.xml" rel="self" type="application/rss+xml" />
-    
-    
-      
-        
-      
-    
-    
     <item>
       <title>Project: High-Fidelity Stealth Agent - Research in Evasion and C2 Telemetry</title>
       <link>http://localhost:1313/projects/mantis-c2/</link>
       <pubDate>Thu, 27 Nov 2025 00:00:00 +0000</pubDate>
-      
       <guid>http://localhost:1313/projects/mantis-c2/</guid>
-      <description>
-        
-        
-        &lt;h1&gt;Project: Mantis C2 Framework - Agent R&amp;amp;D&lt;/h1&gt;&lt;h2&gt;Overview&lt;span class=&#34;hx:absolute hx:-mt-20&#34; id=&#34;overview&#34;&gt;&lt;/span&gt;
+      <description>&lt;h2&gt;Overview&lt;span class=&#34;hx:absolute hx:-mt-20&#34; id=&#34;overview&#34;&gt;&lt;/span&gt;
     &lt;a href=&#34;#overview&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;This project is a Command &amp;amp; Control (C2) framework built as a research vehicle for testing modern evasion techniques and high-fidelity data extraction methods. The agent is designed for covert operations and is often deployed in internal honeypot environments to study attack TTPs (Tactics, Techniques, and Procedures).&lt;/p&gt;
 &lt;h2&gt;1. Evasion and Persistence Architecture&lt;span class=&#34;hx:absolute hx:-mt-20&#34; id=&#34;1-evasion-and-persistence-architecture&#34;&gt;&lt;/span&gt;
     &lt;a href=&#34;#1-evasion-and-persistence-architecture&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;h3&gt;AST-Driven Polymorphism Protocol&lt;span class=&#34;hx:absolute hx:-mt-20&#34; id=&#34;ast-driven-polymorphism-protocol&#34;&gt;&lt;/span&gt;
-    &lt;a href=&#34;#ast-driven-polymorphism-protocol&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;To defeat static analysis, the builder utilizes a custom source-code mutation protocol:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;AST-Driven Mutation:&lt;/strong&gt; The agent is processed by a custom pre-compiler that mutates the Abstract Syntax Tree (AST) to generate &lt;strong&gt;structurally unique binaries&lt;/strong&gt; for every deployment. This defeats Control Flow Graph (CFG) analysis and static signatures, a key step beyond simple file hash mutation.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;String Context Encryption:&lt;/strong&gt; All sensitive strings (e.g., C2 domains, commands) are automatically detected and encrypted at the source-code level and decrypted at runtime using a file-local key.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Debug Stripping:&lt;/strong&gt; All DWARF tables and symbol information are automatically removed during cross-compilation to severely complicate reverse engineering efforts.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3&gt;Operational Stealth&lt;span class=&#34;hx:absolute hx:-mt-20&#34; id=&#34;operational-stealth&#34;&gt;&lt;/span&gt;
-    &lt;a href=&#34;#operational-stealth&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;The agent runs silently as a background process (&lt;code&gt;-H=windowsgui&lt;/code&gt; flag).&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Jitter Beacon:&lt;/strong&gt; Network heartbeat uses randomized intervals (Base ± Jitter%) to defeat detection rules based on static frequency analysis.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3&gt;Self-Contained OPSEC&lt;span class=&#34;hx:absolute hx:-mt-20&#34; id=&#34;self-contained-opsec&#34;&gt;&lt;/span&gt;
-    &lt;a href=&#34;#self-contained-opsec&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;The &lt;strong&gt;&lt;code&gt;quit&lt;/code&gt;&lt;/strong&gt; command initiates a self-destruct routine, which is critical for operational cleanup:&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;Removes Windows Registry Run keys used for persistence.&lt;/li&gt;
-&lt;li&gt;Securely deletes the executable binary from the disk.&lt;/li&gt;
-&lt;li&gt;Terminates the session and signals the C2 server.&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h2&gt;2. Streaming Data Telemetry&lt;span class=&#34;hx:absolute hx:-mt-20&#34; id=&#34;2-streaming-data-telemetry&#34;&gt;&lt;/span&gt;
-    &lt;a href=&#34;#2-streaming-data-telemetry&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;The core innovation is the streaming telemetry model, designed for high-volume, low-latency exfiltration:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;Streaming C2:&lt;/strong&gt; Data is sent immediately in small, encrypted batches (ZIPs) over a covert TCP channel. This ensures data capture is continuous, even if the session is unexpectedly terminated.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Auto-Pillage:&lt;/strong&gt; An immediate &lt;strong&gt;Stage 1 Recon Report&lt;/strong&gt; is generated upon connection, providing the operator with critical system and file metadata before any manual command is issued.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Large File Handling:&lt;/strong&gt; Files exceeding a defined threshold (&lt;strong&gt;50MB&lt;/strong&gt;) are automatically streamed raw in chunks, bypassing the compression engine to prevent memory spikes and keep CPU load minimal.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2&gt;3. Tooling and Sanitization&lt;span class=&#34;hx:absolute hx:-mt-20&#34; id=&#34;3-tooling-and-sanitization&#34;&gt;&lt;/span&gt;
-    &lt;a href=&#34;#3-tooling-and-sanitization&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;The framework includes a custom Builder tool to generate payloads. The code is structured to enforce responsible R&amp;amp;D principles.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Code Snippet: Stealth Compilation&lt;/strong&gt;
-&lt;em&gt;The following sanitized Makefile snippet shows the cross-compilation flags used to ensure a minimal, quiet Windows binary.&lt;/em&gt;&lt;/p&gt;
-&lt;div class=&#34;hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code&#34;&gt;
-
-&lt;div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-makefile&#34; data-lang=&#34;makefile&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c&#34;&gt;# Example of build automation for stealth
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nf&#34;&gt;build_stealer_windows&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nv&#34;&gt;GOOS&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;windows &lt;span class=&#34;nv&#34;&gt;GOARCH&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;amd64 go build -ldflags&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;-s -w -H=windowsgui&amp;#34;&lt;/span&gt; -o dist/agent.exe
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&#34;hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-0&#34;&gt;
-  &lt;button
-    class=&#34;hextra-code-copy-btn hx:group/copybtn hx:cursor-pointer hx:transition-all hx:active:opacity-50 hx:bg-primary-700/5 hx:border hx:border-black/5 hx:text-gray-600 hx:hover:text-gray-900 hx:rounded-md hx:p-1.5 hx:dark:bg-primary-300/10 hx:dark:border-white/10 hx:dark:text-gray-400 hx:dark:hover:text-gray-50&#34;
-    title=&#34;Copy code&#34;
-  &gt;
-    &lt;div class=&#34;hextra-copy-icon hx:group-[.copied]/copybtn:hidden hx:pointer-events-none hx:h-4 hx:w-4&#34;&gt;&lt;/div&gt;
-&lt;div class=&#34;hextra-success-icon hx:hidden hx:group-[.copied]/copybtn:block hx:pointer-events-none hx:h-4 hx:w-4&#34;&gt;&lt;/div&gt;
-  &lt;/button&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;blockquote&gt;
-  &lt;p&gt;&lt;strong&gt;Disclaimer:&lt;/strong&gt; &lt;em&gt;Core OPSEC features, including the encryption/decryption keys, C2 IP/Port configuration, and the full multi-threaded session management logic, are omitted from this public documentation to prevent weaponization and maintain responsible disclosure standards. For the technical mechanism behind the polymorphic build, please refer to the dedicated research: &lt;a href=&#34;https://ieri.sh/research/building-a-polymorphic-engine/&#34;target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Go AST Polymorphic Engine&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
-
-&lt;/blockquote&gt;
-&lt;hr&gt;
-&lt;p&gt;&lt;em&gt;This tool is for educational research and authorized internal threat simulation only.&lt;/em&gt;&lt;/p&gt;
-
-      </description>
+    &lt;a href=&#34;#ast-driven-polymorphism-protocol&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;To defeat static analysis, the builder utilizes a custom source-code mutation protocol:&lt;/p&gt;</description>
     </item>
-    
   </channel>
 </rss>
